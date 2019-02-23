@@ -30,6 +30,11 @@
     "preset": "react-native"
   },
   "workspaces": {
-    "nohoist": ["react-native", "react-native/**", "react", "react/**"]
+    "nohoist": [
+      "react-native", "react-native/**", 
+      "react", "react/**",
+      "mobx-react-lite", "mobx-react-lite/**",
+      "mobx", "mobx/**"
+    ]
   }
 }

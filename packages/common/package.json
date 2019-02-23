@@ -6,19 +6,31 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "schema:download": "apollo schema:download --endpoint=http://localhost:4000",
+    "schema:generate": "apollo codegen:generate --includes=./src/**/*.tsx --endpoint=http://localhost:4000 --target=typescript --outputFlat ./src/schemaTypes.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-cache-inmemory": "^1.4.3",
+    "apollo-client": "^2.4.13",
+    "apollo-link-http": "^1.5.11",
+    "formik": "^1.5.1",
+    "graphql": "^14.1.1",
+    "graphql-tag": "^2.10.1",
     "mobx": "5.9.0",
     "mobx-react-lite": "1.0.1",
     "react": "16.8.2",
-    "react-native": "0.59.0-rc.1"
+    "react-apollo": "^2.4.1",
+    "react-native": "0.59.0-rc.1",
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@types/react-native": "0.57.36",
+    "@types/yup": "^0.26.9",
+    "apollo": "^2.5.1",
     "rimraf": "^2.6.3",
     "typescript": "3.3.3"
   }

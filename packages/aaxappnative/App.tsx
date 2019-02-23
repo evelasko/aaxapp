@@ -1,3 +1,2 @@
-import { App } from '@aaxapp/common';
-
+import App from '@aaxapp/common';
 export default App

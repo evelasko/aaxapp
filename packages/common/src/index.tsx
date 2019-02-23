@@ -1,24 +1,22 @@
-import React, { useContext } from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { StyleSheet, View } from 'react-native';
+import { client } from './apollo';
 import { Router } from './Router';
-import { CounterStoreContext } from './store/CounterStore';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-})
 
-export const App = () => {
-    const counterStore = useContext(CounterStoreContext)
+export default class App extends React.PureComponent {
+  render() {
     return (
+      <ApolloProvider client={client}>
         <View style={styles.container}>
           <View style={styles.wrapper}>
             <Router />
           </View>
         </View>
-  )
+      </ApolloProvider>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

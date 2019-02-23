@@ -9,10 +9,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_react_lite_1 = require("mobx-react-lite");
 var react_1 = __importStar(require("react"));
+var LoginConnector_1 = require("./connectors/LoginConnector");
 var Main_1 = require("./modules/Main");
 var NewsDetails_1 = require("./modules/NewsDetails");
-var RouterStore_1 = require("./store/RouterStore");
+var RootStore_1 = require("./stores/RootStore");
 exports.Router = mobx_react_lite_1.observer(function () {
-    var routerStore = react_1.useContext(RouterStore_1.RouterStoreContext);
-    return routerStore.screen === 'Main' ? react_1.default.createElement(Main_1.Main, null) : react_1.default.createElement(NewsDetails_1.NewsDetails, null);
+    var rootStore = react_1.useContext(RootStore_1.RootStoreContext);
+    switch (rootStore.routerStore.screen) {
+        case 'Main':
+            return react_1.default.createElement(Main_1.Main, null);
+        case 'NewsDetails':
+            return react_1.default.createElement(NewsDetails_1.NewsDetails, null);
+        case 'Login':
+            return react_1.default.createElement(LoginConnector_1.LoginConnector, null);
+        default:
+            return react_1.default.createElement(LoginConnector_1.LoginConnector, null);
+    }
 });

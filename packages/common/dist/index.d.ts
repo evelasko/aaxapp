@@ -1,2 +1,4 @@
-/// <reference types="react" />
-export declare const App: () => JSX.Element;
+import React from 'react';
+export default class App extends React.PureComponent {
+    render(): JSX.Element;
+}

@@ -1,11 +1,21 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
+import { LoginConnector } from './connectors/LoginConnector';
 import { Main } from "./modules/Main";
 import { NewsDetails } from "./modules/NewsDetails";
-import { RouterStoreContext } from "./store/RouterStore";
+import { RootStoreContext } from "./stores/RootStore";
 
 
 export const Router = observer(() => {
-    const routerStore = useContext(RouterStoreContext)
-    return routerStore.screen === 'Main' ? <Main /> : <NewsDetails />
+    const rootStore = useContext(RootStoreContext)
+    switch (rootStore.routerStore.screen) {
+        case 'Main':
+            return <Main />
+        case 'NewsDetails':
+            return <NewsDetails />
+        case 'Login':
+            return <LoginConnector />
+        default:
+            return <LoginConnector />
+    }
 })
