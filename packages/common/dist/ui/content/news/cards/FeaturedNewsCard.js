@@ -11,38 +11,26 @@ var React = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var styles = react_native_1.StyleSheet.create({
     featuredNewsCard: {
-        flexDirection: 'column',
-        marginBottom: 20,
+        flexDirection: 'column', marginBottom: 20,
     },
     featuredNewsCardHeader: {
-        color: "#EB894A",
-        fontWeight: 'bold', fontSize: 24,
-        margin: 20,
-        textTransform: 'uppercase'
+        color: "#EB894A", fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        margin: 20
     },
     featuredNewsCardImage: {
         width: '100%', height: 206
     },
     featuredNewsCardTitle: {
-        color: "black",
-        fontWeight: 'bold', fontSize: 20,
+        color: "black", fontWeight: 'bold', fontSize: 20,
         margin: 20
     },
     featuredNewsCardSubtitle: {
-        color: "black",
-        fontWeight: 'bold', fontSize: 12,
-        marginLeft: 20, marginRight: 20,
-        maxHeight: 60,
-        overflow: 'hidden',
-        fontVariant: ['small-caps'],
-        marginBottom: 5
+        color: "black", fontWeight: 'bold', fontSize: 12, fontVariant: ['small-caps'],
+        marginLeft: 20, marginRight: 20, marginBottom: 5, maxHeight: 60, overflow: 'hidden'
     },
     featuredNewsCardText: {
-        color: "black",
-        fontWeight: 'normal', fontSize: 12,
-        marginLeft: 20, marginRight: 20,
-        maxHeight: 60,
-        overflow: 'hidden'
+        color: "black", fontWeight: 'normal', fontSize: 12,
+        marginLeft: 20, marginRight: 20, maxHeight: 60, overflow: 'hidden'
     }
 });
 exports.FeaturedNewsCard = function (_a) {

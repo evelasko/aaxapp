@@ -2,4 +2,5 @@ import React from 'react';
 interface Props {
 }
 export declare const NewsScroll: React.FC<Props>;
-export {};
+declare const _default: React.ComponentClass<{}, any>;
+export default _default;

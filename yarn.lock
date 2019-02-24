@@ -2122,7 +2122,7 @@ apollo-link-http@^1.5.11, apollo-link-http@^1.5.5:
     apollo-link "^1.2.8"
     apollo-link-http-common "^0.2.10"
 
-apollo-link-ws@^1.0.9:
+apollo-link-ws@^1.0.14, apollo-link-ws@^1.0.9:
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/apollo-link-ws/-/apollo-link-ws-1.0.14.tgz#588f898b7f953930a27e283941614d89907adf13"
   integrity sha512-KwHVnhKKDUA5PmmzpiqkyahjBcwGdf2eFlTZg4DIwgH1R0KcBmn/A6rkZnmClBbUNgV6t+kR46dW2fyx64Jm3A==

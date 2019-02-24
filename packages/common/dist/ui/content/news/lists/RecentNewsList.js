@@ -15,35 +15,26 @@ var styles = react_native_1.StyleSheet.create({
         padding: 20
     },
     recentNewsItem: {
-        height: 132,
-        flexDirection: 'row'
+        height: 132, flexDirection: 'row'
     },
     recentNewsItemTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
+        fontSize: 20, fontWeight: 'bold',
         color: '#363636',
         height: 75,
         overflow: 'hidden'
     },
     recentNewsItemDataView: {
-        flexDirection: 'column',
-        flex: 1,
-        marginLeft: 10
+        flexDirection: 'column', flex: 1, marginLeft: 10
     },
     recentNewsItemImage: {
-        width: 118,
-        height: 96
+        width: 118, height: 96
     },
     recentNewsItemTime: {
-        color: '#999999',
-        fontSize: 10,
-        textAlign: 'right'
+        color: '#999999', fontSize: 10, textAlign: 'right'
     },
     recentHeader: {
         color: "#C77139",
-        fontWeight: 'bold',
-        fontSize: 24,
-        textTransform: 'uppercase',
+        fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
         marginBottom: 20
     },
 });
@@ -55,7 +46,7 @@ exports.RecentNewsList = function (_a) {
                 var item = _a.item, separators = _a.separators;
                 return (React.createElement(react_native_1.TouchableHighlight, { style: { height: 132 }, onPress: function () { return console.log('You pressed on: ', item.title); }, onShowUnderlay: separators.highlight, onHideUnderlay: separators.unhighlight },
                     React.createElement(react_native_1.View, { style: styles.recentNewsItem },
-                        React.createElement(react_native_1.Image, { style: styles.recentNewsItemImage, source: { uri: item.imageURL } }),
+                        React.createElement(react_native_1.Image, { style: styles.recentNewsItemImage, source: { uri: item.imageURL || 'default.jpg' } }),
                         React.createElement(react_native_1.View, { style: styles.recentNewsItemDataView },
                             React.createElement(react_native_1.Text, { style: styles.recentNewsItemTitle }, item.title),
                             React.createElement(react_native_1.Text, { style: styles.recentNewsItemTime }, item.expiration)))));

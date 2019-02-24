@@ -1,6 +1,8 @@
+import gql from 'graphql-tag';
+import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { AllNewsQuery_allNews } from '../../../schemaTypes';
+import { graphql } from 'react-apollo';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { RootStoreContext } from '../../../stores/RootStore';
 import { FeaturedNewsCard } from './cards/FeaturedNewsCard';
 import { AlertScroll } from './lists/AlertScroll';
@@ -18,25 +20,21 @@ const styles = StyleSheet.create({
     }
 })
 
-export const NewsScroll: React.FC<Props> = () => {
+export const NewsScroll: React.FC<Props> = observer(({data}:any) => {
     const rootStore = useContext(RootStoreContext)
-    const featuredNews:AllNewsQuery_allNews = rootStore.newsStore.featured.filter((n:any) => n.category === 'NEWS')[0]
-    const newsLength = rootStore.newsStore.newses.length
-    const recentsCount = newsLength > 3 ? 3 : newsLength
-    const sortedNews: AllNewsQuery_allNews[] = rootStore.newsStore.newses.slice().sort((a,b) => {
-        const dA:any = new Date(a.expiration)
-        const dB:any = new Date(b.expiration)
-        return dA - dB
-    })
-    const recents = sortedNews.slice(0, recentsCount )
-    const newses = sortedNews.slice(recentsCount, newsLength)
+    if (data.loading) return (<View><Text>Loading</Text></View>)
+    else { rootStore.newsStore.initNewsStore(data.allNews) }
     return (
         <ScrollView style={styles.contentScroll}>
-            <FeaturedNewsCard featuredNews={featuredNews} />
-            <AlertScroll />
-            <RecentNewsList recents={recents} />
-            <CallScroll />
-            <NewsList newses={newses} />
+            <FeaturedNewsCard featuredNews={rootStore.newsStore.featuredNews} />
+            <AlertScroll alerts={rootStore.newsStore.alerts} />
+            <RecentNewsList recents={rootStore.newsStore.recents} />
+            <CallScroll calls={rootStore.newsStore.calls} />
+            <NewsList newses={rootStore.newsStore.newses} />
         </ScrollView>
     )
-}
+})
+
+export default graphql(
+    gql` query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured } } `
+)(NewsScroll)

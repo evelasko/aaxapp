@@ -9,18 +9,41 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_1 = require("mobx");
 var NewsStore = /** @class */ (function () {
     function NewsStore(rootStore) {
-        this.newses = [];
         this.alerts = [];
         this.calls = [];
-        this.featured = [];
+        this.allNews = [];
+        this.featuredNews = null;
         this.rootStore = rootStore;
     }
     NewsStore.prototype.initNewsStore = function (newses) {
-        this.newses = newses.filter(function (n) { return n.category === 'NEWS' && !n.featured; });
+        var _this = this;
         this.alerts = newses.filter(function (n) { return n.category === 'ALERT'; });
         this.calls = newses.filter(function (n) { return n.category === 'CALL'; });
-        this.featured = newses.filter(function (n) { return n.featured; });
+        this.featuredNews = newses.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
+        this.allNews = newses.filter(function (n) {
+            _this.featuredNews ? n.category === 'NEWS' && n.id != _this.featuredNews.id : n.category === 'NEWS';
+        }).slice().sort(function (a, b) {
+            var dA = new Date(a.expiration);
+            var dB = new Date(b.expiration);
+            return dA - dB;
+        });
     };
+    Object.defineProperty(NewsStore.prototype, "recents", {
+        get: function () {
+            var recentsCount = this.allNews.length > 3 ? 3 : this.allNews.length;
+            return this.allNews.slice(0, recentsCount);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewsStore.prototype, "newses", {
+        get: function () {
+            var recentsCount = this.allNews.length > 3 ? 3 : this.allNews.length;
+            return this.allNews.slice(recentsCount, this.allNews.length);
+        },
+        enumerable: true,
+        configurable: true
+    });
     NewsStore.prototype.addAlert = function (newAlert) {
         this.alerts.unshift(newAlert);
     };
@@ -29,19 +52,25 @@ var NewsStore = /** @class */ (function () {
     };
     __decorate([
         mobx_1.observable
-    ], NewsStore.prototype, "newses", void 0);
-    __decorate([
-        mobx_1.observable
     ], NewsStore.prototype, "alerts", void 0);
     __decorate([
         mobx_1.observable
     ], NewsStore.prototype, "calls", void 0);
     __decorate([
         mobx_1.observable
-    ], NewsStore.prototype, "featured", void 0);
+    ], NewsStore.prototype, "allNews", void 0);
+    __decorate([
+        mobx_1.observable
+    ], NewsStore.prototype, "featuredNews", void 0);
     __decorate([
         mobx_1.action
     ], NewsStore.prototype, "initNewsStore", null);
+    __decorate([
+        mobx_1.computed
+    ], NewsStore.prototype, "recents", null);
+    __decorate([
+        mobx_1.computed
+    ], NewsStore.prototype, "newses", null);
     __decorate([
         mobx_1.action
     ], NewsStore.prototype, "addAlert", null);

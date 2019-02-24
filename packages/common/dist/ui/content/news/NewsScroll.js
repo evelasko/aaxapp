@@ -1,4 +1,11 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -7,7 +14,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var graphql_tag_1 = __importDefault(require("graphql-tag"));
+var mobx_react_lite_1 = require("mobx-react-lite");
 var react_1 = __importStar(require("react"));
+var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var RootStore_1 = require("../../../stores/RootStore");
 var FeaturedNewsCard_1 = require("./cards/FeaturedNewsCard");
@@ -22,22 +32,21 @@ var styles = react_native_1.StyleSheet.create({
         flex: 1
     }
 });
-exports.NewsScroll = function () {
+exports.NewsScroll = mobx_react_lite_1.observer(function (_a) {
+    var data = _a.data;
     var rootStore = react_1.useContext(RootStore_1.RootStoreContext);
-    var featuredNews = rootStore.newsStore.featured.filter(function (n) { return n.category === 'NEWS'; })[0];
-    var newsLength = rootStore.newsStore.newses.length;
-    var recentsCount = newsLength > 3 ? 3 : newsLength;
-    var sortedNews = rootStore.newsStore.newses.slice().sort(function (a, b) {
-        var dA = new Date(a.expiration);
-        var dB = new Date(b.expiration);
-        return dA - dB;
-    });
-    var recents = sortedNews.slice(0, recentsCount);
-    var newses = sortedNews.slice(recentsCount, newsLength);
+    if (data.loading)
+        return (react_1.default.createElement(react_native_1.View, null,
+            react_1.default.createElement(react_native_1.Text, null, "Loading")));
+    else {
+        rootStore.newsStore.initNewsStore(data.allNews);
+    }
     return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
-        react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews }),
-        react_1.default.createElement(AlertScroll_1.AlertScroll, null),
-        react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents }),
-        react_1.default.createElement(CallScroll_1.CallScroll, null),
-        react_1.default.createElement(NewsList_1.NewsList, { newses: newses })));
-};
+        react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: rootStore.newsStore.featuredNews }),
+        react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: rootStore.newsStore.alerts }),
+        react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: rootStore.newsStore.recents }),
+        react_1.default.createElement(CallScroll_1.CallScroll, { calls: rootStore.newsStore.calls }),
+        react_1.default.createElement(NewsList_1.NewsList, { newses: rootStore.newsStore.newses })));
+});
+exports.default = react_apollo_1.graphql(graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured } } "], [" query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured } } "]))))(exports.NewsScroll);
+var templateObject_1;
