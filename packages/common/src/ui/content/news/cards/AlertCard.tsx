@@ -4,14 +4,14 @@ import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 interface Props {
     title: string
-    time: string
+    body: string
 }
 
 const styles = StyleSheet.create({
     alertCard: {
         flexDirection: 'column',
         height: 131,
-        width: 132,
+        width: 140,
         borderLeftColor: 'rgba(255,255,255,0.3)',
         borderLeftWidth: 1,
         overflow: 'hidden'
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
     },
 })
 
-export const AlertCard: React.FC<Props> = observer(({title, time}) => {
+export const AlertCard: React.FC<Props> = observer(({title, body}) => {
     return (
         <TouchableHighlight onPress={() => console.log('You pressed an alert ')}>
             <View style={styles.alertCard} >
                 <Text style={styles.alertCardTitle}>{title}</Text>
-                <Text style={styles.alertCardText}>{time}</Text>
+                <Text style={styles.alertCardText}>{body}</Text>
             </View>
         </TouchableHighlight>
     )

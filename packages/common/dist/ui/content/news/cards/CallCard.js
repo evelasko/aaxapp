@@ -22,7 +22,9 @@ var styles = react_native_1.StyleSheet.create({
         color: "white",
         fontWeight: 'bold',
         fontSize: 14,
-        margin: 20
+        margin: 20,
+        height: 100,
+        overflow: 'hidden'
     },
     callCardExpiration: {
         color: "white",
@@ -32,9 +34,10 @@ var styles = react_native_1.StyleSheet.create({
         padding: 8
     },
 });
-exports.CallCard = function () {
+exports.CallCard = function (_a) {
+    var title = _a.title, due = _a.due;
     return (React.createElement(react_native_1.TouchableHighlight, { onPress: function () { return console.log('You pressed a call'); } },
         React.createElement(react_native_1.View, { style: styles.callCard },
-            React.createElement(react_native_1.Text, { style: styles.callCardTitle }, "T\u00EDtulo de la Convocatoria"),
-            React.createElement(react_native_1.Text, { style: styles.callCardExpiration }, "vence en 4 d\u00EDas"))));
+            React.createElement(react_native_1.Text, { style: styles.callCardTitle }, title),
+            React.createElement(react_native_1.Text, { style: styles.callCardExpiration }, due))));
 };

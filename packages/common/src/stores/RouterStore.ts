@@ -9,6 +9,6 @@ export class RouterStore {
     constructor(rootStore:RootStore) {
         this.rootStore = rootStore
     }
-    @observable screen:Routes = "Login"
+    @observable screen:Routes = "Main"
 }
 

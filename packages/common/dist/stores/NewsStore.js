@@ -15,6 +15,18 @@ var NewsStore = /** @class */ (function () {
         this.featured = [];
         this.rootStore = rootStore;
     }
+    NewsStore.prototype.initNewsStore = function (newses) {
+        this.newses = newses.filter(function (n) { return n.category === 'NEWS' && !n.featured; });
+        this.alerts = newses.filter(function (n) { return n.category === 'ALERT'; });
+        this.calls = newses.filter(function (n) { return n.category === 'CALL'; });
+        this.featured = newses.filter(function (n) { return n.featured; });
+    };
+    NewsStore.prototype.addAlert = function (newAlert) {
+        this.alerts.unshift(newAlert);
+    };
+    NewsStore.prototype.updateAlert = function (id, newTitle) {
+        this.alerts.filter(function (a) { return a.id === id; })[0].title = newTitle;
+    };
     __decorate([
         mobx_1.observable
     ], NewsStore.prototype, "newses", void 0);
@@ -27,6 +39,15 @@ var NewsStore = /** @class */ (function () {
     __decorate([
         mobx_1.observable
     ], NewsStore.prototype, "featured", void 0);
+    __decorate([
+        mobx_1.action
+    ], NewsStore.prototype, "initNewsStore", null);
+    __decorate([
+        mobx_1.action
+    ], NewsStore.prototype, "addAlert", null);
+    __decorate([
+        mobx_1.action
+    ], NewsStore.prototype, "updateAlert", null);
     return NewsStore;
 }());
 exports.NewsStore = NewsStore;

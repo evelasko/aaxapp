@@ -6,27 +6,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_react_lite_1 = require("mobx-react-lite");
 var react_1 = __importStar(require("react"));
+var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
+var LoginConnector_1 = require("../connectors/LoginConnector");
+var AuthController_1 = require("../controllers/AuthController");
 var RootStore_1 = require("../stores/RootStore");
-var ContentScroll_1 = require("../ui/content/news/ContentScroll");
-var TopBar_1 = require("../ui/shared/TopBar");
-var styles = react_native_1.StyleSheet.create({
-    main: {
-        flexDirection: 'column',
-        flex: 1
-    }
-});
+var Base_1 = __importDefault(require("./Base"));
 exports.Main = mobx_react_lite_1.observer(function () {
     var rootStore = react_1.useContext(RootStore_1.RootStoreContext);
-    return (react_1.default.createElement(react_native_1.View, { style: styles.main },
-        react_1.default.createElement(TopBar_1.TopBar, null),
-        react_1.default.createElement(react_native_1.Button, { title: "view details", onPress: function () {
-                // rootStore.routerStore.screen = 'NewsDetails' 
-                rootStore.newsStore.alerts.push({ id: '1', title: 'Title One', text: 'Lorem ipsum' }, { id: '2', title: 'Title Two', text: 'Lorem ipsum' }, { id: '3', title: 'Title Three', text: 'Lorem ipsum' }, { id: '4', title: 'Title Four', text: 'Lorem ipsum' });
-            } }),
-        react_1.default.createElement(ContentScroll_1.ContentScroll, null)));
+    return (react_1.default.createElement(react_apollo_1.Query, { query: AuthController_1.meQuery }, function (_a) {
+        var loading = _a.loading, data = _a.data;
+        if (!loading) {
+            if (data.me.user) {
+                rootStore.userStore.CurrentUser = data.me.user;
+                return react_1.default.createElement(Base_1.default, null);
+            }
+            else {
+                rootStore.userStore.CurrentUser = null;
+                return react_1.default.createElement(LoginConnector_1.LoginConnector, null);
+            }
+        }
+        else
+            return (react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.Text, null, "Loading")));
+    }));
 });
-// 

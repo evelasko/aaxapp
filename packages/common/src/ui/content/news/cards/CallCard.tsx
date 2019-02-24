@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
-interface Props {}
+interface Props {
+    title: string
+    due: string
+}
 
 const styles = StyleSheet.create({
     callCard: {
@@ -16,7 +19,9 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 'bold',
         fontSize: 14,
-        margin: 20
+        margin: 20,
+        height: 100,
+        overflow: 'hidden'
     },
     callCardExpiration: {
         color: "white",
@@ -27,12 +32,12 @@ const styles = StyleSheet.create({
     },
 })
 
-export const CallCard: React.FC<Props> = () => {
+export const CallCard: React.FC<Props> = ({title, due}) => {
     return (
         <TouchableHighlight onPress={() => console.log('You pressed a call')}>
             <View style={styles.callCard}>
-                <Text style={styles.callCardTitle}>Título de la Convocatoria</Text>
-                <Text style={styles.callCardExpiration}>vence en 4 días</Text>
+                <Text style={styles.callCardTitle}>{title}</Text>
+                <Text style={styles.callCardExpiration}>{due}</Text>
             </View>
         </TouchableHighlight>
     )

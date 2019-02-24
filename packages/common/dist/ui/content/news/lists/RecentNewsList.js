@@ -47,20 +47,17 @@ var styles = react_native_1.StyleSheet.create({
         marginBottom: 20
     },
 });
-exports.RecentNewsList = function () {
+exports.RecentNewsList = function (_a) {
+    var recents = _a.recents;
     return (React.createElement(react_native_1.View, { style: styles.recentNewsListView },
         React.createElement(react_native_1.Text, { style: styles.recentHeader }, "recientes"),
-        React.createElement(react_native_1.FlatList, { data: [
-                { title: 'Ut vitae augue vehicula, semper dui eget, tincidunt metus', key: 'item1', time: 'hace 1 día' },
-                { title: 'Fusce non nunc eget nunc viverra aliquam', key: 'item2', time: 'hace 6 horas' },
-                { title: 'Fusce malesuada ante sit amet nunc lacinia pharetra ac sed libero', key: 'item3', time: 'ahora mismo' }
-            ], renderItem: function (_a) {
+        React.createElement(react_native_1.FlatList, { data: recents, keyExtractor: function (item) { return item.id; }, renderItem: function (_a) {
                 var item = _a.item, separators = _a.separators;
                 return (React.createElement(react_native_1.TouchableHighlight, { style: { height: 132 }, onPress: function () { return console.log('You pressed on: ', item.title); }, onShowUnderlay: separators.highlight, onHideUnderlay: separators.unhighlight },
                     React.createElement(react_native_1.View, { style: styles.recentNewsItem },
-                        React.createElement(react_native_1.Image, { style: styles.recentNewsItemImage, source: { uri: 'https://res.cloudinary.com/huh9ixig7/image/upload/v1550834159/aaxapi_images/e3darvw9yh3m8t51wq95.jpg' } }),
+                        React.createElement(react_native_1.Image, { style: styles.recentNewsItemImage, source: { uri: item.imageURL } }),
                         React.createElement(react_native_1.View, { style: styles.recentNewsItemDataView },
                             React.createElement(react_native_1.Text, { style: styles.recentNewsItemTitle }, item.title),
-                            React.createElement(react_native_1.Text, { style: styles.recentNewsItemTime }, item.time)))));
+                            React.createElement(react_native_1.Text, { style: styles.recentNewsItemTime }, item.expiration)))));
             } })));
 };

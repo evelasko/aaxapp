@@ -14,7 +14,7 @@ var styles = react_native_1.StyleSheet.create({
     alertCard: {
         flexDirection: 'column',
         height: 131,
-        width: 132,
+        width: 140,
         borderLeftColor: 'rgba(255,255,255,0.3)',
         borderLeftWidth: 1,
         overflow: 'hidden'
@@ -33,9 +33,9 @@ var styles = react_native_1.StyleSheet.create({
     },
 });
 exports.AlertCard = mobx_react_lite_1.observer(function (_a) {
-    var title = _a.title, time = _a.time;
+    var title = _a.title, body = _a.body;
     return (React.createElement(react_native_1.TouchableHighlight, { onPress: function () { return console.log('You pressed an alert '); } },
         React.createElement(react_native_1.View, { style: styles.alertCard },
             React.createElement(react_native_1.Text, { style: styles.alertCardTitle }, title),
-            React.createElement(react_native_1.Text, { style: styles.alertCardText }, time))));
+            React.createElement(react_native_1.Text, { style: styles.alertCardText }, body))));
 });

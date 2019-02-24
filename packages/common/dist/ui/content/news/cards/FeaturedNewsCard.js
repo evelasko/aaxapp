@@ -16,27 +16,22 @@ var styles = react_native_1.StyleSheet.create({
     },
     featuredNewsCardHeader: {
         color: "#EB894A",
-        fontWeight: 'bold',
-        fontSize: 24,
+        fontWeight: 'bold', fontSize: 24,
         margin: 20,
         textTransform: 'uppercase'
     },
     featuredNewsCardImage: {
-        width: '100%',
-        height: 206
+        width: '100%', height: 206
     },
     featuredNewsCardTitle: {
         color: "black",
-        fontWeight: 'bold',
-        fontSize: 20,
+        fontWeight: 'bold', fontSize: 20,
         margin: 20
     },
     featuredNewsCardSubtitle: {
         color: "black",
-        fontWeight: 'bold',
-        fontSize: 12,
-        marginLeft: 20,
-        marginRight: 20,
+        fontWeight: 'bold', fontSize: 12,
+        marginLeft: 20, marginRight: 20,
         maxHeight: 60,
         overflow: 'hidden',
         fontVariant: ['small-caps'],
@@ -44,19 +39,22 @@ var styles = react_native_1.StyleSheet.create({
     },
     featuredNewsCardText: {
         color: "black",
-        fontWeight: 'normal',
-        fontSize: 12,
-        marginLeft: 20,
-        marginRight: 20,
+        fontWeight: 'normal', fontSize: 12,
+        marginLeft: 20, marginRight: 20,
         maxHeight: 60,
         overflow: 'hidden'
     }
 });
-exports.FeaturedNewsCard = function () {
+exports.FeaturedNewsCard = function (_a) {
+    var featuredNews = _a.featuredNews;
+    if (!featuredNews) {
+        return React.createElement(react_native_1.View, { style: { display: 'none' } });
+    }
+    var imageURL = featuredNews.imageURL, title = featuredNews.title, subtitle = featuredNews.subtitle, body = featuredNews.body;
     return (React.createElement(react_native_1.View, { style: styles.featuredNewsCard },
         React.createElement(react_native_1.Text, { style: styles.featuredNewsCardHeader }, "destacado"),
-        React.createElement(react_native_1.Image, { style: styles.featuredNewsCardImage, source: { uri: 'https://res.cloudinary.com/huh9ixig7/image/upload/v1550788418/aaxapi_images/c2w25yqpsjigg63z6act.jpg' } }),
-        React.createElement(react_native_1.Text, { style: styles.featuredNewsCardTitle }, "Lorem ipsum dolor sit amet, consectetur adipiscing"),
-        React.createElement(react_native_1.Text, { style: styles.featuredNewsCardSubtitle }, "Sed ut erat scelerisque, mattis urna sagittis, placerat eros. Aenean ipsum lectus, egestas vel libero non, viverra consequat ligula."),
-        React.createElement(react_native_1.Text, { style: styles.featuredNewsCardText }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non nibh at quam eleifend efficitur. Praesent lacinia elit eget rhoncus consequat. Donec finibus arcu erat, ut egestas felis lacinia non. Donec ut sapien vel magna ornare dictum. Nulla vulputate ligula sem, eget iaculis ipsum tincidunt eu. Praesent sit amet nisi mi. Proin eget scelerisque justo. Sed eu risus commodo, facilisis velit vitae, sollicitudin urna. Nam viverra leo vel est luctus tempus. Nullam maximus mattis ligula et pharetra. Proin in dolor in justo maximus rutrum sit amet ut odio. Nulla porta tortor sed arcu tincidunt, id aliquet est ornare. Integer at rutrum tortor, vitae fermentum lectus. Ut vel commodo lectus, eu maximus purus. Sed ut erat scelerisque, mattis urna sagittis, placerat eros. Aenean ipsum lectus, egestas vel libero non, viverra consequat ligula.")));
+        React.createElement(react_native_1.Image, { style: styles.featuredNewsCardImage, source: { uri: imageURL || 'default.png' } }),
+        React.createElement(react_native_1.Text, { style: styles.featuredNewsCardTitle }, title),
+        subtitle && React.createElement(react_native_1.Text, { style: styles.featuredNewsCardSubtitle }, subtitle),
+        React.createElement(react_native_1.Text, { style: styles.featuredNewsCardText }, body)));
 };

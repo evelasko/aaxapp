@@ -6,10 +6,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_react_lite_1 = require("mobx-react-lite");
-var React = __importStar(require("react"));
+var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
+var react_native_linear_gradient_1 = __importDefault(require("react-native-linear-gradient"));
 var RootStore_1 = require("../../../../stores/RootStore");
 var AlertCard_1 = require("../cards/AlertCard");
 var styles = react_native_1.StyleSheet.create({
@@ -18,19 +22,26 @@ var styles = react_native_1.StyleSheet.create({
     },
     alertScroll: {
         height: 132,
-        marginBottom: 20
+        marginBottom: 5
     },
     alertHeader: {
         color: "white",
         fontWeight: 'bold',
         fontSize: 24,
-        margin: 20,
+        marginBottom: 10,
+        marginLeft: 20,
         textTransform: 'uppercase'
     },
+    shadowH: { height: 15 }
 });
 exports.AlertScroll = mobx_react_lite_1.observer(function () {
-    var rootStore = React.useContext(RootStore_1.RootStoreContext);
-    return (React.createElement(react_native_1.View, { style: styles.alertView },
-        React.createElement(react_native_1.Text, { style: styles.alertHeader }, "alertas"),
-        React.createElement(react_native_1.ScrollView, { horizontal: true, style: styles.alertScroll }, rootStore.newsStore.alerts.map(function (a) { return React.createElement(AlertCard_1.AlertCard, { key: a.id, title: a.title, time: a.text }); }))));
+    var rootStore = react_1.useContext(RootStore_1.RootStoreContext);
+    if (!rootStore.newsStore.alerts.length) {
+        return react_1.default.createElement(react_native_1.View, { style: { display: 'none' } });
+    }
+    return (react_1.default.createElement(react_native_1.View, { style: styles.alertView },
+        react_1.default.createElement(react_native_linear_gradient_1.default, { style: styles.shadowH, colors: ['rgba(35,35,35,0.2)', 'rgba(35,35,35,0)'] }),
+        react_1.default.createElement(react_native_1.Text, { style: styles.alertHeader }, "alertas"),
+        react_1.default.createElement(react_native_1.ScrollView, { horizontal: true, style: styles.alertScroll }, rootStore.newsStore.alerts.map(function (a) { return react_1.default.createElement(AlertCard_1.AlertCard, { key: a.id, title: a.title, body: a.body }); })),
+        react_1.default.createElement(react_native_linear_gradient_1.default, { style: styles.shadowH, colors: ['rgba(35,35,35,0)', 'rgba(35,35,35,0.2)'] })));
 });

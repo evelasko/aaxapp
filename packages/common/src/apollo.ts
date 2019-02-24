@@ -9,6 +9,7 @@ const host = process.env.AAXAPI_URL ? process.env.AAXAPI_URL :
 export const client = new ApolloClient({
     link: new HttpLink({
         uri: `${host}`,
+        credentials: 'include'
     }),
     cache: new InMemoryCache()
 })

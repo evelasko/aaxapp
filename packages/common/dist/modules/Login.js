@@ -55,20 +55,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var formik_1 = require("formik");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
+var react_native_linear_gradient_1 = __importDefault(require("react-native-linear-gradient"));
+var Logo_1 = __importDefault(require("../ui/Logo"));
 var InputFiled_1 = require("../ui/shared/InputFiled");
 var user_1 = require("../yupSchemas/user");
 var styles = react_native_1.StyleSheet.create({
     loginView: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: "#2E2E2E",
     },
     loginWrapper: {
         flexDirection: 'column',
         alignItems: 'center',
+        zIndex: 3
+    },
+    loginBackground: {
+        width: '100%', height: '100%',
+        backgroundColor: 'blue',
+        zIndex: 1,
     },
     logo: {
-        width: 200, height: 200, resizeMode: 'cover', marginBottom: 100
+        marginBottom: 100
     },
     inputFieldsView: {
         borderBottomColor: "rgba(0,0,0,0.3)",
@@ -99,9 +106,10 @@ var L = /** @class */ (function (_super) {
     }
     L.prototype.render = function () {
         var _a = this.props, handleSubmit = _a.handleSubmit, handleForgot = _a.handleForgot, handleRegister = _a.handleRegister;
-        return (react_1.default.createElement(react_native_1.View, { style: styles.loginView },
+        return (react_1.default.createElement(react_native_linear_gradient_1.default, { style: styles.loginView, colors: ['rgb(35,35,35)', 'rgb(46,46,46)', 'rgb(33,33,33)'], locations: [0.06, 0.80, 1] },
             react_1.default.createElement(react_native_1.View, { style: styles.loginWrapper },
-                react_1.default.createElement(react_native_1.Image, { style: styles.logo, source: { uri: 'https://res.cloudinary.com/huh9ixig7/image/upload/v1550788418/aaxapi_images/c2w25yqpsjigg63z6act.jpg' } }),
+                react_1.default.createElement(react_native_1.View, { style: styles.logo },
+                    react_1.default.createElement(Logo_1.default, { width: 200, height: 200 })),
                 react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
                     react_1.default.createElement(formik_1.Field, { name: "email", placeholder: "email", textContentType: "username", spellCheck: false, style: styles.inputFields, component: InputFiled_1.InputField })),
                 react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },

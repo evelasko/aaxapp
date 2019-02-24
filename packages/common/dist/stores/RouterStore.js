@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mobx_1 = require("mobx");
 var RouterStore = /** @class */ (function () {
     function RouterStore(rootStore) {
-        this.screen = "Login";
+        this.screen = "Main";
         this.rootStore = rootStore;
     }
     __decorate([

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
-interface Props {}
+interface Props {
+    newses: any[]
+}
 
 const styles = StyleSheet.create({
     newsListView: {
@@ -44,23 +46,21 @@ const styles = StyleSheet.create({
     },
 })
 
-export const NewsList: React.FC<Props> = () => {
+export const NewsList: React.FC<Props> = ({newses}) => {
+    if (!newses.length) { return <View style={{display: 'none'}} />}
     return (
         <View style={styles.newsListView}>
             <Text style={styles.newsHeader}>noticias</Text>
             <FlatList
-                data={[
-                    {title: 'Ut vitae augue vehicula, semper dui eget, tincidunt metus', key: 'item1', text: 'Ut vitae augue vehicula, semper dui eget, tincidunt metus. Fusce non nunc eget nunc viverra aliquam. Donec convallis semper nisl in suscipit. Sed quis erat vitae magna vestibulum lobortis ac ut libero. Aenean non sem vel nulla eleifend porta. Aliquam vel posuere nisl. Fusce malesuada ante sit amet nunc lacinia pharetra ac sed libero.'}, 
-                    {title: 'Fusce non nunc eget nunc sit amet nunc lacinia pharetra viverra aliquam', key: 'item2', text: 'Nunc vel eros quis tortor facilisis posuere. Phasellus luctus finibus felis, ac elementum neque dapibus quis. Vivamus consequat dictum neque, sed consequat est facilisis faucibus. Ut finibus varius diam, vitae hendrerit urna suscipit vitae. Etiam ultrices, dolor eu condimentum cursus, velit metus placerat mi, non aliquam velit ante id ante.'}, 
-                    {title: 'Fusce malesuada ante sit amet nunc lacinia pharetra ac sed libero', key: 'item3', text: 'Aliquam maximus, dolor sit amet ultrices sagittis, arcu odio suscipit libero, id venenatis urna magna eu mauris. Donec at molestie dolor, consequat porta eros. Etiam ac est accumsan, sagittis purus quis, scelerisque nulla. Proin vel tellus in purus aliquam dapibus at sit amet erat. Donec sit amet euismod nibh.'}
-                ]}
+                data={newses}
+                keyExtractor={(item) => item.id}
                 renderItem={({item, separators}) => (
                     <TouchableHighlight style={{height:132}} onPress={() => console.log('You pressed on: ',item.title)} onShowUnderlay={separators.highlight} onHideUnderlay={separators.unhighlight}>
                         <View style={styles.newsItem}>
-                            <Image style={styles.newsItemImage} source={{uri: 'https://res.cloudinary.com/huh9ixig7/image/upload/v1550834159/aaxapi_images/e3darvw9yh3m8t51wq95.jpg'}} />
+                            <Image style={styles.newsItemImage} source={{uri: item.imageURL}} />
                             <View style={styles.newsItemDataView} >
                                 <Text style={styles.newsItemTitle}>{item.title}</Text>
-                                <Text style={styles.newsItemText}>{item.text}</Text>
+                                <Text style={styles.newsItemText}>{item.body}</Text>
                             </View>
                         </View>
                     </TouchableHighlight>

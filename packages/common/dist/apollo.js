@@ -9,6 +9,7 @@ var host = process.env.AAXAPI_URL ? process.env.AAXAPI_URL :
 exports.client = new apollo_client_1.ApolloClient({
     link: new apollo_link_http_1.HttpLink({
         uri: "" + host,
+        credentials: 'include'
     }),
     cache: new apollo_cache_inmemory_1.InMemoryCache()
 });

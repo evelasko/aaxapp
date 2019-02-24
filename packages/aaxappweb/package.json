@@ -12,12 +12,18 @@
     "react-art": "16.8.2",
     "react-dom": "^16.8.2",
     "react-native": "0.55.4",
+    "react-native-linear-gradient": "^2.5.3",
+    "react-native-svg": "^9.2.4",
+    "react-native-vector-icons": "^6.3.0",
     "react-native-web": "0.10.0",
+    "react-native-web-linear-gradient": "^1.0.5",
+    "react-native-web-svg": "^1.0.0",
     "react-scripts": "2.1.5",
     "typescript": "3.3.3"
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "startr": "SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -32,6 +38,11 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/react-native": "0.55.4"
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@types/react-native": "0.55.4",
+    "babel-plugin-import": "^1.11.0",
+    "customize-cra": "^0.2.11",
+    "react-app-rewired": "^2.1.0",
+    "react-scripts-ts": "^3.1.0"
   }
 }
