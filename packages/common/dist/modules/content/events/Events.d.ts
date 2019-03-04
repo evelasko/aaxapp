@@ -7,10 +7,8 @@ interface Props extends NavigationScreenProps {
 declare class Events extends React.Component<Props> {
     static navigationOptions: {
         title: string;
-        headerStyle: {
-            backgroundColor: string;
-        };
-        headerTintColor: string;
+        headerBackground: JSX.Element;
+        headerTransparent: boolean;
         headerTitleStyle: {
             fontWeight: string;
         };

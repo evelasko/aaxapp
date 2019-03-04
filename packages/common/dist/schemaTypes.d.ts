@@ -46,19 +46,6 @@ export interface AllEventsQuery_events {
 export interface AllEventsQuery {
     events: (AllEventsQuery_events | null)[];
 }
-export interface NewsSubscription_newNews {
-    __typename: "News";
-    id: string;
-    title: string;
-    body: string;
-    expiration: any;
-    category: NewsCategory | null;
-    featured: boolean | null;
-    imageURL: string | null;
-}
-export interface NewsSubscription {
-    newNews: NewsSubscription_newNews;
-}
 export interface AllNewsQuery_allNews {
     __typename: "News";
     id: string;
@@ -69,6 +56,7 @@ export interface AllNewsQuery_allNews {
     expiration: any;
     category: NewsCategory | null;
     featured: boolean | null;
+    createdAt: any;
 }
 export interface AllNewsQuery {
     allNews: (AllNewsQuery_allNews | null)[];

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AllNewsQuery_allNews } from '../../../schemaTypes';
@@ -51,7 +52,7 @@ export const RecentNewsList: React.FC<Props> = ({recents, pushDetails}) => {
                             <Image style={styles.recentNewsItemImage} source={{uri: item.imageURL || 'default.jpg' }} />
                             <View style={styles.recentNewsItemDataView} >
                                 <Text style={styles.recentNewsItemTitle}>{item.title}</Text>
-                                <Text style={styles.recentNewsItemTime}>{item.expiration}</Text>
+                                <Text style={styles.recentNewsItemTime}>{moment(item.createdAt).fromNow()}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>

@@ -50,17 +50,15 @@ var EventDetails = function (_a) {
     if (!id)
         return react_1.default.createElement(react_native_1.View, null,
             react_1.default.createElement(react_native_1.Text, null, "Lo sentimos pero no encontramos el evento que quer\u00EDas..."));
-    console.log('ID: ', id);
     var eventDetails = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" \n        query EventDetails { oneEvent (id: ", ") \n            { id title subtitle body imageURL date venue { name address placeID} } }\n    "], [" \n        query EventDetails { oneEvent (id: ", ") \n            { id title subtitle body imageURL date venue { name address placeID} } }\n    "])), id);
     return (react_1.default.createElement(react_native_1.ScrollView, null,
         react_1.default.createElement(react_apollo_1.Query, { query: eventDetails }, function (_a) {
             var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading)
                 return react_1.default.createElement(react_native_1.Text, null, "Loading");
-            console.log("data: " + data + ", ERROR: " + error);
             if (!loading && data === undefined || error) {
                 console.log('Error: ', error);
-                return react_1.default.createElement(react_native_1.Text, null, "Error en la petici\u00F3n: " + (error && error.message));
+                return react_1.default.createElement(react_native_1.Text, null, "Error en la petici\u00F3n");
             }
             var oneEvent = data.oneEvent;
             var latlng = { latitude: 40.2927789, longitude: -3.7913771 };

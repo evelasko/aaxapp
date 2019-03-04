@@ -6,10 +6,8 @@ interface Props extends RouteComponentProps {
 declare class News extends React.Component<Props & NavigationScreenProps> {
     static navigationOptions: {
         title: string;
-        headerStyle: {
-            backgroundColor: string;
-        };
-        headerTintColor: string;
+        headerBackground: JSX.Element;
+        headerTransparent: boolean;
         headerTitleStyle: {
             fontWeight: string;
         };

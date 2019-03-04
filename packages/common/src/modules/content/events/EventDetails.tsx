@@ -34,7 +34,6 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
     
     const id = match && match.params.event ? match.params.event : navigation.getParam('id')
     if (!id) return <View><Text>Lo sentimos pero no encontramos el evento que querías...</Text></View>
-    console.log('ID: ', id)
     const eventDetails = gql` 
         query EventDetails { oneEvent (id: ${id}) 
             { id title subtitle body imageURL date venue { name address placeID} } }
@@ -44,10 +43,9 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
             <Query query={eventDetails}>
                 {({loading, data, error}) => {
                     if (loading) return <Text>Loading</Text>
-                    console.log(`data: ${data}, ERROR: ${error}`)
                     if (!loading && data === undefined || error ) { 
                         console.log('Error: ', error)
-                        return <Text>{`Error en la petición: ${error && error.message}` }</Text>
+                        return <Text>Error en la petición</Text>
                     }
                     const { oneEvent } = data
                     const latlng = {latitude: 40.2927789, longitude: -3.7913771}

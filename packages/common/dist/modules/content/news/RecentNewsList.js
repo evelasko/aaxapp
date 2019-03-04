@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var moment_1 = __importDefault(require("moment"));
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var styles = react_native_1.StyleSheet.create({
@@ -48,6 +49,6 @@ exports.RecentNewsList = function (_a) {
                         react_1.default.createElement(react_native_1.Image, { style: styles.recentNewsItemImage, source: { uri: item.imageURL || 'default.jpg' } }),
                         react_1.default.createElement(react_native_1.View, { style: styles.recentNewsItemDataView },
                             react_1.default.createElement(react_native_1.Text, { style: styles.recentNewsItemTitle }, item.title),
-                            react_1.default.createElement(react_native_1.Text, { style: styles.recentNewsItemTime }, item.expiration)))));
+                            react_1.default.createElement(react_native_1.Text, { style: styles.recentNewsItemTime }, moment_1.default(item.createdAt).fromNow())))));
             } })));
 };

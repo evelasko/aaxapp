@@ -20,6 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var expo_1 = require("expo");
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
@@ -29,9 +30,10 @@ var CallScroll_1 = require("./CallScroll");
 var FeaturedNewsCard_1 = require("./FeaturedNewsCard");
 var NewsList_1 = __importDefault(require("./NewsList"));
 var RecentNewsList_1 = require("./RecentNewsList");
-var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured }}"], ["query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured }}"])));
+var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery { allNews \n{ id title subtitle body imageURL expiration category featured createdAt } }"], ["query AllNewsQuery { allNews \n{ id title subtitle body imageURL expiration category featured createdAt } }"])));
 var styles = react_native_1.StyleSheet.create({
-    contentScroll: { flexDirection: 'column', height: '100%', flex: 1 }
+    contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
+    activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
 });
 var News = /** @class */ (function (_super) {
     __extends(News, _super);
@@ -51,9 +53,14 @@ var News = /** @class */ (function (_super) {
         var _this = this;
         var history = this.props.history;
         return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
-            var loading = _a.loading, data = _a.data;
+            var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading) {
-                return react_1.default.createElement(react_native_1.Text, null, "Loading");
+                return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
+                    react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
+            }
+            if (error) {
+                console.log('ERROR: ', error);
+                return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
             }
             if (!data.allNews.length)
                 return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
@@ -76,13 +83,9 @@ var News = /** @class */ (function (_super) {
     };
     News.navigationOptions = {
         title: 'Noticias',
-        headerStyle: {
-            backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
+        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
+        headerTransparent: true,
+        headerTitleStyle: { fontWeight: 'bold' },
     };
     return News;
 }(react_1.default.Component));

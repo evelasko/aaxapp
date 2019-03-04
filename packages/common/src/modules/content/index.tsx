@@ -1,3 +1,5 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import React from 'react';
 import { createAppContainer, createBottomTabNavigator, createStackNavigator, NavigationContainer } from 'react-navigation';
 import EventDetails from '../content/events/EventDetails';
 import NewsDetails from '../content/news/NewsDetails';
@@ -13,6 +15,12 @@ const NewsNavigator:NavigationContainer = createStackNavigator({
         })
     }
 })
+NewsNavigator.navigationOptions = ({ navigation }:any) => {
+    let tabBarVisible = true
+    if (navigation.state.index > 0) { tabBarVisible = false }
+    return { tabBarVisible }
+}
+
 const EventNavigator:NavigationContainer = createStackNavigator({ 
     Events, 
     EventDetails :  {
@@ -22,10 +30,39 @@ const EventNavigator:NavigationContainer = createStackNavigator({
         })
     }
 })
-
+EventNavigator.navigationOptions = ({ navigation }:any) => {
+    let tabBarVisible = true
+    if (navigation.state.index > 0) { tabBarVisible = false }
+    return { tabBarVisible }
+}
 const Content = createBottomTabNavigator({
-    News: NewsNavigator,
-    Events: EventNavigator,
-  })
+    Noticias: {screen: NewsNavigator},
+    Eventos: {screen: EventNavigator},
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state
+        let IconComponent = MaterialCommunityIcons
+        let iconName = 'apps'
+        if (routeName === 'Noticias') {
+          iconName = `newspaper`;
+          // Sometimes we want to add badges to some icons. 
+          // You can check the implementation below.
+          // IconComponent = HomeIconWithBadge; 
+        } else if (routeName === 'Eventos') {
+          iconName = `calendar-star`;
+        }
+
+        // You can return any component that you like here!
+        return <MaterialCommunityIcons name={iconName} size={25} color={tintColor||'#C77139'} />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: '#C77139',
+      inactiveTintColor: 'gray',
+    },
+  }
+)
   
-  export default createAppContainer(Content);
+export default createAppContainer(Content);

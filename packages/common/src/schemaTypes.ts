@@ -84,29 +84,6 @@ export interface AllEventsQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL subscription operation: NewsSubscription
-// ====================================================
-
-export interface NewsSubscription_newNews {
-  __typename: "News";
-  id: string;
-  title: string;
-  body: string;
-  expiration: any;
-  category: NewsCategory | null;
-  featured: boolean | null;
-  imageURL: string | null;
-}
-
-export interface NewsSubscription {
-  newNews: NewsSubscription_newNews;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL query operation: AllNewsQuery
 // ====================================================
 
@@ -120,6 +97,7 @@ export interface AllNewsQuery_allNews {
   expiration: any;
   category: NewsCategory | null;
   featured: boolean | null;
+  createdAt: any;
 }
 
 export interface AllNewsQuery {

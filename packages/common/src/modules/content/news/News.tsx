@@ -1,7 +1,8 @@
+import { BlurView } from 'expo';
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { RouteComponentProps } from 'react-router';
 import { AlertScroll } from './AlertScroll';
@@ -13,23 +14,21 @@ import { RecentNewsList } from './RecentNewsList';
 interface Props extends RouteComponentProps {
 }
 
-const newsQuery = gql`query AllNewsQuery { allNews { id title subtitle body imageURL expiration category featured }}`
+const newsQuery = gql`query AllNewsQuery { allNews 
+{ id title subtitle body imageURL expiration category featured createdAt } }`
 
 const styles = StyleSheet.create({
-    contentScroll: { flexDirection: 'column', height: '100%', flex: 1 }
+    contentScroll: { flexDirection: 'column', height: '100%', flex: 1},
+    activity: {flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center'}
 })
 
 class News extends React.Component<Props & NavigationScreenProps> {
     static navigationOptions = {
-    title: 'Noticias',
-    headerStyle: {
-      backgroundColor: '#f4511e',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
-    },
-  };
+        title: 'Noticias',
+        headerBackground: (<BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />),
+        headerTransparent: true,
+        headerTitleStyle: { fontWeight: 'bold' },
+    }
     pushDetails = (id:string, title:string) => {
         if (this.props.navigation) { this.props.navigation.push('NewsDetails', {id, title}) }
         else if (this.props.history) { this.props.history.push(`/news/${id}`)}
@@ -38,8 +37,16 @@ class News extends React.Component<Props & NavigationScreenProps> {
         const { history } = this.props
         return (
             <Query query={newsQuery}>
-                {({loading, data}) => {
-                    if (loading) { return <Text>Loading</Text> }
+                {({loading, data, error}) => {
+                    if (loading) { return (
+                        <View style={styles.activity}>
+                            <ActivityIndicator size="small" color="#C77139" />
+                        </View>
+                    )}
+                    if (error) { 
+                        console.log('ERROR: ', error)
+                        return <Text>Ha ocurrido un error</Text>
+                    }
                     if (!data.allNews.length) return <Text>No hay noticias que mostrar...</Text>
                     const { allNews } = data
                     const alerts = allNews.filter((n:any) => n.category === 'ALERT')

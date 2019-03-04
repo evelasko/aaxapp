@@ -20,6 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var expo_1 = require("expo");
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
@@ -28,9 +29,8 @@ var EventList_1 = require("./EventList");
 var UpcomingEventCard_1 = require("./UpcomingEventCard");
 var eventsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } "], [" query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } "])));
 var styles = react_native_1.StyleSheet.create({
-    contentScroll: {
-        flexDirection: 'column', height: '100%', flex: 1
-    }
+    contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
+    activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
 });
 var Events = /** @class */ (function (_super) {
     __extends(Events, _super);
@@ -51,12 +51,14 @@ var Events = /** @class */ (function (_super) {
         return (react_1.default.createElement(react_apollo_1.Query, { query: eventsQuery }, function (_a) {
             var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading) {
-                return react_1.default.createElement(react_native_1.Text, { style: { marginTop: 100 } }, "Loading");
+                return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
+                    react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
             }
             if (!data.events.length)
                 return react_1.default.createElement(react_native_1.Text, null, "No hay eventos que mostrar...");
             if (error) {
                 console.log('ERROR: ', error);
+                return react_1.default.createElement(react_native_1.Text, null, "Lo sentimos, ha ocurrido un error al obtener la informaci\u00F3n...");
             }
             var upcoming = data.events[0];
             var events = data.events.length > 1 ? data.events.slice(1) : null;
@@ -69,13 +71,9 @@ var Events = /** @class */ (function (_super) {
     };
     Events.navigationOptions = {
         title: 'Eventos',
-        headerStyle: {
-            backgroundColor: '#f4511e',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
+        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 20, style: react_native_1.StyleSheet.absoluteFill })),
+        headerTransparent: false,
+        headerTitleStyle: { fontWeight: 'bold' },
     };
     return Events;
 }(react_1.default.Component));
