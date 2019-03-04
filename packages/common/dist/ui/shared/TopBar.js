@@ -21,12 +21,15 @@ var styles = react_native_1.StyleSheet.create({
         color: "#FFFFFF"
     },
     topBarBtn: {
-        backgroundColor: "#EB894A"
-    }
+        width: 32, height: 32, backgroundColor: "#EB894A"
+    },
 });
-exports.TopBar = function () {
+exports.TopBar = function (_a) {
+    var pushBack = _a.pushBack;
     return (React.createElement(react_native_1.View, { style: styles.topBar },
-        React.createElement(react_native_1.Button, { title: "Menu", onPress: function () { console.log('Menu pressed'); } }),
+        pushBack &&
+            React.createElement(react_native_1.TouchableOpacity, { style: styles.topBarBtn },
+                React.createElement(react_native_1.Text, null, "Go back")),
         React.createElement(react_native_1.Text, { style: styles.topBarTitle }, "Hi there!"),
         React.createElement(react_native_1.Button, { title: "User", onPress: function () { console.log('Menu pressed'); } })));
 };

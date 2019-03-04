@@ -27,6 +27,38 @@ export interface LoginUserMutationVariables {
     email: string;
     password: string;
 }
+export interface AllEventsQuery_events_venue {
+    __typename: "Venue";
+    name: string;
+    address: string | null;
+    placeID: string | null;
+}
+export interface AllEventsQuery_events {
+    __typename: "Event";
+    id: string;
+    title: string;
+    subtitle: string | null;
+    body: string;
+    imageURL: string | null;
+    date: any;
+    venue: AllEventsQuery_events_venue;
+}
+export interface AllEventsQuery {
+    events: (AllEventsQuery_events | null)[];
+}
+export interface NewsSubscription_newNews {
+    __typename: "News";
+    id: string;
+    title: string;
+    body: string;
+    expiration: any;
+    category: NewsCategory | null;
+    featured: boolean | null;
+    imageURL: string | null;
+}
+export interface NewsSubscription {
+    newNews: NewsSubscription_newNews;
+}
 export interface AllNewsQuery_allNews {
     __typename: "News";
     id: string;

@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var EventsIcon_1 = __importDefault(require("./icons/EventsIcon"));
-var NewsIcon_1 = __importDefault(require("./icons/NewsIcon"));
+var index_1 = __importDefault(require("../icons/events/index"));
+var index_2 = __importDefault(require("../icons/news/index"));
 var styles = react_native_1.StyleSheet.create({
     container: {
         position: 'absolute',
@@ -33,9 +33,9 @@ exports.TabBar = function (_a) {
     var onEventsPress = _a.onEventsPress, onNewsPress = _a.onNewsPress;
     return (react_1.default.createElement(react_native_1.View, { style: styles.container },
         react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.iconContainer, onPress: onNewsPress },
-            react_1.default.createElement(NewsIcon_1.default, null),
+            react_1.default.createElement(index_2.default, null),
             react_1.default.createElement(react_native_1.Text, { style: styles.iconText }, "Noticias")),
         react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.iconContainer, onPress: onEventsPress },
-            react_1.default.createElement(EventsIcon_1.default, null),
+            react_1.default.createElement(index_1.default, null),
             react_1.default.createElement(react_native_1.Text, { style: styles.iconText }, "Eventos"))));
 };

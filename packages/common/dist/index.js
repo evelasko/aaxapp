@@ -20,7 +20,7 @@ var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var apollo_1 = require("./apollo");
-var Router_1 = require("./Router");
+var index_1 = __importDefault(require("./routes/index"));
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {
@@ -30,7 +30,7 @@ var App = /** @class */ (function (_super) {
         return (react_1.default.createElement(react_apollo_1.ApolloProvider, { client: apollo_1.client },
             react_1.default.createElement(react_native_1.View, { style: styles.container },
                 react_1.default.createElement(react_native_1.View, { style: styles.wrapper },
-                    react_1.default.createElement(Router_1.Router, null)))));
+                    react_1.default.createElement(index_1.default, null)))));
     };
     return App;
 }(react_1.default.PureComponent));

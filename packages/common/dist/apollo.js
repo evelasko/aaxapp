@@ -17,7 +17,20 @@ var link = apollo_link_1.split(function (_a) {
     var _b = apollo_utilities_1.getMainDefinition(query), kind = _b.kind, operation = _b.operation;
     return kind === "OperationDefinition" && operation === "subscription";
 }, wsLink, httpLink);
-exports.client = new apollo_client_1.ApolloClient({
-    link: link,
-    cache: new apollo_cache_inmemory_1.InMemoryCache()
+var cache = new apollo_cache_inmemory_1.InMemoryCache({
+    cacheRedirects: {
+        Query: {
+            oneEvent: function (_, _a, _b) {
+                var id = _a.id;
+                var getCacheKey = _b.getCacheKey;
+                return getCacheKey({ __typename: 'Event', id: id });
+            },
+            oneNews: function (_, _a, _b) {
+                var id = _a.id;
+                var getCacheKey = _b.getCacheKey;
+                return getCacheKey({ __typename: 'News', id: id });
+            }
+        }
+    }
 });
+exports.client = new apollo_client_1.ApolloClient({ link: link, cache: cache });

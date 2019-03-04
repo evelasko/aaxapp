@@ -18,7 +18,13 @@ const link = split(({query}) => {
     return kind === "OperationDefinition" && operation === "subscription"
 }, wsLink, httpLink)
 
-export const client = new ApolloClient({
-    link,
-    cache: new InMemoryCache()
+const cache:InMemoryCache = new InMemoryCache({
+    cacheRedirects: {
+        Query: {
+            oneEvent: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'Event', id }),
+            oneNews: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'News', id })
+        }
+    }
 })
+
+export const client = new ApolloClient({ link, cache })

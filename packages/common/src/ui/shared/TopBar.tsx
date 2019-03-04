@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-interface Props {}
+interface Props {
+    pushBack?: () => void
+}
 
 const styles = StyleSheet.create({
     topBar: {
@@ -15,14 +17,17 @@ const styles = StyleSheet.create({
         color: "#FFFFFF"
     },
     topBarBtn:{
-        backgroundColor: "#EB894A"
-    }
+        width: 32, height: 32, backgroundColor: "#EB894A"
+    },
+
 })
 
-export const TopBar: React.FC<Props> = () => {
+export const TopBar: React.FC<Props> = ({pushBack}) => {
     return (
         <View style={styles.topBar}>
-            <Button title="Menu" onPress={() => {console.log('Menu pressed')}} />
+            {   pushBack &&
+                    <TouchableOpacity style={styles.topBarBtn}><Text>Go back</Text></TouchableOpacity>
+            }
             <Text style={styles.topBarTitle}>Hi there!</Text>
             <Button title="User" onPress={() => {console.log('Menu pressed')}} />
         </View>

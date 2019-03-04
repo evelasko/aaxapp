@@ -54,6 +54,59 @@ export interface LoginUserMutationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: AllEventsQuery
+// ====================================================
+
+export interface AllEventsQuery_events_venue {
+  __typename: "Venue";
+  name: string;
+  address: string | null;
+  placeID: string | null;
+}
+
+export interface AllEventsQuery_events {
+  __typename: "Event";
+  id: string;
+  title: string;
+  subtitle: string | null;
+  body: string;
+  imageURL: string | null;
+  date: any;
+  venue: AllEventsQuery_events_venue;
+}
+
+export interface AllEventsQuery {
+  events: (AllEventsQuery_events | null)[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: NewsSubscription
+// ====================================================
+
+export interface NewsSubscription_newNews {
+  __typename: "News";
+  id: string;
+  title: string;
+  body: string;
+  expiration: any;
+  category: NewsCategory | null;
+  featured: boolean | null;
+  imageURL: string | null;
+}
+
+export interface NewsSubscription {
+  newNews: NewsSubscription_newNews;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: AllNewsQuery
 // ====================================================
 

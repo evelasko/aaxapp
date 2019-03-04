@@ -11,19 +11,22 @@
     "react": "^16.8.2",
     "react-art": "16.8.2",
     "react-dom": "^16.8.2",
+    "react-google-maps": "^9.4.5",
     "react-native": "0.55.4",
     "react-native-linear-gradient": "^2.5.3",
+    "react-native-paper": "^2.11.1",
     "react-native-svg": "^9.2.4",
     "react-native-vector-icons": "^6.3.0",
     "react-native-web": "0.10.0",
     "react-native-web-linear-gradient": "^1.0.5",
+    "react-native-web-maps": "^0.1.0",
     "react-native-web-svg": "^1.0.0",
     "react-scripts": "2.1.5",
     "typescript": "3.3.3"
   },
   "scripts": {
-    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "startr": "SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
+    "startr": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "start": "SKIP_PREFLIGHT_CHECK=true react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,8 +42,11 @@
   ],
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "@types/react-native": "0.55.4",
     "babel-plugin-import": "^1.11.0",
+    "babel-plugin-optional-require": "^0.3.1",
     "customize-cra": "^0.2.11",
     "react-app-rewired": "^2.1.0",
     "react-scripts-ts": "^3.1.0"

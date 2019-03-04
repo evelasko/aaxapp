@@ -56,7 +56,7 @@ var formik_1 = require("formik");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var react_native_linear_gradient_1 = __importDefault(require("react-native-linear-gradient"));
-var Logo_1 = __importDefault(require("../ui/Logo"));
+var index_1 = __importDefault(require("../ui/icons/logo/index"));
 var InputFiled_1 = require("../ui/shared/InputFiled");
 var user_1 = require("../yupSchemas/user");
 var styles = react_native_1.StyleSheet.create({
@@ -109,7 +109,7 @@ var L = /** @class */ (function (_super) {
         return (react_1.default.createElement(react_native_linear_gradient_1.default, { style: styles.loginView, colors: ['rgb(35,35,35)', 'rgb(46,46,46)', 'rgb(33,33,33)'], locations: [0.06, 0.80, 1] },
             react_1.default.createElement(react_native_1.View, { style: styles.loginWrapper },
                 react_1.default.createElement(react_native_1.View, { style: styles.logo },
-                    react_1.default.createElement(Logo_1.default, { width: 200, height: 200 })),
+                    react_1.default.createElement(index_1.default, { width: 200, height: 200 })),
                 react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
                     react_1.default.createElement(formik_1.Field, { name: "email", placeholder: "email", textContentType: "username", spellCheck: false, style: styles.inputFields, component: InputFiled_1.InputField })),
                 react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
@@ -137,8 +137,7 @@ exports.LoginView = formik_1.withFormik({
                         if (errors) {
                             return [2 /*return*/, setErrors(errors)];
                         }
-                        // props.onFinish()
-                        return [2 /*return*/, 'ok'];
+                        return [2 /*return*/];
                 }
             });
         });

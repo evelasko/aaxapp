@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import EventsIcon from './icons/EventsIcon';
-import NewsIcon from './icons/NewsIcon';
+import EventsIcon from '../icons/events/index';
+import NewsIcon from '../icons/news/index';
 
 
 interface Props {

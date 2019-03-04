@@ -2,7 +2,7 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { StyleSheet, View } from 'react-native';
 import { client } from './apollo';
-import { Router } from './Router';
+import Routes from './routes/index';
 
 
 export default class App extends React.PureComponent {
@@ -11,7 +11,7 @@ export default class App extends React.PureComponent {
       <ApolloProvider client={client}>
         <View style={styles.container}>
           <View style={styles.wrapper}>
-            <Router />
+            <Routes />
           </View>
         </View>
       </ApolloProvider>
