@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
     }
 })
 
-export default class NativeMenuButton<Props> extends React.Component {
+export default class MenuButton<Props> extends React.Component {
     render() {
         return (
             <View style={styles.container}>
                 <Ionicons 
-                    name="md-menu"
-                    color="#EEEEEE"
+                    name="ios-menu"
+                    color="gray"
                     size={32}
                     onPress={() => {}}
                     style={styles.menuIcon}

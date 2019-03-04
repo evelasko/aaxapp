@@ -1,4 +1,4 @@
 import React from 'react';
-export default class NativeMenuButton<Props> extends React.Component {
+export default class MenuButton<Props> extends React.Component {
     render(): JSX.Element;
 }

@@ -5,11 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var vector_icons_1 = require("@expo/vector-icons");
 var react_1 = __importDefault(require("react"));
+var react_native_1 = require("react-native");
 var react_navigation_1 = require("react-navigation");
 var EventDetails_1 = __importDefault(require("../content/events/EventDetails"));
 var NewsDetails_1 = __importDefault(require("../content/news/NewsDetails"));
+var index_1 = __importDefault(require("../profile/index"));
 var Events_1 = __importDefault(require("./events/Events"));
 var News_1 = __importDefault(require("./news/News"));
+// ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
     News: News_1.default,
     NewsDetails: {
@@ -30,6 +33,7 @@ NewsNavigator.navigationOptions = function (_a) {
     }
     return { tabBarVisible: tabBarVisible };
 };
+// ----------------------------------------- EVENTS STACK
 var EventNavigator = react_navigation_1.createStackNavigator({
     Events: Events_1.default,
     EventDetails: {
@@ -50,9 +54,11 @@ EventNavigator.navigationOptions = function (_a) {
     }
     return { tabBarVisible: tabBarVisible };
 };
+// ----------------------------------------- TABS STACK
 var Content = react_navigation_1.createBottomTabNavigator({
     Noticias: { screen: NewsNavigator },
     Eventos: { screen: EventNavigator },
+    Perfil: { screen: index_1.default }
 }, {
     defaultNavigationOptions: function (_a) {
         var navigation = _a.navigation;
@@ -71,9 +77,13 @@ var Content = react_navigation_1.createBottomTabNavigator({
                 else if (routeName === 'Eventos') {
                     iconName = "calendar-star";
                 }
+                else if (routeName === 'Perfil') {
+                    return react_1.default.createElement(vector_icons_1.FontAwesome, { name: "id-card", size: 20, color: tintColor || '#C77139' });
+                }
                 // You can return any component that you like here!
                 return react_1.default.createElement(vector_icons_1.MaterialCommunityIcons, { name: iconName, size: 25, color: tintColor || '#C77139' });
             },
+            animationEnabled: true
         });
     },
     tabBarOptions: {
@@ -81,4 +91,8 @@ var Content = react_navigation_1.createBottomTabNavigator({
         inactiveTintColor: 'gray',
     },
 });
+// ----------------------------------------- DRAWER STACK
+var WIDTH = react_native_1.Dimensions.get('window').width;
+var Drawer = react_navigation_1.createDrawerNavigator({ Menu: { screen: Content } }, { drawerPosition: 'left', drawerWidth: WIDTH * 0.83, initialRouteName: 'Menu' });
+exports.DrawerMenu = react_navigation_1.createAppContainer(Drawer);
 exports.default = react_navigation_1.createAppContainer(Content);

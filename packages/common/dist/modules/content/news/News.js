@@ -25,6 +25,8 @@ var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
+var react_navigation_1 = require("react-navigation");
+var index_1 = __importDefault(require("../../../ui/shared/MenuButton/index"));
 var AlertScroll_1 = require("./AlertScroll");
 var CallScroll_1 = require("./CallScroll");
 var FeaturedNewsCard_1 = require("./FeaturedNewsCard");
@@ -52,40 +54,43 @@ var News = /** @class */ (function (_super) {
     News.prototype.render = function () {
         var _this = this;
         var history = this.props.history;
-        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
-            var loading = _a.loading, data = _a.data, error = _a.error;
-            if (loading) {
-                return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
-                    react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
-            }
-            if (error) {
-                console.log('ERROR: ', error);
-                return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
-            }
-            if (!data.allNews.length)
-                return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
-            var allNews = data.allNews;
-            var alerts = allNews.filter(function (n) { return n.category === 'ALERT'; });
-            var calls = allNews.filter(function (n) { return n.category === 'CALL'; });
-            var featuredNews = allNews.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
-            var allNewses = allNews.filter(function (n) { return featuredNews ?
-                n.category === 'NEWS' && n.id != featuredNews.id : n.category === 'NEWS'; });
-            var recentsCount = allNewses.length > 3 ? 3 : allNewses.length;
-            var recents = allNewses.slice(0, recentsCount);
-            var newses = allNewses.slice(recentsCount, allNewses.length);
-            return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
-                react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews, pushDetails: _this.pushDetails }),
-                react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: alerts, pushDetails: _this.pushDetails }),
-                react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents, pushDetails: _this.pushDetails }),
-                react_1.default.createElement(CallScroll_1.CallScroll, { calls: calls, pushDetails: _this.pushDetails }),
-                react_1.default.createElement(NewsList_1.default, { newses: newses, pushDetails: _this.pushDetails })));
-        }));
+        return (react_1.default.createElement(react_native_1.View, { style: react_native_1.StyleSheet.absoluteFill },
+            react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
+                var loading = _a.loading, data = _a.data, error = _a.error;
+                if (loading) {
+                    return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
+                        react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
+                }
+                if (error) {
+                    console.log('ERROR: ', error);
+                    return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
+                }
+                if (!data.allNews.length)
+                    return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
+                var allNews = data.allNews;
+                var alerts = allNews.filter(function (n) { return n.category === 'ALERT'; });
+                var calls = allNews.filter(function (n) { return n.category === 'CALL'; });
+                var featuredNews = allNews.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
+                var allNewses = allNews.filter(function (n) { return featuredNews ?
+                    n.category === 'NEWS' && n.id != featuredNews.id : n.category === 'NEWS'; });
+                var recentsCount = allNewses.length > 3 ? 3 : allNewses.length;
+                var recents = allNewses.slice(0, recentsCount);
+                var newses = allNewses.slice(recentsCount, allNewses.length);
+                return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
+                    react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews, pushDetails: _this.pushDetails }),
+                    react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: alerts, pushDetails: _this.pushDetails }),
+                    react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents, pushDetails: _this.pushDetails }),
+                    react_1.default.createElement(CallScroll_1.CallScroll, { calls: calls, pushDetails: _this.pushDetails }),
+                    react_1.default.createElement(NewsList_1.default, { newses: newses, pushDetails: _this.pushDetails })));
+            })));
     };
     News.navigationOptions = {
         title: 'Noticias',
         headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
         headerTransparent: true,
         headerTitleStyle: { fontWeight: 'bold' },
+        headerLeft: (react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_navigation_1.DrawerActions.openDrawer(); } },
+            react_1.default.createElement(index_1.default, null)))
     };
     return News;
 }(react_1.default.Component));

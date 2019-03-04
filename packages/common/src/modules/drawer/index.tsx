@@ -1,11 +1,42 @@
-import { Dimensions } from 'react-native';
-import { createDrawerNavigator } from 'react-navigation';
-import About from '../content/about/About';
+import React, { Component } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { DrawerActions, NavigationActions, NavigationScreenProps } from 'react-navigation';
 
-const WIDTH = Dimensions.get('window').width
+const styles = StyleSheet.create({
+    menuItem: {}
+})
+export default class DrawerScreen extends Component<NavigationScreenProps> {
+  navigateToScreen = (route:string) => () => {
+    const navigateAction = NavigationActions.navigate({
+      routeName: route
+    });
+    this.props.navigation.dispatch(navigateAction);
+    this.props.navigation.dispatch(DrawerActions.closeDrawer())
+  }
 
-const DrawerConfig = { drawerWidth: WIDTH*0.83 }
-
-const DrawerNavigator = createDrawerNavigator({
-    About: { screen: About }  
-}, DrawerConfig )
+  render () {
+    return (
+      <View>
+        <ScrollView>
+          <View>
+            <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('Content')}>
+                Home
+              </Text>
+            </View>
+            <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('About')}>
+               About
+              </Text>
+            </View>
+            <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('Contact')}>
+              Contact
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}

@@ -11,6 +11,7 @@ declare class News extends React.Component<Props & NavigationScreenProps> {
         headerTitleStyle: {
             fontWeight: string;
         };
+        headerLeft: JSX.Element;
     };
     pushDetails: (id: string, title: string) => void;
     render(): JSX.Element;

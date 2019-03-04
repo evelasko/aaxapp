@@ -25,15 +25,15 @@ var styles = react_native_1.StyleSheet.create({
         marginLeft: 15
     }
 });
-var NativeMenuButton = /** @class */ (function (_super) {
-    __extends(NativeMenuButton, _super);
-    function NativeMenuButton() {
+var MenuButton = /** @class */ (function (_super) {
+    __extends(MenuButton, _super);
+    function MenuButton() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    NativeMenuButton.prototype.render = function () {
+    MenuButton.prototype.render = function () {
         return (react_1.default.createElement(react_native_1.View, { style: styles.container },
-            react_1.default.createElement(vector_icons_1.Ionicons, { name: "md-menu", color: "#EEEEEE", size: 32, onPress: function () { }, style: styles.menuIcon })));
+            react_1.default.createElement(vector_icons_1.Ionicons, { name: "ios-menu", color: "gray", size: 32, onPress: function () { }, style: styles.menuIcon })));
     };
-    return NativeMenuButton;
+    return MenuButton;
 }(react_1.default.Component));
-exports.default = NativeMenuButton;
+exports.default = MenuButton;

@@ -71,8 +71,8 @@ var Events = /** @class */ (function (_super) {
     };
     Events.navigationOptions = {
         title: 'Eventos',
-        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 20, style: react_native_1.StyleSheet.absoluteFill })),
-        headerTransparent: false,
+        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
+        headerTransparent: true,
         headerTitleStyle: { fontWeight: 'bold' },
     };
     return Events;

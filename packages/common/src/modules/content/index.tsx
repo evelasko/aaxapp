@@ -1,11 +1,14 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
-import { createAppContainer, createBottomTabNavigator, createStackNavigator, NavigationContainer } from 'react-navigation';
+import { Dimensions } from 'react-native';
+import { createAppContainer, createBottomTabNavigator, createDrawerNavigator, createStackNavigator, NavigationContainer } from 'react-navigation';
 import EventDetails from '../content/events/EventDetails';
 import NewsDetails from '../content/news/NewsDetails';
+import Profile from '../profile/index';
 import Events from "./events/Events";
 import News from "./news/News";
 
+// ----------------------------------------- NEWS STACK
 const NewsNavigator:NavigationContainer = createStackNavigator({ 
     News, 
     NewsDetails: {
@@ -20,7 +23,7 @@ NewsNavigator.navigationOptions = ({ navigation }:any) => {
     if (navigation.state.index > 0) { tabBarVisible = false }
     return { tabBarVisible }
 }
-
+// ----------------------------------------- EVENTS STACK
 const EventNavigator:NavigationContainer = createStackNavigator({ 
     Events, 
     EventDetails :  {
@@ -35,9 +38,11 @@ EventNavigator.navigationOptions = ({ navigation }:any) => {
     if (navigation.state.index > 0) { tabBarVisible = false }
     return { tabBarVisible }
 }
+// ----------------------------------------- TABS STACK
 const Content = createBottomTabNavigator({
     Noticias: {screen: NewsNavigator},
     Eventos: {screen: EventNavigator},
+    Perfil: {screen: Profile}
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -52,11 +57,14 @@ const Content = createBottomTabNavigator({
           // IconComponent = HomeIconWithBadge; 
         } else if (routeName === 'Eventos') {
           iconName = `calendar-star`;
+        } else if (routeName === 'Perfil') {
+            return <FontAwesome name="id-card" size={20} color={tintColor||'#C77139'}/>
         }
 
         // You can return any component that you like here!
         return <MaterialCommunityIcons name={iconName} size={25} color={tintColor||'#C77139'} />;
       },
+      animationEnabled: true
     }),
     tabBarOptions: {
       activeTintColor: '#C77139',
@@ -64,5 +72,14 @@ const Content = createBottomTabNavigator({
     },
   }
 )
-  
+
+// ----------------------------------------- DRAWER STACK
+const WIDTH = Dimensions.get('window').width
+const Drawer = createDrawerNavigator(
+    { Menu: { screen: Content } }, 
+    { drawerPosition: 'left', drawerWidth: WIDTH*0.83, initialRouteName: 'Menu' }
+)
+export const DrawerMenu = createAppContainer(Drawer)
+
+
 export default createAppContainer(Content);

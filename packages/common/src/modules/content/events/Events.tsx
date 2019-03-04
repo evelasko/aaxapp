@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
 class Events extends React.Component<Props> {
     static navigationOptions = {
         title: 'Eventos',
-        headerBackground: (<BlurView tint="light" intensity={20} style={StyleSheet.absoluteFill} />),
-        headerTransparent: false,
+        headerBackground: (<BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />),
+        headerTransparent: true,
         headerTitleStyle: { fontWeight: 'bold' },
     }
     pushDetails = (id:string, title:string) => {
