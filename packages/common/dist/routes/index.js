@@ -15,6 +15,7 @@ var Policy_1 = __importDefault(require("../modules/content/policy/Policy"));
 var Support_1 = __importDefault(require("../modules/content/support/Support"));
 var login_1 = require("../modules/login");
 var index_3 = __importDefault(require("../modules/profile/index"));
+var index_4 = __importDefault(require("../ui/shared/DrawerMenu/index"));
 // ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
     News: index_2.default,
@@ -57,8 +58,8 @@ EventNavigator.navigationOptions = function (_a) {
     }
     return { tabBarVisible: tabBarVisible };
 };
-// ----------------------------------------- TABS STACK
-var Content = react_navigation_1.createBottomTabNavigator({
+// ----------------------------------------- CONTENT TABS
+var ContentTabs = react_navigation_1.createBottomTabNavigator({
     Noticias: { screen: NewsNavigator },
     Eventos: { screen: EventNavigator },
     Perfil: { screen: index_3.default }
@@ -86,7 +87,6 @@ var Content = react_navigation_1.createBottomTabNavigator({
                 // You can return any component that you like here!
                 return react_1.default.createElement(vector_icons_1.MaterialCommunityIcons, { name: iconName, size: 25, color: tintColor || '#C77139' });
             },
-            animationEnabled: true
         });
     },
     tabBarOptions: {
@@ -97,16 +97,18 @@ var Content = react_navigation_1.createBottomTabNavigator({
 // ----------------------------------------- DRAWER STACK
 var WIDTH = react_native_1.Dimensions.get('window').width;
 var Drawer = react_navigation_1.createDrawerNavigator({
-    Content: { screen: Content },
+    Content: { screen: ContentTabs },
     Soporte: { screen: Support_1.default },
     Privacidad: { screen: Policy_1.default }
 }, {
     drawerPosition: 'left',
-    drawerWidth: WIDTH * 0.83,
-    // contentComponent: ({navigation}:DrawerItemsProps) => <DrawerMenu navigation={navigation}/> , 
+    drawerWidth: WIDTH * 0.63,
+    contentComponent: function (_a) {
+        var navigation = _a.navigation;
+        return react_1.default.createElement(index_4.default, { navigation: navigation });
+    },
     initialRouteName: 'Content'
 });
-exports.MenuNavigator = react_navigation_1.createAppContainer(Drawer);
 // ----------------------------------------- MAIN NAVIGATOR
 var Routes = react_navigation_1.createSwitchNavigator({
     Login: { screen: login_1.LoginConnector },

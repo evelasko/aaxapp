@@ -3,10 +3,12 @@ import { NavigationScreenProps } from 'react-navigation';
 interface Props {
 }
 declare class Events extends React.Component<Props & NavigationScreenProps> {
-    static navigationOptions: {
+    static navigationOptions: ({ navigation }: any) => {
         title: string;
-        headerBackground: JSX.Element;
         headerTransparent: boolean;
+        animationEnabled: boolean;
+        headerLeft: JSX.Element;
+        headerBackground: JSX.Element;
         headerTitleStyle: {
             fontWeight: string;
         };

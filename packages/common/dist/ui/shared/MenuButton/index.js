@@ -20,10 +20,7 @@ var vector_icons_1 = require("@expo/vector-icons");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var styles = react_native_1.StyleSheet.create({
-    container: {},
-    menuIcon: {
-        marginLeft: 15
-    }
+    menuIcon: { marginLeft: 15 }
 });
 var MenuButton = /** @class */ (function (_super) {
     __extends(MenuButton, _super);
@@ -31,8 +28,8 @@ var MenuButton = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     MenuButton.prototype.render = function () {
-        return (react_1.default.createElement(react_native_1.View, { style: styles.container },
-            react_1.default.createElement(vector_icons_1.Ionicons, { name: "ios-menu", color: "gray", size: 32, onPress: function () { }, style: styles.menuIcon })));
+        var toggler = this.props.toggler;
+        return (react_1.default.createElement(vector_icons_1.Ionicons, { name: "ios-menu", color: "gray", size: 32, onPress: function () { return toggler(); }, style: styles.menuIcon }));
     };
     return MenuButton;
 }(react_1.default.Component));

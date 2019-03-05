@@ -1,30 +1,23 @@
 import { BlurView } from 'expo';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { DrawerActions, NavigationScreenProps } from 'react-navigation';
-import MenuButton from '../../../ui/shared/MenuButton/index';
+import { StyleSheet, View } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
+import MenuButton from '../../../ui/shared/MenuButton';
 import NewsComponent from './News';
 
 interface Props {
 }
-
-const styles = StyleSheet.create({
-    contentScroll: { flexDirection: 'column', height: '100%', flex: 1},
-    activity: {flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center'}
-})
-
 class News extends React.Component<Props & NavigationScreenProps> {
-    static navigationOptions = {
-        title: 'Noticias',
-        headerBackground: (<BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />),
+    static navigationOptions = ({navigation}:any) => ({ 
+        title: 'Noticias' ,
         headerTransparent: true,
-        headerTitleStyle: { fontWeight: 'bold' },
-        headerLeft: (
-        <TouchableOpacity onPress={() => DrawerActions.openDrawer()}>
-            <MenuButton />
-        </TouchableOpacity>
-        )
-    }
+        animationEnabled: true,
+        headerLeft: <MenuButton toggler={() => navigation.openDrawer()} />,
+        headerBackground: (
+            <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
+        ),
+        headerTitleStyle: { fontWeight: 'bold' }
+    })
     pushDetails = (id:string, title:string) => {
         this.props.navigation.push('NewsDetails', {id, title})
     }

@@ -1,4 +1,8 @@
 import React from 'react';
-export default class MenuButton<Props> extends React.Component {
+interface Props {
+    toggler: () => void;
+}
+export default class MenuButton extends React.Component<Props> {
     render(): JSX.Element;
 }
+export {};

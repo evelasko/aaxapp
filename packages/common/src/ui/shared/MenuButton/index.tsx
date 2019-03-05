@@ -1,28 +1,26 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-interface Props {}
+interface Props {
+    toggler: () => void
+}
 
 const styles = StyleSheet.create({
-    container: {},
-    menuIcon: {
-        marginLeft: 15
-    }
+    menuIcon: { marginLeft: 15 }
 })
 
-export default class MenuButton<Props> extends React.Component {
+export default class MenuButton extends React.Component<Props> {
     render() {
+        const { toggler } = this.props
         return (
-            <View style={styles.container}>
                 <Ionicons 
                     name="ios-menu"
                     color="gray"
                     size={32}
-                    onPress={() => {}}
+                    onPress={() => toggler()}
                     style={styles.menuIcon}
                 />
-            </View>
         )
     }
 }

@@ -19,6 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var expo_1 = require("expo");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
+var MenuButton_1 = __importDefault(require("../../../ui/shared/MenuButton"));
 var Events_1 = __importDefault(require("./Events"));
 var Events = /** @class */ (function (_super) {
     __extends(Events, _super);
@@ -32,11 +33,16 @@ var Events = /** @class */ (function (_super) {
     Events.prototype.render = function () {
         return (react_1.default.createElement(Events_1.default, { pushDetails: this.pushDetails }));
     };
-    Events.navigationOptions = {
-        title: 'Eventos',
-        headerBackground: (expo_1.BlurView ? react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill }) : react_1.default.createElement(react_native_1.View, null)),
-        headerTransparent: true,
-        headerTitleStyle: { fontWeight: 'bold' },
+    Events.navigationOptions = function (_a) {
+        var navigation = _a.navigation;
+        return ({
+            title: 'Eventos',
+            headerTransparent: true,
+            animationEnabled: true,
+            headerLeft: react_1.default.createElement(MenuButton_1.default, { toggler: function () { return navigation.openDrawer(); } }),
+            headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
+            headerTitleStyle: { fontWeight: 'bold' }
+        });
     };
     return Events;
 }(react_1.default.Component));

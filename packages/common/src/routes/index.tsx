@@ -10,6 +10,7 @@ import Policy from '../modules/content/policy/Policy';
 import Support from '../modules/content/support/Support';
 import { LoginConnector } from '../modules/login';
 import Profile from '../modules/profile/index';
+import DrawerMenu from '../ui/shared/DrawerMenu/index';
 
 // ----------------------------------------- NEWS STACK
 const NewsNavigator:NavigationContainer = createStackNavigator({ 
@@ -41,33 +42,32 @@ EventNavigator.navigationOptions = ({ navigation }:any) => {
     if (navigation.state.index > 0) { tabBarVisible = false }
     return { tabBarVisible }
 }
-// ----------------------------------------- TABS STACK
-const Content = createBottomTabNavigator({
+// ----------------------------------------- CONTENT TABS
+const ContentTabs = createBottomTabNavigator({
     Noticias: {screen: NewsNavigator},
     Eventos: {screen: EventNavigator},
     Perfil: {screen: Profile}
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state
-        let IconComponent = MaterialCommunityIcons
-        let iconName = 'apps'
-        if (routeName === 'Noticias') {
-          iconName = `newspaper`;
-          // Sometimes we want to add badges to some icons. 
-          // You can check the implementation below.
-          // IconComponent = HomeIconWithBadge; 
-        } else if (routeName === 'Eventos') {
-          iconName = `calendar-star`;
-        } else if (routeName === 'Perfil') {
-            return <FontAwesome name="id-card" size={20} color={tintColor||'#C77139'}/>
-        }
+        tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            const { routeName } = navigation.state
+            let IconComponent = MaterialCommunityIcons
+            let iconName = 'apps'
+            if (routeName === 'Noticias') {
+            iconName = `newspaper`;
+            // Sometimes we want to add badges to some icons. 
+            // You can check the implementation below.
+            // IconComponent = HomeIconWithBadge; 
+            } else if (routeName === 'Eventos') {
+            iconName = `calendar-star`;
+            } else if (routeName === 'Perfil') {
+                return <FontAwesome name="id-card" size={20} color={tintColor||'#C77139'}/>
+            }
 
-        // You can return any component that you like here!
-        return <MaterialCommunityIcons name={iconName} size={25} color={tintColor||'#C77139'} />;
-      },
-      animationEnabled: true
+            // You can return any component that you like here!
+            return <MaterialCommunityIcons name={iconName} size={25} color={tintColor||'#C77139'} />;
+        },
     }),
     tabBarOptions: {
       activeTintColor: '#C77139',
@@ -81,18 +81,17 @@ const WIDTH = Dimensions.get('window').width
 
 const Drawer = createDrawerNavigator(
     { 
-        Content: { screen: Content },
+        Content: { screen: ContentTabs },
         Soporte: { screen: Support },
         Privacidad: { screen: Policy } 
     }, 
     { 
         drawerPosition: 'left', 
-        drawerWidth: WIDTH*0.83,
-        // contentComponent: ({navigation}:DrawerItemsProps) => <DrawerMenu navigation={navigation}/> , 
+        drawerWidth: WIDTH*0.63,
+        contentComponent: ({navigation}:any) => <DrawerMenu navigation={navigation}/> , 
         initialRouteName: 'Content' 
     }
 )
-export const MenuNavigator = createAppContainer(Drawer)
 
 // ----------------------------------------- MAIN NAVIGATOR
 const Routes = createSwitchNavigator({
