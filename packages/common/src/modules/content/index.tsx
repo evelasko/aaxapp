@@ -1,12 +1,23 @@
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
-import { Dimensions } from 'react-native';
-import { createAppContainer, createBottomTabNavigator, createDrawerNavigator, createStackNavigator, NavigationContainer } from 'react-navigation';
+import { createAppContainer, createBottomTabNavigator, createStackNavigator, createSwitchNavigator, NavigationContainer } from 'react-navigation';
 import EventDetails from '../content/events/EventDetails';
 import NewsDetails from '../content/news/NewsDetails';
+import { LoginConnector } from '../login';
 import Profile from '../profile/index';
-import Events from "./events/Events";
-import News from "./news/News";
+import Events from "./events/index";
+import News from "./news/index";
+
+// ----------------------------------------- MAIN NAVIGATOR
+const MainNavigator = createSwitchNavigator({
+    Login: { screen: LoginConnector},
+})
+ const AppContainer = createAppContainer(MainNavigator)
+
+
+ // ----------------------------------------- MAIN APP
+ class App extends React.Component { render() { return <AppContainer /> } }
+
 
 // ----------------------------------------- NEWS STACK
 const NewsNavigator:NavigationContainer = createStackNavigator({ 
@@ -72,14 +83,5 @@ const Content = createBottomTabNavigator({
     },
   }
 )
-
-// ----------------------------------------- DRAWER STACK
-const WIDTH = Dimensions.get('window').width
-const Drawer = createDrawerNavigator(
-    { Menu: { screen: Content } }, 
-    { drawerPosition: 'left', drawerWidth: WIDTH*0.83, initialRouteName: 'Menu' }
-)
-export const DrawerMenu = createAppContainer(Drawer)
-
 
 export default createAppContainer(Content);

@@ -20,13 +20,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var expo_1 = require("expo");
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
-var react_navigation_1 = require("react-navigation");
-var index_1 = __importDefault(require("../../../ui/shared/MenuButton/index"));
 var AlertScroll_1 = require("./AlertScroll");
 var CallScroll_1 = require("./CallScroll");
 var FeaturedNewsCard_1 = require("./FeaturedNewsCard");
@@ -37,62 +34,43 @@ var styles = react_native_1.StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
     activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
 });
-var News = /** @class */ (function (_super) {
-    __extends(News, _super);
-    function News() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.pushDetails = function (id, title) {
-            if (_this.props.navigation) {
-                _this.props.navigation.push('NewsDetails', { id: id, title: title });
-            }
-            else if (_this.props.history) {
-                _this.props.history.push("/news/" + id);
-            }
-        };
-        return _this;
+var NewsComponent = /** @class */ (function (_super) {
+    __extends(NewsComponent, _super);
+    function NewsComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    News.prototype.render = function () {
-        var _this = this;
-        var history = this.props.history;
-        return (react_1.default.createElement(react_native_1.View, { style: react_native_1.StyleSheet.absoluteFill },
-            react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
-                var loading = _a.loading, data = _a.data, error = _a.error;
-                if (loading) {
-                    return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
-                        react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
-                }
-                if (error) {
-                    console.log('ERROR: ', error);
-                    return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
-                }
-                if (!data.allNews.length)
-                    return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
-                var allNews = data.allNews;
-                var alerts = allNews.filter(function (n) { return n.category === 'ALERT'; });
-                var calls = allNews.filter(function (n) { return n.category === 'CALL'; });
-                var featuredNews = allNews.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
-                var allNewses = allNews.filter(function (n) { return featuredNews ?
-                    n.category === 'NEWS' && n.id != featuredNews.id : n.category === 'NEWS'; });
-                var recentsCount = allNewses.length > 3 ? 3 : allNewses.length;
-                var recents = allNewses.slice(0, recentsCount);
-                var newses = allNewses.slice(recentsCount, allNewses.length);
-                return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
-                    react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews, pushDetails: _this.pushDetails }),
-                    react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: alerts, pushDetails: _this.pushDetails }),
-                    react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents, pushDetails: _this.pushDetails }),
-                    react_1.default.createElement(CallScroll_1.CallScroll, { calls: calls, pushDetails: _this.pushDetails }),
-                    react_1.default.createElement(NewsList_1.default, { newses: newses, pushDetails: _this.pushDetails })));
-            })));
+    NewsComponent.prototype.render = function () {
+        var pushDetails = this.props.pushDetails;
+        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
+            var loading = _a.loading, data = _a.data, error = _a.error;
+            if (loading) {
+                return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
+                    react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
+            }
+            if (error) {
+                console.log('ERROR: ', error);
+                return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
+            }
+            if (!data.allNews.length)
+                return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
+            var allNews = data.allNews;
+            var alerts = allNews.filter(function (n) { return n.category === 'ALERT'; });
+            var calls = allNews.filter(function (n) { return n.category === 'CALL'; });
+            var featuredNews = allNews.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
+            var allNewses = allNews.filter(function (n) { return featuredNews ?
+                n.category === 'NEWS' && n.id != featuredNews.id : n.category === 'NEWS'; });
+            var recentsCount = allNewses.length > 3 ? 3 : allNewses.length;
+            var recents = allNewses.slice(0, recentsCount);
+            var newses = allNewses.slice(recentsCount, allNewses.length);
+            return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
+                react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews, pushDetails: pushDetails }),
+                react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: alerts, pushDetails: pushDetails }),
+                react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents, pushDetails: pushDetails }),
+                react_1.default.createElement(CallScroll_1.CallScroll, { calls: calls, pushDetails: pushDetails }),
+                react_1.default.createElement(NewsList_1.default, { newses: newses, pushDetails: pushDetails })));
+        }));
     };
-    News.navigationOptions = {
-        title: 'Noticias',
-        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
-        headerTransparent: true,
-        headerTitleStyle: { fontWeight: 'bold' },
-        headerLeft: (react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { return react_navigation_1.DrawerActions.openDrawer(); } },
-            react_1.default.createElement(index_1.default, null)))
-    };
-    return News;
+    return NewsComponent;
 }(react_1.default.Component));
-exports.default = News;
+exports.default = NewsComponent;
 var templateObject_1;

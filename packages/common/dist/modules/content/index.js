@@ -1,20 +1,47 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var vector_icons_1 = require("@expo/vector-icons");
 var react_1 = __importDefault(require("react"));
-var react_native_1 = require("react-native");
 var react_navigation_1 = require("react-navigation");
 var EventDetails_1 = __importDefault(require("../content/events/EventDetails"));
 var NewsDetails_1 = __importDefault(require("../content/news/NewsDetails"));
+var login_1 = require("../login");
 var index_1 = __importDefault(require("../profile/index"));
-var Events_1 = __importDefault(require("./events/Events"));
-var News_1 = __importDefault(require("./news/News"));
+var index_2 = __importDefault(require("./events/index"));
+var index_3 = __importDefault(require("./news/index"));
+// ----------------------------------------- MAIN NAVIGATOR
+var MainNavigator = react_navigation_1.createSwitchNavigator({
+    Login: { screen: login_1.LoginConnector },
+});
+var AppContainer = react_navigation_1.createAppContainer(MainNavigator);
+// ----------------------------------------- MAIN APP
+var App = /** @class */ (function (_super) {
+    __extends(App, _super);
+    function App() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    App.prototype.render = function () { return react_1.default.createElement(AppContainer, null); };
+    return App;
+}(react_1.default.Component));
 // ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
-    News: News_1.default,
+    News: index_3.default,
     NewsDetails: {
         screen: NewsDetails_1.default,
         navigationOptions: function (_a) {
@@ -35,7 +62,7 @@ NewsNavigator.navigationOptions = function (_a) {
 };
 // ----------------------------------------- EVENTS STACK
 var EventNavigator = react_navigation_1.createStackNavigator({
-    Events: Events_1.default,
+    Events: index_2.default,
     EventDetails: {
         screen: EventDetails_1.default,
         navigationOptions: function (_a) {
@@ -91,8 +118,4 @@ var Content = react_navigation_1.createBottomTabNavigator({
         inactiveTintColor: 'gray',
     },
 });
-// ----------------------------------------- DRAWER STACK
-var WIDTH = react_native_1.Dimensions.get('window').width;
-var Drawer = react_navigation_1.createDrawerNavigator({ Menu: { screen: Content } }, { drawerPosition: 'left', drawerWidth: WIDTH * 0.83, initialRouteName: 'Menu' });
-exports.DrawerMenu = react_navigation_1.createAppContainer(Drawer);
 exports.default = react_navigation_1.createAppContainer(Content);

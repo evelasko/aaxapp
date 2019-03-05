@@ -1,15 +1,12 @@
-import { BlurView } from 'expo';
 import gql from 'graphql-tag';
-import { History } from 'history';
 import React from 'react';
 import { Query } from 'react-apollo';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
 import { EventsList } from './EventList';
 import { UpcomingEventCard } from './UpcomingEventCard';
 
-interface Props extends NavigationScreenProps {
-    history?: History
+interface Props {
+    pushDetails: (id:string, title:string) => void
 }
 
 const eventsQuery = gql` query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } `
@@ -19,18 +16,9 @@ const styles = StyleSheet.create({
     activity: {flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center'}
 })
 
-class Events extends React.Component<Props> {
-    static navigationOptions = {
-        title: 'Eventos',
-        headerBackground: (<BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />),
-        headerTransparent: true,
-        headerTitleStyle: { fontWeight: 'bold' },
-    }
-    pushDetails = (id:string, title:string) => {
-        if (this.props.navigation) { this.props.navigation.push('EventDetails', {id, title}) }
-        else if (this.props.history) { this.props.history.push(`/event/${id}`)}
-    }
+class EventsComponent extends React.Component<Props> {
     render() {
+        const { pushDetails } = this.props
         return (
             <Query query={eventsQuery}>
                 {({ loading, data, error }) => {
@@ -49,8 +37,8 @@ class Events extends React.Component<Props> {
                     if (events) return (
                         <View style={{width: '100%', height: '100%'}}>
                             <ScrollView style={styles.contentScroll}>
-                            <UpcomingEventCard upcomingEvent={upcoming} pushDetails={this.pushDetails} />
-                            <EventsList events={events} pushDetails={this.pushDetails} />
+                            <UpcomingEventCard upcomingEvent={upcoming} pushDetails={pushDetails} />
+                            <EventsList events={events} pushDetails={pushDetails} />
                             </ScrollView>
                         </View>
                     )
@@ -60,4 +48,4 @@ class Events extends React.Component<Props> {
     }
 }
 
-export default Events
+export default EventsComponent

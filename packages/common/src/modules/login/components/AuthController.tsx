@@ -1,7 +1,7 @@
 // @ts-ignore
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
-import { MeQuery, MeQuery_me } from '../schemaTypes';
+import { MeQuery, MeQuery_me } from '../../../schemaTypes';
 
 export const meQuery = gql`
  query MeQuery { me { user { id name lastname email group isAdmin } error } }

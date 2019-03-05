@@ -1,19 +1,8 @@
-import { History } from 'history';
 import React from 'react';
-import { NavigationScreenProps } from 'react-navigation';
-interface Props extends NavigationScreenProps {
-    history?: History;
-}
-declare class Events extends React.Component<Props> {
-    static navigationOptions: {
-        title: string;
-        headerBackground: JSX.Element;
-        headerTransparent: boolean;
-        headerTitleStyle: {
-            fontWeight: string;
-        };
-    };
+interface Props {
     pushDetails: (id: string, title: string) => void;
+}
+declare class EventsComponent extends React.Component<Props> {
     render(): JSX.Element;
 }
-export default Events;
+export default EventsComponent;

@@ -39,13 +39,16 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
             { id title subtitle body imageURL date venue { name address placeID} } }
     `
     return (
-        <ScrollView>
+        <ScrollView style={StyleSheet.absoluteFill}>
             <Query query={eventDetails}>
                 {({loading, data, error}) => {
                     if (loading) return <Text>Loading</Text>
-                    if (!loading && data === undefined || error ) { 
-                        console.log('Error: ', error)
-                        return <Text>Error en la petición</Text>
+                    if ( error ) {
+                        console.log('ERROR: ', JSON.stringify(error))
+                        return <Text>Ha ocurrido un error inesperado...</Text>
+                    }
+                    if (!loading && data === undefined ) { 
+                        return <Text>Error en la petición...</Text>
                     }
                     const { oneEvent } = data
                     const latlng = {latitude: 40.2927789, longitude: -3.7913771}

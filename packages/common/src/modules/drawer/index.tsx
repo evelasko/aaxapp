@@ -1,42 +1,23 @@
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { DrawerActions, NavigationActions, NavigationScreenProps } from 'react-navigation';
+import { Dimensions } from 'react-native';
+import { createAppContainer, createDrawerNavigator } from 'react-navigation';
+import About from '../content/about/About';
+import Policy from '../content/policy/Policy';
+import Support from '../content/support/Support';
 
-const styles = StyleSheet.create({
-    menuItem: {}
-})
-export default class DrawerScreen extends Component<NavigationScreenProps> {
-  navigateToScreen = (route:string) => () => {
-    const navigateAction = NavigationActions.navigate({
-      routeName: route
-    });
-    this.props.navigation.dispatch(navigateAction);
-    this.props.navigation.dispatch(DrawerActions.closeDrawer())
-  }
+// ----------------------------------------- DRAWER STACK
+const WIDTH = Dimensions.get('window').width
 
-  render () {
-    return (
-      <View>
-        <ScrollView>
-          <View>
-            <View style={styles.menuItem}>
-              <Text onPress={this.navigateToScreen('Content')}>
-                Home
-              </Text>
-            </View>
-            <View style={styles.menuItem}>
-              <Text onPress={this.navigateToScreen('About')}>
-               About
-              </Text>
-            </View>
-            <View style={styles.menuItem}>
-              <Text onPress={this.navigateToScreen('Contact')}>
-              Contact
-              </Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View>
-    );
-  }
-}
+const Drawer = createDrawerNavigator(
+    { 
+        Nosotros: { screen: About },
+        Soporte: { screen: Support },
+        Privacidad: { screen: Policy } 
+    }, 
+    { 
+        drawerPosition: 'left', 
+        drawerWidth: WIDTH*0.83,
+        // contentComponent: ({navigation}:DrawerItemsProps) => <DrawerMenu navigation={navigation}/> , 
+        initialRouteName: 'About' 
+    }
+)
+export const MenuNavigator = createAppContainer(Drawer)

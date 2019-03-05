@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { ChildMutateProps, graphql, withApollo, WithApolloClient } from 'react-apollo';
-import { LoginUserMutation, LoginUserMutationVariables } from '../schemaTypes';
+import { LoginUserMutation, LoginUserMutationVariables } from '../../../schemaTypes';
 
 const loginUserMutation = gql`
     mutation LoginUserMutation ( $email: String!, $password: String! ) 

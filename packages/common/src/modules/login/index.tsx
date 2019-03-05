@@ -1,110 +1,34 @@
-import { LinearGradient } from 'expo';
-import { Field, FormikErrors, FormikProps, withFormik } from 'formik';
-import React from "react";
-import { Button, StyleSheet, Text, View } from 'react-native';
-import Logo from '../../ui/icons/logo/index';
-import { InputField } from '../../ui/shared/InputFiled';
-import { loginSchema } from "../../yupSchemas/user";
+import React from 'react';
+import { NavigationScreenProps } from 'react-navigation';
+import { LoginController } from './components/LoginController';
+import { LoginView } from './components/LoginView/index';
 
-interface FormValues {
-    email: string
-    password: string
+interface Props extends NavigationScreenProps {}
+
+export const LoginConnector: React.FC<Props> = ({navigation}) =>  {    
+    return (
+        <LoginController>
+            {({ submit }) => 
+                <LoginView 
+                    submit={async (values:any) => {
+                        const res = await submit(values)
+                        if (res && !res.error) { 
+                            navigation.navigate('Content')
+                            // check here for agreement acceptance from mutation results
+                            // if not accepted then navigate to the agreement screen
+                            // rootStore.routerStore.screen = 'Main' 
+                        }
+                        return null
+                    }} 
+                    handleForgot={ () => {
+                        console.log('Handle Forgot')
+                    }}
+                    handleRegister={ () => {
+                        console.log('Handle Register')
+                    }}
+                    handleGuest={ () => navigation.navigate('Content') }
+                />
+            }
+        </LoginController>
+    )
 }
-interface Props {
-    submit: (values: FormValues) => Promise<FormikErrors<FormValues> | null>
-    handleForgot: () => void
-    handleRegister: () => void
-}
-
-const styles = StyleSheet.create({
-    loginView: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-    loginWrapper: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        zIndex: 3
-    },
-    loginBackground: {
-        width: '100%', height: '100%',
-        backgroundColor: 'blue',
-        zIndex: 1,
-    },
-    logo: {
-        marginBottom: 100
-    },
-    inputFieldsView: {
-        borderBottomColor: "rgba(0,0,0,0.3)",
-        borderBottomWidth: 1,
-        marginBottom: 25,
-        width: '60%',
-        paddingBottom: 5
-    },
-    inputFields: {
-        color: "white"
-    },
-    submitButton: {
-        margin: 25, width: '60%'
-    },
-    linkTextView: {
-        width: '100%',
-        alignItems: 'center'
-    },
-    linkTextButtons: {
-        color: "#EB894A",
-        marginTop: 10, marginBottom: 10
-    }
-})
-
-class L extends React.PureComponent<FormikProps<FormValues> & Props> {
-    render() {
-        const {handleSubmit, handleForgot, handleRegister} = this.props
-        return (
-            <LinearGradient style={styles.loginView} colors={['rgb(35,35,35)','rgb(46,46,46)','rgb(33,33,33)']} locations={[0.06, 0.80, 1]}>
-                <View style={styles.loginWrapper}>
-                    <View style={styles.logo}>
-                        <Logo width={200} height={200} />
-                    </View>
-                    <View style={styles.inputFieldsView}>
-                        <Field 
-                            name="email"
-                            placeholder="email"
-                            textContentType="username"
-                            spellCheck={false}
-                            style={styles.inputFields}
-                            component={InputField}
-                        />
-                    </View>
-                    <View style={styles.inputFieldsView}>
-                        <Field 
-                            name="password"
-                            type="password"
-                            textContentType="password"
-                            placeholder="password"
-                            secureTextEntry
-                            spellCheck={false}
-                            style={styles.inputFields}
-                            component={InputField}
-                        />
-                    </View>
-                    <View style={styles.submitButton}>
-                        <Button title="Login" color="#EB894A" onPress={handleSubmit as any} />
-                    </View>
-                    <View style={styles.linkTextView}>
-                        <Text style={styles.linkTextButtons} onPress={handleForgot}>recuerda tu contraseña</Text>
-                        <Text style={styles.linkTextButtons} onPress={handleRegister}>regístrate aquí</Text>
-                    </View>
-                </View>
-            </LinearGradient>
-    )}
-}
-
-export const LoginView = withFormik<Props, FormValues>({
-    validationSchema: loginSchema,
-    mapPropsToValues: () => ({ email: "", password: "" }),
-    handleSubmit: async (values, { props, setErrors }) => {
-      const errors = await props.submit(values)
-      if (errors) { return setErrors(errors) }
-    },
-  })(L);

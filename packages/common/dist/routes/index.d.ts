@@ -1,3 +1,4 @@
-/// <reference types="react" />
-declare const Routes: () => JSX.Element;
-export default Routes;
+import { NavigationContainer } from 'react-navigation';
+export declare const MenuNavigator: NavigationContainer;
+declare const _default: NavigationContainer;
+export default _default;

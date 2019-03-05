@@ -20,7 +20,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var expo_1 = require("expo");
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
@@ -32,22 +31,13 @@ var styles = react_native_1.StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
     activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
 });
-var Events = /** @class */ (function (_super) {
-    __extends(Events, _super);
-    function Events() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.pushDetails = function (id, title) {
-            if (_this.props.navigation) {
-                _this.props.navigation.push('EventDetails', { id: id, title: title });
-            }
-            else if (_this.props.history) {
-                _this.props.history.push("/event/" + id);
-            }
-        };
-        return _this;
+var EventsComponent = /** @class */ (function (_super) {
+    __extends(EventsComponent, _super);
+    function EventsComponent() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    Events.prototype.render = function () {
-        var _this = this;
+    EventsComponent.prototype.render = function () {
+        var pushDetails = this.props.pushDetails;
         return (react_1.default.createElement(react_apollo_1.Query, { query: eventsQuery }, function (_a) {
             var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading) {
@@ -65,17 +55,11 @@ var Events = /** @class */ (function (_super) {
             if (events)
                 return (react_1.default.createElement(react_native_1.View, { style: { width: '100%', height: '100%' } },
                     react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
-                        react_1.default.createElement(UpcomingEventCard_1.UpcomingEventCard, { upcomingEvent: upcoming, pushDetails: _this.pushDetails }),
-                        react_1.default.createElement(EventList_1.EventsList, { events: events, pushDetails: _this.pushDetails }))));
+                        react_1.default.createElement(UpcomingEventCard_1.UpcomingEventCard, { upcomingEvent: upcoming, pushDetails: pushDetails }),
+                        react_1.default.createElement(EventList_1.EventsList, { events: events, pushDetails: pushDetails }))));
         }));
     };
-    Events.navigationOptions = {
-        title: 'Eventos',
-        headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
-        headerTransparent: true,
-        headerTitleStyle: { fontWeight: 'bold' },
-    };
-    return Events;
+    return EventsComponent;
 }(react_1.default.Component));
-exports.default = Events;
+exports.default = EventsComponent;
 var templateObject_1;
