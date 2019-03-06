@@ -1,3 +1,3 @@
 import React from 'react';
-declare const About: React.FC;
-export default About;
+declare const AboutContent: React.FC;
+export default AboutContent;

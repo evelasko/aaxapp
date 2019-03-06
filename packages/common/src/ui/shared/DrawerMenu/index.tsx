@@ -6,21 +6,30 @@ const WIDTH = Dimensions.get('window').width
 const HEIGHT =  Dimensions.get('window').height
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#2E2E2E' },
-    headerContainer: {width: '100%', height:300, alignItems: 'center', justifyContent:'center'},
+    container: { 
+        flex: 1, backgroundColor: '#2E2E2E', justifyContent:'space-between' 
+    },
+    headerContainer: {
+        width: '100%', alignItems: 'center', justifyContent:'center'
+    },
+    logoContainer: {
+        width: '100%', height:300, marginTop: 50, alignItems: 'center', justifyContent:'center'
+    },
+    linkList: {
+        borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: '#555555', width: '100%'
+    },
     linkContainer: { 
-        height: 48, justifyContent: 'center',
+        justifyContent: 'center',
         borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#555555' 
     },
-    linkList: {borderTopWidth: StyleSheet.hairlineWidth, borderTopColor: '#555555'},
     link: { 
-        flex: 1, padding: 6, paddingLeft: 14,
-        fontSize: 14, fontWeight: '100', textTransform: 'uppercase', color: '#999999'
+        paddingLeft: 20, marginTop: 15, marginBottom: 15,
+        fontSize: 14, fontWeight: '100', textTransform: 'uppercase', color: '#999999', letterSpacing: 1
     },
     linkSocialContainer: {},
     linkSocialList: { flexDirection: 'row', justifyContent: 'space-evenly' },
     linkSocial: {},
-    footerContainer: {},
+    footerContainer: { marginBottom: 35},
     footerText: { 
         fontWeight: '100', fontSize: 10, color: '#999999', 
         alignSelf: 'center', marginTop: 15
@@ -33,7 +42,7 @@ interface Props {
 
 export default class DrawerMenu extends React.Component<Props> {
     navLink = (nav:string, text:string) => (
-        <TouchableOpacity style={styles.linkContainer} onPress={() => {}}>
+        <TouchableOpacity style={styles.linkContainer} onPress={() => this.props.navigation.navigate(nav)}>
             <Text style={styles.link}>{text}</Text>
         </TouchableOpacity>
     )
@@ -41,11 +50,14 @@ export default class DrawerMenu extends React.Component<Props> {
         return (
             <View style={styles.container}>
                 <View style={styles.headerContainer}>
-                    <Logo width={100} height={100} />
-                </View>   
-                <View style={styles.linkList}>
-                    { this.navLink('Nosotros', 'Nosotros') }
-                    { this.navLink('Soporte', 'Soporte') }
+                    <View style={styles.logoContainer}>
+                        <Logo width={100} height={100} />
+                    </View>   
+                    <View style={styles.linkList}>
+                        { this.navLink('Nosotros', 'Nosotros') }
+                        { this.navLink('Soporte', 'Soporte') }
+                        { this.navLink('Privacidad', 'Privacidad') }
+                    </View>
                 </View>
                 <View style={styles.footerContainer}>
                     <View style={styles.linkSocialList}>

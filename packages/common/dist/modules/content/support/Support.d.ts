@@ -1,3 +1,5 @@
 import React from 'react';
-declare const Support: React.FC;
-export default Support;
+interface Props {
+}
+declare const SupportContent: React.FC<Props>;
+export default SupportContent;

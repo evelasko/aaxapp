@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
-const Support: React.FC = () => {
+interface Props {}
+
+const SupportContent: React.FC<Props> = () => {
     return (
-        <View>
-            <Text>Support...</Text>
+        <View style={{...StyleSheet.absoluteFillObject, paddingTop: 50}}>
+            <Text>SupportContent...</Text>
         </View>
     )
 }
 
-export default Support
+export default SupportContent

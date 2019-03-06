@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var Policy = function () {
+var PolicyContent = function () {
     return (react_1.default.createElement(react_native_1.View, null,
-        react_1.default.createElement(react_native_1.Text, null, "Policy...")));
+        react_1.default.createElement(react_native_1.Text, null, "PolicyContent...")));
 };
-exports.default = Policy;
+exports.default = PolicyContent;

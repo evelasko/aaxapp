@@ -71,6 +71,7 @@ class L extends React.PureComponent<FormikProps<FormValues> & Props> {
                         <Field 
                             name="email"
                             placeholder="email"
+                            placeholderTextColor="#999999"
                             textContentType="username"
                             spellCheck={false}
                             style={styles.inputFields}
@@ -83,6 +84,7 @@ class L extends React.PureComponent<FormikProps<FormValues> & Props> {
                             type="password"
                             textContentType="password"
                             placeholder="password"
+                            placeholderTextColor="#999999"
                             secureTextEntry
                             spellCheck={false}
                             style={styles.inputFields}

@@ -1,3 +1,5 @@
 import React from 'react';
-declare const Profile: React.FC;
+declare class Profile extends React.Component {
+    render(): JSX.Element;
+}
 export default Profile;

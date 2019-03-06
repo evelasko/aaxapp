@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const Policy: React.FC = () => {
+const PolicyContent: React.FC = () => {
     return (
         <View>
-            <Text>Policy...</Text>
+            <Text>PolicyContent...</Text>
         </View>
     )
 }
 
-export default Policy
+export default PolicyContent

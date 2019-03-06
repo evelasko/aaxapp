@@ -1,13 +1,15 @@
-import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { EvilIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+import { BlurView } from 'expo';
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { createAppContainer, createBottomTabNavigator, createDrawerNavigator, createStackNavigator, createSwitchNavigator, NavigationContainer } from 'react-navigation';
+import About from '../modules/content/about/index';
 import EventDetails from '../modules/content/events/EventDetails';
 import Events from "../modules/content/events/index";
 import News from "../modules/content/news/index";
 import NewsDetails from '../modules/content/news/NewsDetails';
-import Policy from '../modules/content/policy/Policy';
-import Support from '../modules/content/support/Support';
+import Policy from '../modules/content/policy/index';
+import Support from '../modules/content/support/index';
 import { LoginConnector } from '../modules/login';
 import Profile from '../modules/profile/index';
 import DrawerMenu from '../ui/shared/DrawerMenu/index';
@@ -69,27 +71,43 @@ const ContentTabs = createBottomTabNavigator({
             return <MaterialCommunityIcons name={iconName} size={25} color={tintColor||'#C77139'} />;
         },
     }),
-    tabBarOptions: {
-      activeTintColor: '#C77139',
-      inactiveTintColor: 'gray',
-    },
+    tabBarOptions: { activeTintColor: '#C77139', inactiveTintColor: 'gray' },
   }
 )
 
 // ----------------------------------------- DRAWER STACK
 const WIDTH = Dimensions.get('window').width
 
+const DrawerScreens = createStackNavigator({
+    Privacidad: {screen: Policy},
+    Soporte: {screen: Support},
+    Nosotros: {screen: About}
+}, 
+{
+    defaultNavigationOptions: ({navigation}:any) => {
+        const { routeName } = navigation.state
+        return {
+            title: routeName,
+            headerTransparent: true,
+            animationEnabled: true,
+            headerLeft: <EvilIcons style={{marginLeft:15}} name='close' color="gray" size={32} onPress={() => navigation.navigate('Content') }/>,
+            headerBackground: <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />,
+            headerTitleStyle: { fontWeight: 'bold' }
+        }
+    }
+}
+)
+
 const Drawer = createDrawerNavigator(
     { 
         Content: { screen: ContentTabs },
-        Soporte: { screen: Support },
-        Privacidad: { screen: Policy } 
+        DrawerScreens,
     }, 
     { 
         drawerPosition: 'left', 
         drawerWidth: WIDTH*0.63,
         contentComponent: ({navigation}:any) => <DrawerMenu navigation={navigation}/> , 
-        initialRouteName: 'Content' 
+        initialRouteName: 'Content'
     }
 )
 
