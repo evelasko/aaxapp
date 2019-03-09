@@ -1,4 +1,2 @@
-import React from 'react';
-export default class App extends React.Component {
-    render(): JSX.Element;
-}
+import App from './entry/index';
+export default App;

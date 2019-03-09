@@ -6,7 +6,7 @@ interface Props extends NavigationScreenProps {
 export default class Login extends React.Component<Props & {
     appStore: AppStore;
 }> {
-    componentDidMount(): Promise<void>;
+    componentDidMount(): void;
     render(): JSX.Element;
 }
 export {};
