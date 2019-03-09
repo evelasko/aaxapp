@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AllNewsQuery_allNews } from '../../../schemaTypes';
-import LinearGradient from '../../../ui/shared/linearGradient/index';
+import LinearGradient from '../../../ui/shared/LGradient/index';
 
 interface Props {
     calls: AllNewsQuery_allNews[],
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     callScroll: { height: 132, marginBottom: 5 },
     shadowH: { height: 15 },
     callHeader: {
-        color: "white", fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        color: "white", fontWeight: '900', fontSize: 22, textTransform: 'uppercase', letterSpacing: 1,
         marginBottom: 20, marginLeft: 20,
     },
     callCard: {

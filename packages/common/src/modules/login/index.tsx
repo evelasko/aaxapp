@@ -1,34 +1,35 @@
+import { inject } from 'mobx-react/native';
 import React from 'react';
+import { AsyncStorage, Linking } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
-import { LoginController } from './components/LoginController';
-import { LoginView } from './components/LoginView/index';
+import appStore, { AppStore } from '../../store';
+import { LoginConnector } from './components/LoginConnector';
 
 interface Props extends NavigationScreenProps {}
 
-export const LoginConnector: React.FC<Props> = ({navigation}) =>  {    
-    return (
-        <LoginController>
-            {({ submit }) => 
-                <LoginView 
-                    submit={async (values:any) => {
-                        const res = await submit(values)
-                        if (res && !res.error) { 
-                            navigation.navigate('Content')
-                            // check here for agreement acceptance from mutation results
-                            // if not accepted then navigate to the agreement screen
-                            // rootStore.routerStore.screen = 'Main' 
-                        }
-                        return null
-                    }} 
-                    handleForgot={ () => {
-                        console.log('Handle Forgot')
-                    }}
-                    handleRegister={ () => {
-                        console.log('Handle Register')
-                    }}
-                    handleGuest={ () => navigation.navigate('Content') }
-                />
+@inject('appStore')
+export default class Login extends React.Component<Props&{appStore: AppStore}> {
+    async componentDidMount() {
+        try {
+            const per = await AsyncStorage.getItem('per')
+            if (per) {
+                console.log('FETCHED PER: ', per)
+                appStore.setUser(per)
+                this.props.navigation.navigate('Content')
             }
-        </LoginController>
-    )
+        } catch(err) {
+            console.log('ERROR WHILE FETCHING FROM ASYNC STORAGE: ', err)
+        }
+    }
+    render() {
+        const { navigation } = this.props
+        return (
+            <LoginConnector
+                loginSuccess={ () => {navigation.navigate('Content')} }
+                handleForgot={  ()=>{ Linking.openURL('https://admin.alicialonso.org/forgot')} }
+                handleSignUp={ () => { Linking.openURL('https://admin.alicialonso.org/register')} }
+                handleGuest={ () => {navigation.navigate('Content')} }
+            />
+        )
+    }
 }

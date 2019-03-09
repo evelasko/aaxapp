@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AllNewsQuery_allNews } from '../../../schemaTypes';
-import LinearGradient from '../../../ui/shared/linearGradient/index';
+import LinearGradient from '../../../ui/shared/LGradient/index';
 
 interface Props {
     alerts: AllNewsQuery_allNews[],
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     alertScroll: { height: 132, marginBottom: 5 },
     shadowH: { height: 15 },
     alertHeader: {
-        color: "white", fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        color: "white", fontWeight: '900', fontSize: 22, textTransform: 'uppercase', letterSpacing: 1,
         marginBottom: 10, marginLeft: 20
     },
     alertCard: {

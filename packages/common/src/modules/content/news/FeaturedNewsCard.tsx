@@ -36,7 +36,7 @@ export const FeaturedNewsCard: React.FC<Props> = ({featuredNews, pushDetails}) =
     if (!featuredNews) { return <View style={{display:'none'}} /> }
     const { id, imageURL, title, subtitle, body } = featuredNews
     return (
-        <TouchableOpacity style={styles.featuredNewsCard} onPress={() => { pushDetails(id,title) }}>
+        <TouchableOpacity style={styles.featuredNewsCard} onPress={() => { pushDetails(id, title) }}>
             <Text style={styles.featuredNewsCardHeader}>destacado</Text>
             <Image
                 style={styles.featuredNewsCardImage}

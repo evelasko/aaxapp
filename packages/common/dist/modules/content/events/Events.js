@@ -26,7 +26,7 @@ var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var EventList_1 = require("./EventList");
 var UpcomingEventCard_1 = require("./UpcomingEventCard");
-var eventsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } "], [" query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } "])));
+var eventsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" query AllEventsQuery ($per:String, $query:String)\n{ \n    events (per: $per, query: $query)\n    { id title subtitle body imageURL date venue { name address placeID} } \n} "], [" query AllEventsQuery ($per:String, $query:String)\n{ \n    events (per: $per, query: $query)\n    { id title subtitle body imageURL date venue { name address placeID} } \n} "])));
 var styles = react_native_1.StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
     activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
@@ -37,8 +37,8 @@ var EventsComponent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     EventsComponent.prototype.render = function () {
-        var pushDetails = this.props.pushDetails;
-        return (react_1.default.createElement(react_apollo_1.Query, { query: eventsQuery }, function (_a) {
+        var _a = this.props, pushDetails = _a.pushDetails, _b = _a.per, per = _b === void 0 ? null : _b;
+        return (react_1.default.createElement(react_apollo_1.Query, { query: eventsQuery, variables: { per: per, query: '' } }, function (_a) {
             var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading) {
                 return (react_1.default.createElement(react_native_1.View, { style: styles.activity },

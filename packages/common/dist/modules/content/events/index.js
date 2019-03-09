@@ -12,11 +12,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var expo_1 = require("expo");
+var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var MenuButton_1 = __importDefault(require("../../../ui/shared/MenuButton"));
@@ -31,7 +38,8 @@ var Events = /** @class */ (function (_super) {
         return _this;
     }
     Events.prototype.render = function () {
-        return (react_1.default.createElement(Events_1.default, { pushDetails: this.pushDetails }));
+        var per = this.props.appStore.per;
+        return (react_1.default.createElement(Events_1.default, { pushDetails: this.pushDetails, per: per }));
     };
     Events.navigationOptions = function (_a) {
         var navigation = _a.navigation;
@@ -44,6 +52,10 @@ var Events = /** @class */ (function (_super) {
             headerTitleStyle: { fontWeight: 'bold' }
         });
     };
+    Events = __decorate([
+        native_1.inject('appStore'),
+        native_1.observer
+    ], Events);
     return Events;
 }(react_1.default.Component));
 exports.default = Events;

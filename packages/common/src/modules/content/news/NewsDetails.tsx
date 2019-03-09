@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { RouteComponentProps } from 'react-router';
 
@@ -24,24 +24,22 @@ const NewsDetail: React.FC<Props & NavigationScreenProps> = ({match, navigation}
         query NewsDetails { oneNews (id: ${id} ) { id title subtitle body imageURL } }`
 
     return (
-        <ScrollView>
-            <Query query={newsDetails}>
-                {({loading, data}) => {
-                    if (loading) return <Text>Loading</Text>
-                    if (!loading && data === undefined) return <Text>Error en la petición</Text>
-                    const { oneNews } = data
-                    return (
-                        <View style={styles.detailsView}>
-                            <Image style={styles.detailsImage} source={{uri: oneNews.imageURL}} />
-                            <View style={styles.detailsHeader}>
-                                <Text style={styles.detailsTitle} >{oneNews.title}</Text>
-                                <Text style={styles.detailsSubtitle}>{oneNews.subtitle}</Text>
-                            </View>
-                                <Text style={styles.detailsBody}>{oneNews.body}</Text>
-                        </View>     
-                )}}
-            </Query>
-        </ScrollView>
+        <Query query={newsDetails}>
+            {({loading, data}) => {
+                if (loading) return <Text>Loading</Text>
+                if (!loading && data === undefined) return <Text>Error en la petición</Text>
+                const { oneNews } = data
+                return (
+                    <View style={styles.detailsView}>
+                        <Image style={styles.detailsImage} source={{uri: oneNews.imageURL}} />
+                        <View style={styles.detailsHeader}>
+                            <Text style={styles.detailsTitle} >{oneNews.title}</Text>
+                            <Text style={styles.detailsSubtitle}>{oneNews.subtitle}</Text>
+                        </View>
+                            <Text style={styles.detailsBody}>{oneNews.body}</Text>
+                    </View>     
+            )}}
+        </Query>
     )
 }
 

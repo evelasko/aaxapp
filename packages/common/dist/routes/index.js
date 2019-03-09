@@ -15,9 +15,9 @@ var index_3 = __importDefault(require("../modules/content/news/index"));
 var NewsDetails_1 = __importDefault(require("../modules/content/news/NewsDetails"));
 var index_4 = __importDefault(require("../modules/content/policy/index"));
 var index_5 = __importDefault(require("../modules/content/support/index"));
-var login_1 = require("../modules/login");
-var index_6 = __importDefault(require("../modules/profile/index"));
-var index_7 = __importDefault(require("../ui/shared/DrawerMenu/index"));
+var index_6 = __importDefault(require("../modules/login/index"));
+var index_7 = __importDefault(require("../modules/profile/index"));
+var index_8 = __importDefault(require("../ui/shared/DrawerMenu/index"));
 // ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
     News: index_3.default,
@@ -64,7 +64,7 @@ EventNavigator.navigationOptions = function (_a) {
 var ContentTabs = react_navigation_1.createBottomTabNavigator({
     Noticias: { screen: NewsNavigator },
     Eventos: { screen: EventNavigator },
-    Perfil: { screen: index_6.default }
+    Perfil: { screen: index_7.default }
 }, {
     defaultNavigationOptions: function (_a) {
         var navigation = _a.navigation;
@@ -121,13 +121,13 @@ var Drawer = react_navigation_1.createDrawerNavigator({
     drawerWidth: WIDTH * 0.63,
     contentComponent: function (_a) {
         var navigation = _a.navigation;
-        return react_1.default.createElement(index_7.default, { navigation: navigation });
+        return react_1.default.createElement(index_8.default, { navigation: navigation });
     },
     initialRouteName: 'Content'
 });
 // ----------------------------------------- MAIN NAVIGATOR
 var Routes = react_navigation_1.createSwitchNavigator({
-    Login: { screen: login_1.LoginConnector },
+    Login: { screen: index_6.default },
     Content: { screen: Drawer }
 });
 exports.default = react_navigation_1.createAppContainer(Routes);

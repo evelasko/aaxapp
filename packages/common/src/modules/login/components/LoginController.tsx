@@ -13,7 +13,10 @@ interface Props {
     children: ( 
         data: {
             submit: (values: LoginUserMutationVariables) => 
-                Promise<{ [key: string]: string } | null > 
+                Promise< {
+                    error: string | null
+                    token: string | null
+                } > 
         }
     ) => JSX.Element | null
 }
@@ -31,13 +34,13 @@ export class L extends React.PureComponent<
         const response = normalizeResponse(await this.props.mutate({ variables: values }))
         if (response.data.loginUser.error) {
             console.log(response.data.loginUser.error)
-            return {error: response.data.loginUser.error}
+            return {error: response.data.loginUser.error || 'error', token: null}
         }
         if (this.props.onSessionId && response.data.loginUser.token) {
             this.props.onSessionId(response.data.loginUser.token)
         }
         await this.props.client.resetStore()
-        return {error: null}
+        return { error: null, token: response.data.loginUser.token || null}
     }
     render() { return this.props.children({ submit: this.submit }) }
 }

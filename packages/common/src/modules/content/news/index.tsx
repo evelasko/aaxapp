@@ -1,13 +1,17 @@
 import { BlurView } from 'expo';
+import { inject, observer } from 'mobx-react/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
+import { AppStore } from '../../../store';
 import MenuButton from '../../../ui/shared/MenuButton';
 import NewsComponent from './News';
 
 interface Props {
 }
-class News extends React.Component<Props & NavigationScreenProps> {
+@inject('appStore')
+@observer
+class News extends React.Component<Props & NavigationScreenProps & {appStore: AppStore}> {
     static navigationOptions = ({navigation}:any) => ({ 
         title: 'Noticias' ,
         headerTransparent: true,
@@ -22,9 +26,10 @@ class News extends React.Component<Props & NavigationScreenProps> {
         this.props.navigation.push('NewsDetails', {id, title})
     }
     render () {
+        const { per } = this.props.appStore
         return (
             <View style={StyleSheet.absoluteFill}>
-                <NewsComponent pushDetails={this.pushDetails} />
+                <NewsComponent pushDetails={this.pushDetails} per={per} />
             </View>
         )
     }

@@ -1,32 +1,18 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { LoginController } from './components/LoginController';
-import { LoginView } from './components/LoginView/index';
+import { LoginConnector } from './components/LoginConnector';
 
 interface Props extends RouteComponentProps {}
 
-export const LoginConnector: React.FC<Props> = ({history}) =>  {    
+const Login: React.FC<Props> = ({history}) =>  {    
     return (
-        <LoginController>
-            {({ submit }) => 
-                <LoginView 
-                    submit={async (values:any) => {
-                        const res = await submit(values)
-                        if (res && !res.error) { 
-                            // history.push('/content')
-                            // rootStore.routerStore.screen = 'Main' 
-                        }
-                        return null
-                    }} 
-                    handleForgot={ () => {
-                        history.push('Content')
-                        console.log('Handle Forgot')
-                    }}
-                    handleRegister={ () => {
-                        console.log('Handle Register')
-                    }}
-                />
-            }
-        </LoginController>
+        <LoginConnector
+            loginSuccess={ () => {history.push('/content')} }
+            handleForgot={ () => {history.push('/forgot')} }
+            handleSignUp={ () => {history.push('Register')} }
+            handleGuest={ () => {history.push('Content')} }
+        />
     )
 }
+
+export default Login

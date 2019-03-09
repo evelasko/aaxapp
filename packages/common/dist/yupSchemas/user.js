@@ -42,3 +42,10 @@ exports.loginSchema = yup.object().shape({
 exports.changePasswordSchema = yup.object().shape({
     newPassword: exports.registerPasswordValidation
 });
+exports.validPasswordSchema = yup.object().shape({
+    password: yup
+        .string()
+        .min(8, exports.passwordNotLongEnough)
+        .max(255)
+        .required()
+});

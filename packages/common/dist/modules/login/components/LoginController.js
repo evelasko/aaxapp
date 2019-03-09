@@ -77,7 +77,7 @@ var L = /** @class */ (function (_super) {
                         response = _a.apply(void 0, [_b.sent()]);
                         if (response.data.loginUser.error) {
                             console.log(response.data.loginUser.error);
-                            return [2 /*return*/, { error: response.data.loginUser.error }];
+                            return [2 /*return*/, { error: response.data.loginUser.error || 'error', token: null }];
                         }
                         if (this.props.onSessionId && response.data.loginUser.token) {
                             this.props.onSessionId(response.data.loginUser.token);
@@ -85,7 +85,7 @@ var L = /** @class */ (function (_super) {
                         return [4 /*yield*/, this.props.client.resetStore()];
                     case 2:
                         _b.sent();
-                        return [2 /*return*/, { error: null }];
+                        return [2 /*return*/, { error: null, token: response.data.loginUser.token || null }];
                 }
             });
         }); };

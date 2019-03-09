@@ -10,9 +10,10 @@ import News from "../modules/content/news/index";
 import NewsDetails from '../modules/content/news/NewsDetails';
 import Policy from '../modules/content/policy/index';
 import Support from '../modules/content/support/index';
-import { LoginConnector } from '../modules/login';
+import Login from '../modules/login/index';
 import Profile from '../modules/profile/index';
 import DrawerMenu from '../ui/shared/DrawerMenu/index';
+
 
 // ----------------------------------------- NEWS STACK
 const NewsNavigator:NavigationContainer = createStackNavigator({ 
@@ -113,7 +114,7 @@ const Drawer = createDrawerNavigator(
 
 // ----------------------------------------- MAIN NAVIGATOR
 const Routes = createSwitchNavigator({
-    Login: { screen: LoginConnector},
+    Login: { screen: Login },
     Content: { screen: Drawer }
 })
 

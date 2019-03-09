@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         height: 43, overflow: 'hidden'
     },
     newsHeader: {
-        color: "#C77139", fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        color: "#C77139", fontWeight: '900', fontSize: 22, textTransform: 'uppercase', letterSpacing: 1,
         marginBottom: 20
     },
 })

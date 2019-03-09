@@ -16,11 +16,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var apollo_1 = require("./apollo");
 var index_1 = __importDefault(require("./routes/index"));
+var store_1 = __importDefault(require("./store"));
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App() {
@@ -30,10 +32,11 @@ var App = /** @class */ (function (_super) {
         return (react_1.default.createElement(react_apollo_1.ApolloProvider, { client: apollo_1.client },
             react_1.default.createElement(react_native_1.View, { style: styles.container },
                 react_1.default.createElement(react_native_1.View, { style: styles.wrapper },
-                    react_1.default.createElement(index_1.default, null)))));
+                    react_1.default.createElement(native_1.Provider, { appStore: store_1.default },
+                        react_1.default.createElement(index_1.default, null))))));
     };
     return App;
-}(react_1.default.PureComponent));
+}(react_1.default.Component));
 exports.default = App;
 var styles = react_native_1.StyleSheet.create({
     container: {
@@ -45,6 +48,5 @@ var styles = react_native_1.StyleSheet.create({
         flex: 1,
         width: '100%',
         maxWidth: 900,
-        backgroundColor: '#F5FCFF'
     }
 });

@@ -1,14 +1,17 @@
 import { BlurView } from 'expo';
+import { inject, observer } from 'mobx-react/native';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
+import { AppStore } from '../../../store';
 import MenuButton from '../../../ui/shared/MenuButton';
 import EventsComponent from './Events';
 
+interface Props {}
 
-interface Props {
-}
-class Events extends React.Component<Props & NavigationScreenProps> {
+@inject('appStore')
+@observer
+class Events extends React.Component<Props & NavigationScreenProps & {appStore: AppStore}> {
     static navigationOptions = ({navigation}:any) => ({ 
         title: 'Eventos' ,
         headerTransparent: true,
@@ -24,7 +27,8 @@ class Events extends React.Component<Props & NavigationScreenProps> {
         this.props.navigation.push('EventDetails', {id, title})
     }
     render() {
-        return ( <EventsComponent pushDetails={this.pushDetails} /> )
+        const { per } = this.props.appStore
+        return ( <EventsComponent pushDetails={this.pushDetails} per={per}/> )
     }
 }
 

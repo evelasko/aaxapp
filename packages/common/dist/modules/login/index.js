@@ -1,4 +1,23 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -37,35 +56,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
-var LoginController_1 = require("./components/LoginController");
-var index_1 = require("./components/LoginView/index");
-exports.LoginConnector = function (_a) {
-    var navigation = _a.navigation;
-    return (react_1.default.createElement(LoginController_1.LoginController, null, function (_a) {
-        var submit = _a.submit;
-        return react_1.default.createElement(index_1.LoginView, { submit: function (values) { return __awaiter(_this, void 0, void 0, function () {
-                var res;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, submit(values)];
-                        case 1:
-                            res = _a.sent();
-                            if (res && !res.error) {
-                                navigation.navigate('Content');
-                                // check here for agreement acceptance from mutation results
-                                // if not accepted then navigate to the agreement screen
-                                // rootStore.routerStore.screen = 'Main' 
-                            }
-                            return [2 /*return*/, null];
-                    }
-                });
-            }); }, handleForgot: function () {
-                console.log('Handle Forgot');
-            }, handleRegister: function () {
-                console.log('Handle Register');
-            }, handleGuest: function () { return navigation.navigate('Content'); } });
-    }));
-};
+var react_native_1 = require("react-native");
+var store_1 = __importDefault(require("../../store"));
+var LoginConnector_1 = require("./components/LoginConnector");
+var Login = /** @class */ (function (_super) {
+    __extends(Login, _super);
+    function Login() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Login.prototype.componentDidMount = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var per, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem('per')];
+                    case 1:
+                        per = _a.sent();
+                        if (per) {
+                            console.log('FETCHED PER: ', per);
+                            store_1.default.setUser(per);
+                            this.props.navigation.navigate('Content');
+                        }
+                        return [3 /*break*/, 3];
+                    case 2:
+                        err_1 = _a.sent();
+                        console.log('ERROR WHILE FETCHING FROM ASYNC STORAGE: ', err_1);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    Login.prototype.render = function () {
+        var navigation = this.props.navigation;
+        return (react_1.default.createElement(LoginConnector_1.LoginConnector, { loginSuccess: function () { navigation.navigate('Content'); }, handleForgot: function () { react_native_1.Linking.openURL('https://admin.alicialonso.org/forgot'); }, handleSignUp: function () { react_native_1.Linking.openURL('https://admin.alicialonso.org/register'); }, handleGuest: function () { navigation.navigate('Content'); } }));
+    };
+    Login = __decorate([
+        native_1.inject('appStore')
+    ], Login);
+    return Login;
+}(react_1.default.Component));
+exports.default = Login;

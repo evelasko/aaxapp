@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     recentHeader: {
         color: "#C77139",
-        fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        fontWeight: '900', fontSize: 22, textTransform: 'uppercase', letterSpacing: 1,
         marginBottom: 20
     },
 })

@@ -1,25 +1,50 @@
-import QRCode from 'qrcode';
+import { inject } from 'mobx-react/native';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-// @ts-ignore
-// import QRCode from 'react-native-qrcode-svg';
+import { Animated, AsyncStorage, Button, Dimensions, ScrollView, SectionList, StyleSheet, Text, View } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
+import { AppStore } from '../../store';
+import ProfileHeader from './Header';
 
 const WIDTH = Dimensions.get('window').width
-
-class Profile extends React.Component  {
+const styles = StyleSheet.create({
+    listHeaderContainer: {
+        margin: 5, marginTop: 25
+      },
+      listItemContainer: {
+        margin: 5
+      }
+})
+@inject('appStore')
+class Profile extends React.Component<NavigationScreenProps&{appStore: AppStore}> {
     render() {
-        QRCode.toDataURL('some text', { errorCorrectionLevel: 'H' }, function (err, url) {
-            if (err) console.log('ERROR', err)
-            console.log(url)
-          })
+        const { navigation, appStore } = this.props
         return (
             <View style={{...StyleSheet.absoluteFillObject, padding:10}}>
-                <View style={{marginTop: 200, marginBottom: 100}}>
-                    <Text>Profile...</Text>
-                </View>
-                <View>
-                   
-                </View>
+                <Animated.View>
+                    <View>
+                        <ProfileHeader />
+                    </View>
+                </Animated.View>
+                <ScrollView scrollEventThrottle={16} >
+                    <SectionList 
+                        renderItem={({item, index, section}) => <View style={styles.listItemContainer}><Text key={index}>{item}</Text></View> }
+                        renderSectionHeader={({section: {title}}) => <View style={styles.listHeaderContainer} ><Text style={{fontWeight: 'bold'}}>{title}</Text></View> }
+                        sections={[
+                        {title: 'Title1', data: ['item1', 'item2', 'item A', 'item B', 'item C', 'item D', 'item1', 'item2', 'item A', 'item B', 'item C', 'item D']},
+                        {title: 'Title2', data: ['item3', 'item4', 'item A', 'item B', 'item C', 'item D']},
+                        {title: 'Title3', data: ['item5', 'item6', 'item A', 'item B', 'item C', 'item D']},
+                        ]}
+                        keyExtractor={(item, index) => item + index}
+                    />
+                    <Button title='Cerrar Sesión' onPress={async() => {
+                        try {
+                            appStore.unsetUser()
+                            await AsyncStorage.removeItem('per')
+                            // Logout Mutation should happen here along with Apollo ResetStore...
+                            navigation.navigate('Login')
+                        } catch(err) { console.log('LOGGIN OFF ERROR: ', err)}
+                    }} />
+                </ScrollView>
             </View>
         )
     }

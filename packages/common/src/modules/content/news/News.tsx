@@ -9,21 +9,26 @@ import NewsList from './NewsList';
 import { RecentNewsList } from './RecentNewsList';
 interface Props {
     pushDetails: (id:string, title:string) => void
+    per?: string | null
 }
 
-const newsQuery = gql`query AllNewsQuery { allNews 
-{ id title subtitle body imageURL expiration category featured createdAt } }`
+const newsQuery = gql`query AllNewsQuery ( $per: String, $query: String ) 
+{ allNews ( per:$per, query:$query )
+    { id title subtitle body imageURL expiration category featured createdAt } 
+}`
 
 const styles = StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1},
     activity: {flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center'}
 })
 
+
 class NewsComponent extends React.Component<Props> {
     render () {
-        const { pushDetails } = this.props
+        const { pushDetails, per = null } = this.props
+        console.log('FROM NEWS: ', per)
         return (
-            <Query query={newsQuery}>
+            <Query query={newsQuery} variables={{ per, query:''}}>
                 {({loading, data, error}) => {
                     if (loading) { return (
                         <View style={styles.activity}>

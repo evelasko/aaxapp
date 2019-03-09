@@ -21,6 +21,13 @@ var UserGroup;
     UserGroup["STAFF"] = "STAFF";
     UserGroup["STUDENT"] = "STUDENT";
 })(UserGroup = exports.UserGroup || (exports.UserGroup = {}));
+var nIdType;
+(function (nIdType) {
+    nIdType["NATIONALID"] = "NATIONALID";
+    nIdType["OTHER"] = "OTHER";
+    nIdType["PASSPORT"] = "PASSPORT";
+    nIdType["SOCIALSECURITY"] = "SOCIALSECURITY";
+})(nIdType = exports.nIdType || (exports.nIdType = {}));
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

@@ -29,7 +29,7 @@ var CallScroll_1 = require("./CallScroll");
 var FeaturedNewsCard_1 = require("./FeaturedNewsCard");
 var NewsList_1 = __importDefault(require("./NewsList"));
 var RecentNewsList_1 = require("./RecentNewsList");
-var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery { allNews \n{ id title subtitle body imageURL expiration category featured createdAt } }"], ["query AllNewsQuery { allNews \n{ id title subtitle body imageURL expiration category featured createdAt } }"])));
+var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery ( $per: String, $query: String ) \n{ allNews ( per:$per, query:$query )\n    { id title subtitle body imageURL expiration category featured createdAt } \n}"], ["query AllNewsQuery ( $per: String, $query: String ) \n{ allNews ( per:$per, query:$query )\n    { id title subtitle body imageURL expiration category featured createdAt } \n}"])));
 var styles = react_native_1.StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
     activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
@@ -40,8 +40,9 @@ var NewsComponent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NewsComponent.prototype.render = function () {
-        var pushDetails = this.props.pushDetails;
-        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery }, function (_a) {
+        var _a = this.props, pushDetails = _a.pushDetails, _b = _a.per, per = _b === void 0 ? null : _b;
+        console.log('FROM NEWS: ', per);
+        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery, variables: { per: per, query: '' } }, function (_a) {
             var loading = _a.loading, data = _a.data, error = _a.error;
             if (loading) {
                 return (react_1.default.createElement(react_native_1.View, { style: styles.activity },

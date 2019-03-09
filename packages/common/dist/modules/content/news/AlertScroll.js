@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var index_1 = __importDefault(require("../../../ui/shared/linearGradient/index"));
+var index_1 = __importDefault(require("../../../ui/shared/LGradient/index"));
 var styles = react_native_1.StyleSheet.create({
     alertView: { backgroundColor: "#C77139" },
     alertScroll: { height: 132, marginBottom: 5 },
     shadowH: { height: 15 },
     alertHeader: {
-        color: "white", fontWeight: 'bold', fontSize: 24, textTransform: 'uppercase',
+        color: "white", fontWeight: '900', fontSize: 22, textTransform: 'uppercase', letterSpacing: 1,
         marginBottom: 10, marginLeft: 20
     },
     alertCard: {

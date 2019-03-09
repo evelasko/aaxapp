@@ -1,8 +1,11 @@
 import React from 'react';
 import { NavigationScreenProps } from 'react-navigation';
+import { AppStore } from '../../../store';
 interface Props {
 }
-declare class News extends React.Component<Props & NavigationScreenProps> {
+declare class News extends React.Component<Props & NavigationScreenProps & {
+    appStore: AppStore;
+}> {
     static navigationOptions: ({ navigation }: any) => {
         title: string;
         headerTransparent: boolean;

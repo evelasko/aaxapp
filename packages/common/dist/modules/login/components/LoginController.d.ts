@@ -5,13 +5,18 @@ interface Props {
     onSessionId?: (sessionId: string) => void;
     children: (data: {
         submit: (values: LoginUserMutationVariables) => Promise<{
-            [key: string]: string;
-        } | null>;
+            error: string | null;
+            token: string | null;
+        }>;
     }) => JSX.Element | null;
 }
 export declare class L extends React.PureComponent<ChildMutateProps<WithApolloClient<Props>, LoginUserMutation, LoginUserMutationVariables>> {
     submit: (values: LoginUserMutationVariables) => Promise<{
         error: any;
+        token: null;
+    } | {
+        error: null;
+        token: any;
     }>;
     render(): JSX.Element | null;
 }

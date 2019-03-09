@@ -7,9 +7,14 @@ import { UpcomingEventCard } from './UpcomingEventCard';
 
 interface Props {
     pushDetails: (id:string, title:string) => void
+    per?: string | null
 }
 
-const eventsQuery = gql` query AllEventsQuery { events { id title subtitle body imageURL date venue { name address placeID} } } `
+const eventsQuery = gql` query AllEventsQuery ($per:String, $query:String)
+{ 
+    events (per: $per, query: $query)
+    { id title subtitle body imageURL date venue { name address placeID} } 
+} `
 
 const styles = StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
@@ -18,9 +23,9 @@ const styles = StyleSheet.create({
 
 class EventsComponent extends React.Component<Props> {
     render() {
-        const { pushDetails } = this.props
+        const { pushDetails, per = null } = this.props
         return (
-            <Query query={eventsQuery}>
+            <Query query={eventsQuery} variables={{per, query:''}}>
                 {({ loading, data, error }) => {
                     if (loading) { return (
                         <View style={styles.activity}>

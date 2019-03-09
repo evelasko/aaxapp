@@ -26,21 +26,20 @@ var NewsDetail = function (_a) {
         return react_1.default.createElement(react_native_1.View, null,
             react_1.default.createElement(react_native_1.Text, null, "Los sentimos pero no encontramos la noticia que quer\u00EDas..."));
     var newsDetails = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject([" \n        query NewsDetails { oneNews (id: ", " ) { id title subtitle body imageURL } }"], [" \n        query NewsDetails { oneNews (id: ", " ) { id title subtitle body imageURL } }"])), id);
-    return (react_1.default.createElement(react_native_1.ScrollView, null,
-        react_1.default.createElement(react_apollo_1.Query, { query: newsDetails }, function (_a) {
-            var loading = _a.loading, data = _a.data;
-            if (loading)
-                return react_1.default.createElement(react_native_1.Text, null, "Loading");
-            if (!loading && data === undefined)
-                return react_1.default.createElement(react_native_1.Text, null, "Error en la petici\u00F3n");
-            var oneNews = data.oneNews;
-            return (react_1.default.createElement(react_native_1.View, { style: styles.detailsView },
-                react_1.default.createElement(react_native_1.Image, { style: styles.detailsImage, source: { uri: oneNews.imageURL } }),
-                react_1.default.createElement(react_native_1.View, { style: styles.detailsHeader },
-                    react_1.default.createElement(react_native_1.Text, { style: styles.detailsTitle }, oneNews.title),
-                    react_1.default.createElement(react_native_1.Text, { style: styles.detailsSubtitle }, oneNews.subtitle)),
-                react_1.default.createElement(react_native_1.Text, { style: styles.detailsBody }, oneNews.body)));
-        })));
+    return (react_1.default.createElement(react_apollo_1.Query, { query: newsDetails }, function (_a) {
+        var loading = _a.loading, data = _a.data;
+        if (loading)
+            return react_1.default.createElement(react_native_1.Text, null, "Loading");
+        if (!loading && data === undefined)
+            return react_1.default.createElement(react_native_1.Text, null, "Error en la petici\u00F3n");
+        var oneNews = data.oneNews;
+        return (react_1.default.createElement(react_native_1.View, { style: styles.detailsView },
+            react_1.default.createElement(react_native_1.Image, { style: styles.detailsImage, source: { uri: oneNews.imageURL } }),
+            react_1.default.createElement(react_native_1.View, { style: styles.detailsHeader },
+                react_1.default.createElement(react_native_1.Text, { style: styles.detailsTitle }, oneNews.title),
+                react_1.default.createElement(react_native_1.Text, { style: styles.detailsSubtitle }, oneNews.subtitle)),
+            react_1.default.createElement(react_native_1.Text, { style: styles.detailsBody }, oneNews.body)));
+    }));
 };
 exports.default = NewsDetail;
 var templateObject_1;
