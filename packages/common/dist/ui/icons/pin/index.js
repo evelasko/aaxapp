@@ -20,7 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var expo_1 = require("expo");
+var vector_icons_1 = require("@expo/vector-icons");
 var react_1 = __importStar(require("react"));
 var PinIcon = /** @class */ (function (_super) {
     __extends(PinIcon, _super);
@@ -29,9 +29,7 @@ var PinIcon = /** @class */ (function (_super) {
     }
     PinIcon.prototype.render = function () {
         var _a = this.props, width = _a.width, height = _a.height, color = _a.color;
-        return (react_1.default.createElement(expo_1.Svg, { width: width || 24, height: height || 24, viewBox: "0 0 24 24", "stroke-linecap": "round", "stroke-linejoin": "round" },
-            react_1.default.createElement(expo_1.Svg.Path, { d: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z", stroke: color || "#BDBDBD", fill: "none" }),
-            react_1.default.createElement(expo_1.Svg.Circle, { cx: "12", cy: "10", r: "3", stroke: color || "#BDBDBD", fill: "none" })));
+        return (react_1.default.createElement(vector_icons_1.Feather, { name: "map-pin", size: width || 24, color: color || "grey" }));
     };
     return PinIcon;
 }(react_1.Component));

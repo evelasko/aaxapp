@@ -16,3 +16,7 @@ export const nIdTypes = {
     SOCIALSECURITY:['Seguridad Social', 'Seguridad Social'],
     OTHER:['Otro', 'otro']
 }
+
+export const UserMessages = {
+    accountCreatedSuccessfully: '¡Tu cuenta ha sido creada con éxito! Te hemos enviado un email para confirmar tu dirección, por favor, revisa tu bandeja de entrada y sigue las instrucciones para acceder a tu nueva cuenta.'
+}

@@ -1,13 +1,3 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-// const title:string = 'My Bad!'
-
-// ReactDOM.render(
-//     <div>{title}</div>,
-//     document.getElementById('app')
-// )
-
 import { AppRegistry } from 'react-native';
 import App from './App';
 import * as serviceWorker from './serviceWorker';

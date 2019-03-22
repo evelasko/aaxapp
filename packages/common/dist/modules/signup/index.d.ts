@@ -1,6 +1,4 @@
 import React from 'react';
 import { NavigationScreenProps } from 'react-navigation';
-interface Props extends NavigationScreenProps {
-}
-declare const SignUp: React.FC<Props>;
+declare const SignUp: React.FC<NavigationScreenProps>;
 export default SignUp;

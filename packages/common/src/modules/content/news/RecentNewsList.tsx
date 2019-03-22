@@ -1,10 +1,10 @@
 import moment from 'moment';
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AllNewsQuery_allNews } from '../../../schemaTypes';
+import { AllNewsQuery_allNewsMobile } from '../../../schemaTypes';
 
 interface Props {
-    recents: AllNewsQuery_allNews[]
+    recents: AllNewsQuery_allNewsMobile[]
     pushDetails: (id:string, title:string) => void
 }
 

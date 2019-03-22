@@ -1,4 +1,4 @@
-import { Svg } from 'expo';
+import { Feather } from '@expo/vector-icons';
 import React, { Component } from 'react';
 
 interface Props {
@@ -11,11 +11,7 @@ export default class DateIcon extends Component<Props> {
     render() {
         const { width, height, color } = this.props
         return (
-            <Svg width={width || 24} height={height || 24} viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                <Svg.Path d="M16 2v4M8 2v4M3 10h18"
-                    stroke={color ||"#BDBDBD"} fill="none"
-                />
-            </Svg>
+            <Feather name="calendar" size={width || 24} color={color || "grey"} />
         )
     }
 }

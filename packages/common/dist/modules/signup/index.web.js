@@ -4,13 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
-var SignUpController_1 = __importDefault(require("./components/SignUpController"));
-var SignUpView_1 = __importDefault(require("./components/SignUpView"));
-var Register = function (_a) {
+var SignUp_1 = __importDefault(require("./SignUp"));
+var SignUp = function (_a) {
     var history = _a.history;
-    return (react_1.default.createElement(SignUpController_1.default, null, function (_a) {
-        var submit = _a.submit;
-        return react_1.default.createElement(SignUpView_1.default, { onFinish: function () { history.push('/SignUpMessage'); }, submit: submit });
-    }));
+    return react_1.default.createElement(SignUp_1.default, { navToProfile: function () { history.push('/profile'); } });
 };
-exports.default = Register;
+exports.default = SignUp;

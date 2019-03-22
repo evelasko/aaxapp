@@ -16,9 +16,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
+var index_1 = require("../../../ui/shared/SharedConstants/index");
 var Policy_1 = __importDefault(require("./Policy"));
 var Policy = function () {
-    return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { paddingTop: 50 }) },
+    return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { marginTop: index_1.headerHeight }) },
         react_1.default.createElement(Policy_1.default, null)));
 };
 exports.default = Policy;

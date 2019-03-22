@@ -10,8 +10,9 @@ import News from "../modules/content/news/index";
 import NewsDetails from '../modules/content/news/NewsDetails';
 import Policy from '../modules/content/policy/index';
 import Support from '../modules/content/support/index';
-import Login from '../modules/login/index';
 import Profile from '../modules/profile/index';
+import Settings from '../modules/settings/index';
+import SignUp from '../modules/signup/index';
 import DrawerMenu from '../ui/shared/DrawerMenu/index';
 
 
@@ -45,11 +46,22 @@ EventNavigator.navigationOptions = ({ navigation }:any) => {
     if (navigation.state.index > 0) { tabBarVisible = false }
     return { tabBarVisible }
 }
+EventNavigator.navigationOptions = ({ navigation }:any) => {
+    let tabBarVisible = true
+    if (navigation.state.index > 0) { tabBarVisible = false }
+    return { tabBarVisible }
+}
+// ----------------------------------------- PROFILE STACK
+const ProfileNavigator:NavigationContainer = createStackNavigator({ 
+    Profile,
+    Settings,
+})
+
 // ----------------------------------------- CONTENT TABS
 const ContentTabs = createBottomTabNavigator({
     Noticias: {screen: NewsNavigator},
     Eventos: {screen: EventNavigator},
-    Perfil: {screen: Profile}
+    Perfil: {screen: ProfileNavigator}
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -112,10 +124,17 @@ const Drawer = createDrawerNavigator(
     }
 )
 
-// ----------------------------------------- MAIN NAVIGATOR
+// ----------------------------------------- BASE NAVIGATOR
 const Routes = createSwitchNavigator({
-    Login: { screen: Login },
-    Content: { screen: Drawer }
+    Content: { screen: Drawer },
 })
 
-export default createAppContainer(Routes)
+// ----------------------------------------- MODALS NAVIGATOR
+const RootNavigation = createStackNavigator({
+    Routes: { screen: Routes },
+    SignUp: { screen: SignUp }
+    },
+    { mode: 'modal', headerMode: 'none' }
+)
+
+export default createAppContainer(RootNavigation)

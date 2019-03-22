@@ -2,17 +2,17 @@ import gql from 'graphql-tag';
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
-import MapView from 'react-native-maps';
 import { NavigationScreenProps } from 'react-navigation';
 import { RouteComponentProps } from 'react-router';
 import DateIcon from '../../../ui/icons/date/index';
 import PinIcon from '../../../ui/icons/pin/index';
+import EventMap from './mapView/index';
 import moment = require('moment');
 
 interface Props extends RouteComponentProps<{ event: string }> {}
 
 const styles = StyleSheet.create({
-    detailsView: {margin: 15},
+    detailsView: {margin: 15, padding: 20},
     detailsImage: {width: '100%', height: 254},
     detailsHeader: {},
     detailsInfo: {flexDirection: 'column', marginTop: 40, marginBottom: 30},
@@ -82,7 +82,7 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
                                 <View style={styles.divider} />
                             </View>
                             <View style={styles.detailsLocation}>
-                                <MapView region={{ ...latlng, latitudeDelta: 0.0922, longitudeDelta: 0.0421,}} />
+                                <EventMap latlng={latlng} />
                             </View>
                         </View> 
                     )

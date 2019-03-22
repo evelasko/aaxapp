@@ -14,3 +14,6 @@ export declare const nIdTypes: {
     SOCIALSECURITY: string[];
     OTHER: string[];
 };
+export declare const UserMessages: {
+    accountCreatedSuccessfully: string;
+};

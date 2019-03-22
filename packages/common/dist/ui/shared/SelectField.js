@@ -55,7 +55,7 @@ var SelectField = /** @class */ (function (_super) {
     SelectField.prototype.render = function () {
         var _a = this.props, field = _a.field, _b = _a.form, touched = _b.touched, errors = _b.errors, props = __rest(_a, ["field", "form"]);
         var errorMsg = touched[field.name] && errors[field.name];
-        return (React.createElement(react_native_1.Picker, __assign({}, props, { onValueChange: this.onValueChange, selectedValue: field.value })));
+        return (React.createElement(react_native_1.Picker, __assign({}, props, { onValueChange: this.onValueChange, selectedValue: field.value, mode: "dropdown" }), props.options.map(function (o) { return React.createElement(react_native_1.Picker.Item, { key: o.value, label: o.label, value: o.value }); })));
     };
     return SelectField;
 }(React.Component));

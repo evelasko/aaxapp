@@ -1,7 +1,7 @@
 import React from 'react';
-import { AllNewsQuery_allNews } from '../../../schemaTypes';
+import { AllNewsQuery_allNewsMobile } from '../../../schemaTypes';
 interface Props {
-    recents: AllNewsQuery_allNews[];
+    recents: AllNewsQuery_allNewsMobile[];
     pushDetails: (id: string, title: string) => void;
 }
 export declare const RecentNewsList: React.FC<Props>;

@@ -36,9 +36,8 @@ exports.FeaturedNewsCard = function (_a) {
     }
     var id = featuredNews.id, imageURL = featuredNews.imageURL, title = featuredNews.title, subtitle = featuredNews.subtitle, body = featuredNews.body;
     return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.featuredNewsCard, onPress: function () { pushDetails(id, title); } },
-        react_1.default.createElement(react_native_1.Text, { style: styles.featuredNewsCardHeader }, "destacado"),
         react_1.default.createElement(react_native_1.Image, { style: styles.featuredNewsCardImage, source: { uri: imageURL || 'default.png' } }),
         react_1.default.createElement(react_native_1.Text, { style: styles.featuredNewsCardTitle }, title),
-        subtitle && react_1.default.createElement(react_native_1.Text, { style: styles.featuredNewsCardSubtitle }, subtitle),
+        subtitle ? react_1.default.createElement(react_native_1.Text, { style: styles.featuredNewsCardSubtitle }, subtitle) : react_1.default.createElement(react_native_1.View, null),
         react_1.default.createElement(react_native_1.Text, { style: styles.featuredNewsCardText }, body)));
 };

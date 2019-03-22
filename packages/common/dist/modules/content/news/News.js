@@ -16,6 +16,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -29,7 +40,7 @@ var CallScroll_1 = require("./CallScroll");
 var FeaturedNewsCard_1 = require("./FeaturedNewsCard");
 var NewsList_1 = __importDefault(require("./NewsList"));
 var RecentNewsList_1 = require("./RecentNewsList");
-var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery ( $per: String, $query: String ) \n{ allNews ( per:$per, query:$query )\n    { id title subtitle body imageURL expiration category featured createdAt } \n}"], ["query AllNewsQuery ( $per: String, $query: String ) \n{ allNews ( per:$per, query:$query )\n    { id title subtitle body imageURL expiration category featured createdAt } \n}"])));
+var newsQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["query AllNewsQuery ( $per: String ) \n    { allNewsMobile ( per:$per ) \n        { id title subtitle body imageURL expiration category featured createdAt } \n    }\n"], ["query AllNewsQuery ( $per: String ) \n    { allNewsMobile ( per:$per ) \n        { id title subtitle body imageURL expiration category featured createdAt } \n    }\n"])));
 var styles = react_native_1.StyleSheet.create({
     contentScroll: { flexDirection: 'column', height: '100%', flex: 1 },
     activity: { flexDirection: 'column', flex: 1, height: '100%', justifyContent: 'center' }
@@ -40,30 +51,44 @@ var NewsComponent = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NewsComponent.prototype.render = function () {
-        var _a = this.props, pushDetails = _a.pushDetails, _b = _a.per, per = _b === void 0 ? null : _b;
+        var _this = this;
+        var _a = this.props, pushDetails = _a.pushDetails, _b = _a.per, per = _b === void 0 ? null : _b, _c = _a.headerHeight, headerHeight = _c === void 0 ? 0 : _c;
         console.log('FROM NEWS: ', per);
-        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery, variables: { per: per, query: '' } }, function (_a) {
-            var loading = _a.loading, data = _a.data, error = _a.error;
+        return (react_1.default.createElement(react_apollo_1.Query, { query: newsQuery, variables: { per: per }, errorPolicy: "all" }, function (_a) {
+            var loading = _a.loading, data = _a.data, error = _a.error, startPolling = _a.startPolling, stopPolling = _a.stopPolling, refetch = _a.refetch;
             if (loading) {
+                console.log('Loading News...');
                 return (react_1.default.createElement(react_native_1.View, { style: styles.activity },
                     react_1.default.createElement(react_native_1.ActivityIndicator, { size: "small", color: "#C77139" })));
             }
             if (error) {
-                console.log('ERROR: ', error);
-                return react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error");
+                console.log('ERROR WHILE FETCHING NEWS: ', JSON.stringify(error));
+                console.log('STRING: ', JSON.stringify(error.message));
+                console.log('MORE INFO: ', JSON.stringify(error.extraInfo));
+                return (react_1.default.createElement(react_native_1.View, { style: { marginTop: 150 } },
+                    react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error:"),
+                    react_1.default.createElement(react_native_1.View, null, error.graphQLErrors.map(function (rr, i) { return (react_1.default.createElement(react_native_1.View, { key: i },
+                        react_1.default.createElement(react_native_1.Text, null, JSON.stringify(rr)))); }))));
             }
-            if (!data.allNews.length)
+            if (!data.allNewsMobile.length)
                 return react_1.default.createElement(react_native_1.Text, null, "No hay noticias que mostrar...");
-            var allNews = data.allNews;
-            var alerts = allNews.filter(function (n) { return n.category === 'ALERT'; });
-            var calls = allNews.filter(function (n) { return n.category === 'CALL'; });
-            var featuredNews = allNews.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
-            var allNewses = allNews.filter(function (n) { return featuredNews ?
+            if (_this.props.appState) {
+                _this.props.appState.addEventListener('change', function (nextState) {
+                    if (nextState === 'active') {
+                        refetch();
+                    }
+                });
+            }
+            var allNewsMobile = data.allNewsMobile;
+            var alerts = allNewsMobile.filter(function (n) { return n.category === 'ALERT'; });
+            var calls = allNewsMobile.filter(function (n) { return n.category === 'CALL'; });
+            var featuredNews = allNewsMobile.filter(function (n) { return n.featured && n.category === 'NEWS'; })[0];
+            var allNewses = allNewsMobile.filter(function (n) { return featuredNews ?
                 n.category === 'NEWS' && n.id != featuredNews.id : n.category === 'NEWS'; });
             var recentsCount = allNewses.length > 3 ? 3 : allNewses.length;
             var recents = allNewses.slice(0, recentsCount);
             var newses = allNewses.slice(recentsCount, allNewses.length);
-            return (react_1.default.createElement(react_native_1.ScrollView, { style: styles.contentScroll },
+            return (react_1.default.createElement(react_native_1.ScrollView, { style: __assign({}, styles.contentScroll, { marginTop: headerHeight || 0 }) },
                 react_1.default.createElement(FeaturedNewsCard_1.FeaturedNewsCard, { featuredNews: featuredNews, pushDetails: pushDetails }),
                 react_1.default.createElement(AlertScroll_1.AlertScroll, { alerts: alerts, pushDetails: pushDetails }),
                 react_1.default.createElement(RecentNewsList_1.RecentNewsList, { recents: recents, pushDetails: pushDetails }),

@@ -1,22 +1,10 @@
-export interface ChangePasswordMutation_changePassword {
-    __typename: "AuthPayload";
-    token: string | null;
-    error: string | null;
-}
-export interface ChangePasswordMutation {
-    changePassword: ChangePasswordMutation_changePassword;
-}
-export interface ChangePasswordMutationVariables {
-    key?: string | null;
-    newPassword: string;
-}
-export interface AllEventsQuery_events_venue {
+export interface AllEventsQuery_eventsMobile_venue {
     __typename: "Venue";
     name: string;
     address: string | null;
     placeID: string | null;
 }
-export interface AllEventsQuery_events {
+export interface AllEventsQuery_eventsMobile {
     __typename: "Event";
     id: string;
     title: string;
@@ -24,12 +12,15 @@ export interface AllEventsQuery_events {
     body: string;
     imageURL: string | null;
     date: any;
-    venue: AllEventsQuery_events_venue;
+    venue: AllEventsQuery_eventsMobile_venue;
 }
 export interface AllEventsQuery {
-    events: (AllEventsQuery_events | null)[];
+    eventsMobile: (AllEventsQuery_eventsMobile | null)[];
 }
-export interface AllNewsQuery_allNews {
+export interface AllEventsQueryVariables {
+    per?: string | null;
+}
+export interface AllNewsQuery_allNewsMobile {
     __typename: "News";
     id: string;
     title: string;
@@ -42,47 +33,43 @@ export interface AllNewsQuery_allNews {
     createdAt: any;
 }
 export interface AllNewsQuery {
-    allNews: (AllNewsQuery_allNews | null)[];
+    allNewsMobile: (AllNewsQuery_allNewsMobile | null)[];
 }
-export interface ForgotPasswordMutation_sendForgotPasswordEmail {
+export interface AllNewsQueryVariables {
+    per?: string | null;
+}
+export interface ConfirmEmailMutation_confirmEmail {
     __typename: "AuthPayload";
     token: string | null;
     error: string | null;
 }
-export interface ForgotPasswordMutation {
-    sendForgotPasswordEmail: ForgotPasswordMutation_sendForgotPasswordEmail;
+export interface ConfirmEmailMutation {
+    confirmEmail: ConfirmEmailMutation_confirmEmail;
 }
-export interface ForgotPasswordMutationVariables {
-    email: string;
+export interface ConfirmEmailMutationVariables {
+    key: string;
 }
-export interface MeQuery_me_user {
-    __typename: "User";
-    id: string;
-    name: string | null;
-    lastname: string | null;
-    email: string | null;
-    group: UserGroup;
-    isAdmin: boolean | null;
-}
-export interface MeQuery_me {
-    __typename: "UserPayload";
-    user: MeQuery_me_user | null;
-    error: string | null;
-}
-export interface MeQuery {
-    me: MeQuery_me | null;
-}
-export interface LoginUserMutation_loginUser {
+export interface LoginUserMutation_loginUserMobile {
     __typename: "AuthPayload";
     token: string | null;
     error: string | null;
 }
 export interface LoginUserMutation {
-    loginUser: LoginUserMutation_loginUser;
+    loginUserMobile: LoginUserMutation_loginUserMobile;
 }
 export interface LoginUserMutationVariables {
     email: string;
     password: string;
+    device?: string | null;
+    permission?: boolean | null;
+}
+export interface LogOutMutation_logoutUser {
+    __typename: "AuthPayload";
+    token: string | null;
+    error: string | null;
+}
+export interface LogOutMutation {
+    logoutUser: LogOutMutation_logoutUser;
 }
 export interface SignUpUserMutation_signUpUser {
     __typename: "AuthPayload";

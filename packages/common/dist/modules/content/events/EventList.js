@@ -9,7 +9,8 @@ var moment = require("moment");
 var styles = react_native_1.StyleSheet.create({
     eventListView: {
         backgroundColor: "white",
-        padding: 20
+        padding: 20,
+        marginBottom: 55
     },
     eventItem: {
         height: 96, flexDirection: 'row'
@@ -37,7 +38,6 @@ var styles = react_native_1.StyleSheet.create({
 exports.EventsList = function (_a) {
     var events = _a.events, pushDetails = _a.pushDetails;
     return (react_1.default.createElement(react_native_1.View, { style: styles.eventListView },
-        react_1.default.createElement(react_native_1.Text, { style: styles.eventHeader }, "eventos"),
         react_1.default.createElement(react_native_1.FlatList, { data: events, keyExtractor: function (item) { return item.id; }, renderItem: function (_a) {
                 var item = _a.item, separators = _a.separators;
                 return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: { height: 132 }, onPress: function () { pushDetails(item.id, item.title); } },

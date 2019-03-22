@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
-interface Props extends RouteComponentProps {
+interface Props {
 }
-declare const Register: React.FC<Props>;
-export default Register;
+declare const SignUp: React.FC<Props & RouteComponentProps>;
+export default SignUp;

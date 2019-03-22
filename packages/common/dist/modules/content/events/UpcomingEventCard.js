@@ -55,7 +55,6 @@ exports.UpcomingEventCard = function (_a) {
     var pushDetails = _a.pushDetails, upcomingEvent = _a.upcomingEvent;
     var id = upcomingEvent.id, imageURL = upcomingEvent.imageURL, title = upcomingEvent.title, subtitle = upcomingEvent.subtitle, body = upcomingEvent.body, date = upcomingEvent.date;
     return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: styles.upcomingEventCard, onPress: function () { pushDetails(id, title); } },
-        react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventCardHeader }, "pr\u00F3ximamente"),
         react_1.default.createElement(react_native_1.Image, { style: styles.upcomingEventCardImage, source: { uri: imageURL || 'default.png' } }),
         react_1.default.createElement(react_native_1.View, { style: styles.upcomingEventCardInfo },
             react_1.default.createElement(react_native_1.View, { style: styles.upcomingEventCardTimeView },
@@ -64,6 +63,6 @@ exports.UpcomingEventCard = function (_a) {
                 react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventTime }, moment_1.default(date).format('HH:mm'))),
             react_1.default.createElement(react_native_1.View, { style: styles.upcomingEventCardDataView },
                 react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventCardTitle }, title),
-                subtitle && react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventCardSubtitle }, subtitle),
+                subtitle ? react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventCardSubtitle }, subtitle) : react_1.default.createElement(react_native_1.View, null),
                 react_1.default.createElement(react_native_1.Text, { style: styles.upcomingEventCardText }, body)))));
 };

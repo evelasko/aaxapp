@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AllNewsQuery_allNews } from '../../../schemaTypes';
+import { AllNewsQuery_allNewsMobile } from '../../../schemaTypes';
 
 interface Props {
-    featuredNews: AllNewsQuery_allNews
+    featuredNews: AllNewsQuery_allNewsMobile
     pushDetails: (id:string, title:string) => void
 }
 
@@ -37,13 +37,12 @@ export const FeaturedNewsCard: React.FC<Props> = ({featuredNews, pushDetails}) =
     const { id, imageURL, title, subtitle, body } = featuredNews
     return (
         <TouchableOpacity style={styles.featuredNewsCard} onPress={() => { pushDetails(id, title) }}>
-            <Text style={styles.featuredNewsCardHeader}>destacado</Text>
             <Image
                 style={styles.featuredNewsCardImage}
                 source={{uri: imageURL || 'default.png'}}
             />
             <Text style={styles.featuredNewsCardTitle}>{title}</Text>
-            {subtitle && <Text style={styles.featuredNewsCardSubtitle}>{subtitle}</Text>}
+            {subtitle ? <Text style={styles.featuredNewsCardSubtitle}>{subtitle}</Text>: <View />}
             <Text style={styles.featuredNewsCardText}>{body}</Text>
         </TouchableOpacity>
     )

@@ -55,7 +55,9 @@ var InputField = /** @class */ (function (_super) {
     InputField.prototype.render = function () {
         var _a = this.props, field = _a.field, _b = _a.form, touched = _b.touched, errors = _b.errors, props = __rest(_a, ["field", "form"]);
         var errorMsg = touched[field.name] && errors[field.name];
-        return (React.createElement(react_native_1.TextInput, __assign({}, props, { onChangeText: this.onChangeText, value: field.value })));
+        return (React.createElement(react_native_1.View, { style: { width: '100%' } },
+            React.createElement(react_native_1.TextInput, __assign({}, props, { onChangeText: this.onChangeText, value: field.value })),
+            errorMsg && React.createElement(react_native_1.Text, { style: { color: '#F17A61', fontSize: 11 } }, errorMsg)));
     };
     return InputField;
 }(React.Component));

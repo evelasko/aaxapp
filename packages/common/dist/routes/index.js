@@ -15,9 +15,10 @@ var index_3 = __importDefault(require("../modules/content/news/index"));
 var NewsDetails_1 = __importDefault(require("../modules/content/news/NewsDetails"));
 var index_4 = __importDefault(require("../modules/content/policy/index"));
 var index_5 = __importDefault(require("../modules/content/support/index"));
-var index_6 = __importDefault(require("../modules/login/index"));
-var index_7 = __importDefault(require("../modules/profile/index"));
-var index_8 = __importDefault(require("../ui/shared/DrawerMenu/index"));
+var index_6 = __importDefault(require("../modules/profile/index"));
+var index_7 = __importDefault(require("../modules/settings/index"));
+var index_8 = __importDefault(require("../modules/signup/index"));
+var index_9 = __importDefault(require("../ui/shared/DrawerMenu/index"));
 // ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
     News: index_3.default,
@@ -60,11 +61,24 @@ EventNavigator.navigationOptions = function (_a) {
     }
     return { tabBarVisible: tabBarVisible };
 };
+EventNavigator.navigationOptions = function (_a) {
+    var navigation = _a.navigation;
+    var tabBarVisible = true;
+    if (navigation.state.index > 0) {
+        tabBarVisible = false;
+    }
+    return { tabBarVisible: tabBarVisible };
+};
+// ----------------------------------------- PROFILE STACK
+var ProfileNavigator = react_navigation_1.createStackNavigator({
+    Profile: index_6.default,
+    Settings: index_7.default,
+});
 // ----------------------------------------- CONTENT TABS
 var ContentTabs = react_navigation_1.createBottomTabNavigator({
     Noticias: { screen: NewsNavigator },
     Eventos: { screen: EventNavigator },
-    Perfil: { screen: index_7.default }
+    Perfil: { screen: ProfileNavigator }
 }, {
     defaultNavigationOptions: function (_a) {
         var navigation = _a.navigation;
@@ -121,13 +135,17 @@ var Drawer = react_navigation_1.createDrawerNavigator({
     drawerWidth: WIDTH * 0.63,
     contentComponent: function (_a) {
         var navigation = _a.navigation;
-        return react_1.default.createElement(index_8.default, { navigation: navigation });
+        return react_1.default.createElement(index_9.default, { navigation: navigation });
     },
     initialRouteName: 'Content'
 });
-// ----------------------------------------- MAIN NAVIGATOR
+// ----------------------------------------- BASE NAVIGATOR
 var Routes = react_navigation_1.createSwitchNavigator({
-    Login: { screen: index_6.default },
-    Content: { screen: Drawer }
+    Content: { screen: Drawer },
 });
-exports.default = react_navigation_1.createAppContainer(Routes);
+// ----------------------------------------- MODALS NAVIGATOR
+var RootNavigation = react_navigation_1.createStackNavigator({
+    Routes: { screen: Routes },
+    SignUp: { screen: index_8.default }
+}, { mode: 'modal', headerMode: 'none' });
+exports.default = react_navigation_1.createAppContainer(RootNavigation);

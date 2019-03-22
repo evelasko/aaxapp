@@ -9,8 +9,8 @@ const Login: React.FC<Props> = ({history}) =>  {
         <LoginConnector
             loginSuccess={ () => {history.push('/content')} }
             handleForgot={ () => {history.push('/forgot')} }
-            handleSignUp={ () => {history.push('Register')} }
-            handleGuest={ () => {history.push('Content')} }
+            handleSignUp={ () => {history.push('/signup')} }
+            handleGuest={ () => {history.push('/news')} }
         />
     )
 }

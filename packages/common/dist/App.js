@@ -27,9 +27,16 @@ var AppContainer = /** @class */ (function (_super) {
     __extends(AppContainer, _super);
     function AppContainer() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = { isReady: false };
+        _this._handleNotification = function (notification) {
+            console.log("NOTIFICATION DATA: \n    ORIGIN: " + notification.origin + "\n    DATA: " + notification.data);
+        };
         return _this;
     }
+    AppContainer.prototype.componentDidMount = function () {
+        if (this.props.notifications) {
+            this.props.notifications.addListener(this._handleNotification);
+        }
+    };
     AppContainer.prototype.render = function () {
         return (react_1.default.createElement(react_apollo_1.ApolloProvider, { client: apollo_1.client },
             react_1.default.createElement(react_native_1.View, { style: styles.container },

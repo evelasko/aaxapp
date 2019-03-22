@@ -1,11 +1,11 @@
 import moment from 'moment';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AllEventsQuery_events } from '../../../schemaTypes';
+import { AllEventsQuery_eventsMobile } from '../../../schemaTypes';
 
 
 interface Props {
-    upcomingEvent: AllEventsQuery_events
+    upcomingEvent: AllEventsQuery_eventsMobile
     pushDetails: (id:string, title:string) => void
 }
 
@@ -59,7 +59,6 @@ export const UpcomingEventCard: React.FC<Props> = ({pushDetails, upcomingEvent})
     const { id, imageURL, title, subtitle, body, date } = upcomingEvent
     return (
         <TouchableOpacity style={styles.upcomingEventCard} onPress={() => { pushDetails(id,title) }} >
-            <Text style={styles.upcomingEventCardHeader}>próximamente</Text>
             <Image
                 style={styles.upcomingEventCardImage}
                 source={{uri: imageURL || 'default.png'}}
@@ -72,7 +71,7 @@ export const UpcomingEventCard: React.FC<Props> = ({pushDetails, upcomingEvent})
                 </View>
                 <View style={styles.upcomingEventCardDataView}>
                     <Text style={styles.upcomingEventCardTitle}>{title}</Text>
-                    {subtitle && <Text style={styles.upcomingEventCardSubtitle}>{subtitle}</Text>}
+                    {subtitle ? <Text style={styles.upcomingEventCardSubtitle}>{subtitle}</Text>: <View />}
                     <Text style={styles.upcomingEventCardText}>{body}</Text>
                 </View>
             </View>

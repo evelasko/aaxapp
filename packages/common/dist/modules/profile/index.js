@@ -12,6 +12,10 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -68,68 +72,82 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var vector_icons_1 = require("@expo/vector-icons");
+var expo_1 = require("expo");
+var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var Header_1 = __importDefault(require("./Header"));
-var WIDTH = react_native_1.Dimensions.get('window').width;
+var apollo_1 = require("../../apollo");
+var store_1 = __importDefault(require("../../store"));
+var index_1 = require("../../ui/shared/SharedConstants/index");
+var LoginConnector_1 = require("./components/LoginConnector");
+var ProfileView_1 = __importDefault(require("./components/ProfileView"));
 var styles = react_native_1.StyleSheet.create({
-    listHeaderContainer: {
-        margin: 5, marginTop: 25
-    },
-    listItemContainer: {
-        margin: 5
-    }
+    container: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { padding: 10, paddingTop: 50, marginTop: index_1.headerHeight })
 });
 var Profile = /** @class */ (function (_super) {
     __extends(Profile, _super);
     function Profile() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = { guest: !_this.props.appStore.per };
+        _this.shiftUser = function () {
+            _this.setState({ guest: !_this.props.appStore.per });
+        };
+        return _this;
     }
     Profile.prototype.render = function () {
         var _this = this;
         var _a = this.props, navigation = _a.navigation, appStore = _a.appStore;
-        return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { padding: 10 }) },
-            react_1.default.createElement(react_native_1.Animated.View, null,
-                react_1.default.createElement(react_native_1.View, null,
-                    react_1.default.createElement(Header_1.default, null))),
-            react_1.default.createElement(react_native_1.ScrollView, { scrollEventThrottle: 16 },
-                react_1.default.createElement(react_native_1.SectionList, { renderItem: function (_a) {
-                        var item = _a.item, index = _a.index, section = _a.section;
-                        return react_1.default.createElement(react_native_1.View, { style: styles.listItemContainer },
-                            react_1.default.createElement(react_native_1.Text, { key: index }, item));
-                    }, renderSectionHeader: function (_a) {
-                        var title = _a.section.title;
-                        return react_1.default.createElement(react_native_1.View, { style: styles.listHeaderContainer },
-                            react_1.default.createElement(react_native_1.Text, { style: { fontWeight: 'bold' } }, title));
-                    }, sections: [
-                        { title: 'Title1', data: ['item1', 'item2', 'item A', 'item B', 'item C', 'item D', 'item1', 'item2', 'item A', 'item B', 'item C', 'item D'] },
-                        { title: 'Title2', data: ['item3', 'item4', 'item A', 'item B', 'item C', 'item D'] },
-                        { title: 'Title3', data: ['item5', 'item6', 'item A', 'item B', 'item C', 'item D'] },
-                    ], keyExtractor: function (item, index) { return item + index; } }),
-                react_1.default.createElement(react_native_1.Button, { title: 'Cerrar Sesi\u00F3n', onPress: function () { return __awaiter(_this, void 0, void 0, function () {
-                        var err_1;
+        console.log('AT PROFILE RENDER: ', appStore.per);
+        if (!this.state.guest)
+            return (react_1.default.createElement(react_native_1.View, { style: styles.container },
+                react_1.default.createElement(ProfileView_1.default, { userQRID: appStore.per, logOutUser: function () { return __awaiter(_this, void 0, void 0, function () {
+                        var logOutMutation, err_1;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
-                                    _a.trys.push([0, 2, , 3]);
-                                    appStore.unsetUser();
-                                    return [4 /*yield*/, react_native_1.AsyncStorage.removeItem('per')
-                                        // Logout Mutation should happen here along with Apollo ResetStore...
-                                    ];
+                                    _a.trys.push([0, 3, , 4]);
+                                    logOutMutation = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n                            mutation LogOutMutation { logoutUser { token error } }\n                            "], ["\n                            mutation LogOutMutation { logoutUser { token error } }\n                            "])));
+                                    return [4 /*yield*/, apollo_1.client.mutate({
+                                            mutation: logOutMutation,
+                                            refetchQueries: ['AllNewsQuery', 'AllEventsQuery']
+                                        })];
                                 case 1:
                                     _a.sent();
-                                    // Logout Mutation should happen here along with Apollo ResetStore...
-                                    navigation.navigate('Login');
-                                    return [3 /*break*/, 3];
+                                    return [4 /*yield*/, react_native_1.AsyncStorage.removeItem('per')];
                                 case 2:
+                                    _a.sent();
+                                    appStore.unsetUser();
+                                    this.shiftUser();
+                                    return [3 /*break*/, 4];
+                                case 3:
                                     err_1 = _a.sent();
                                     console.log('LOGGIN OFF ERROR: ', err_1);
-                                    return [3 /*break*/, 3];
-                                case 3: return [2 /*return*/];
+                                    return [3 /*break*/, 4];
+                                case 4: return [2 /*return*/];
                             }
                         });
-                    }); } }))));
+                    }); } })));
+        return (react_1.default.createElement(react_native_1.View, { style: styles.container },
+            react_1.default.createElement(LoginConnector_1.LoginConnector, { loginSuccess: function (per) {
+                    if (per) {
+                        appStore.setUser(per);
+                    }
+                    _this.shiftUser();
+                }, handleForgot: function () { react_native_1.Linking.openURL('https://admin.alicialonso.org/forgot/'); }, handleSignUp: function () { navigation.navigate('SignUp'); } })));
+    };
+    Profile.navigationOptions = function (_a) {
+        var navigation = _a.navigation;
+        return ({
+            title: 'Perfil',
+            headerTransparent: true,
+            animationEnabled: true,
+            headerLeft: react_1.default.createElement(vector_icons_1.Ionicons, { name: "ios-menu", color: "gray", size: 32, onPress: function () { return navigation.openDrawer(); }, style: { marginLeft: 15 } }),
+            headerRight: store_1.default.per && react_1.default.createElement(vector_icons_1.Feather, { name: 'sliders', color: "gray", size: 24, onPress: function () { return navigation.navigate('Settings'); }, style: { marginRight: 15 } }),
+            headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
+            headerTitleStyle: { fontWeight: 'bold' }
+        });
     };
     Profile = __decorate([
         native_1.inject('appStore')
@@ -137,4 +155,4 @@ var Profile = /** @class */ (function (_super) {
     return Profile;
 }(react_1.default.Component));
 exports.default = Profile;
-// <QRCode value="http://awesome.link.qr" size={WIDTH-25} />
+var templateObject_1;

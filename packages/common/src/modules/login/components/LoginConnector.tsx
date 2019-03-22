@@ -1,6 +1,6 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
-import { LoginController } from './LoginController';
+import { LoginController } from '../../profile/components/LoginController';
 import { LoginView } from './LoginView';
 
 interface Props {

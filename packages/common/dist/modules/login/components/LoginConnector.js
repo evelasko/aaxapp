@@ -41,7 +41,7 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var LoginController_1 = require("./LoginController");
+var LoginController_1 = require("../../profile/components/LoginController");
 var LoginView_1 = require("./LoginView");
 exports.LoginConnector = function (_a) {
     var loginSuccess = _a.loginSuccess, handleForgot = _a.handleForgot, handleSignUp = _a.handleSignUp, handleGuest = _a.handleGuest;

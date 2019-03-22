@@ -6,11 +6,22 @@ import { client } from './apollo';
 import Routes from './routes/index';
 import appStore from './store';
 
+interface Props {
+  notifications?: any
+}
 
-export default class AppContainer extends React.Component {
-  
-  state = { isReady: false}
+export default class AppContainer extends React.Component<Props> {
 
+  componentDidMount() {
+    if (this.props.notifications) {
+      this.props.notifications.addListener(this._handleNotification) 
+    }
+  }
+  _handleNotification = (notification:any) => {
+    console.log(`NOTIFICATION DATA: 
+    ORIGIN: ${notification.origin}
+    DATA: ${notification.data}`)
+  }
   render() {
     return (
       <ApolloProvider client={client}>

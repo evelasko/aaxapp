@@ -1,17 +1,18 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AllEventsQuery_events } from '../../../schemaTypes';
+import { AllEventsQuery_eventsMobile } from '../../../schemaTypes';
 import moment = require('moment');
 
 interface Props {
-    events: AllEventsQuery_events[],
+    events: AllEventsQuery_eventsMobile[],
     pushDetails: (id:string, title:string) => void
 }
 
 const styles = StyleSheet.create({
     eventListView: {
         backgroundColor: "white",
-        padding: 20
+        padding: 20,
+        marginBottom: 55
     },
     eventItem: {
         height: 96, flexDirection: 'row'
@@ -42,7 +43,6 @@ const styles = StyleSheet.create({
 export const EventsList: React.FC<Props> = ({events, pushDetails}) => {
     return (
         <View style={styles.eventListView}>
-            <Text style={styles.eventHeader}>eventos</Text>
             <FlatList
                 data={events}
                 keyExtractor={(item) => item.id}

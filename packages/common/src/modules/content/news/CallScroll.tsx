@@ -1,11 +1,11 @@
 import moment from 'moment';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { AllNewsQuery_allNews } from '../../../schemaTypes';
+import { AllNewsQuery_allNewsMobile } from '../../../schemaTypes';
 import LinearGradient from '../../../ui/shared/LGradient/index';
 
 interface Props {
-    calls: AllNewsQuery_allNews[],
+    calls: AllNewsQuery_allNewsMobile[],
     pushDetails: (id:string, title:string) => void
 }
 const styles = StyleSheet.create({

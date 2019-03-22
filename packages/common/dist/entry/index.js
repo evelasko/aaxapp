@@ -72,23 +72,44 @@ var App = /** @class */ (function (_super) {
     }
     App.prototype._setStore = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var per, err_1;
+            var existingStatus, finalStatus, status_1, err_1, per, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem('per')];
+                        _a.trys.push([0, 4, , 5]);
+                        return [4 /*yield*/, expo_1.Permissions.getAsync(expo_1.Permissions.NOTIFICATIONS)];
                     case 1:
+                        existingStatus = (_a.sent()).status;
+                        console.log('PUSH NOTIFICATIONS CURRENT STATUS: ', existingStatus);
+                        finalStatus = existingStatus;
+                        if (!(existingStatus !== 'granted')) return [3 /*break*/, 3];
+                        return [4 /*yield*/, expo_1.Permissions.askAsync(expo_1.Permissions.NOTIFICATIONS)];
+                    case 2:
+                        status_1 = (_a.sent()).status;
+                        finalStatus = status_1;
+                        _a.label = 3;
+                    case 3:
+                        console.log('NOTIF STATUS: ', finalStatus);
+                        return [3 /*break*/, 5];
+                    case 4:
+                        err_1 = _a.sent();
+                        console.log('ERROR WHILE REGISTERING FOR PUSH NOTIFICATIONS: ', err_1);
+                        return [3 /*break*/, 5];
+                    case 5:
+                        _a.trys.push([5, 7, , 8]);
+                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem('per')];
+                    case 6:
                         per = _a.sent();
                         if (per) {
                             store_1.default.setUser(per);
                         }
-                        return [3 /*break*/, 3];
-                    case 2:
-                        err_1 = _a.sent();
-                        console.log('ERROR WHILE LOADING: ', err_1);
-                        return [3 /*break*/, 3];
-                    case 3: return [2 /*return*/];
+                        console.log('RESPONSE FROM ASYNCSTORAGE (PER): ', per);
+                        return [3 /*break*/, 8];
+                    case 7:
+                        err_2 = _a.sent();
+                        console.log('ERROR WHILE FETCHING USER FROM ASYNCSTORAGE: ', err_2);
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/];
                 }
             });
         });
@@ -98,7 +119,7 @@ var App = /** @class */ (function (_super) {
         if (!this.state.isReady) {
             return react_1.default.createElement(expo_1.AppLoading, { startAsync: this._setStore, onFinish: function () { _this.setState({ isReady: true }); }, onError: function () { console.warn(); _this.setState({ isReady: true }); } });
         }
-        return react_1.default.createElement(App_1.default, null);
+        return react_1.default.createElement(App_1.default, { notifications: expo_1.Notifications });
     };
     App = __decorate([
         mobx_react_1.observer

@@ -1,10 +1,11 @@
+import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo';
 import { inject, observer } from 'mobx-react/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { AppState, StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { AppStore } from '../../../store';
-import MenuButton from '../../../ui/shared/MenuButton';
+import { headerHeight } from '../../../ui/shared/SharedConstants';
 import NewsComponent from './News';
 
 interface Props {
@@ -16,7 +17,13 @@ class News extends React.Component<Props & NavigationScreenProps & {appStore: Ap
         title: 'Noticias' ,
         headerTransparent: true,
         animationEnabled: true,
-        headerLeft: <MenuButton toggler={() => navigation.openDrawer()} />,
+        headerLeft: <Ionicons 
+                        name="ios-menu"
+                        color="gray"
+                        size={32}
+                        onPress={() => navigation.openDrawer()}
+                        style={{marginLeft: 15}}
+                    />,
         headerBackground: (
             <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
         ),
@@ -29,7 +36,12 @@ class News extends React.Component<Props & NavigationScreenProps & {appStore: Ap
         const { per } = this.props.appStore
         return (
             <View style={StyleSheet.absoluteFill}>
-                <NewsComponent pushDetails={this.pushDetails} per={per} />
+                <NewsComponent 
+                    pushDetails={this.pushDetails} 
+                    per={per} 
+                    headerHeight={headerHeight} 
+                    appState={AppState}
+                />
             </View>
         )
     }

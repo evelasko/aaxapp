@@ -6,11 +6,12 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { Platform } from 'react-native';
 
-const host = process.env.AAXAPI_URL ? process.env.AAXAPI_URL :
-                Platform.OS === "android" ? "10.0.2.2:4000" : "localhost:4000"
+const host = Platform.OS === "android" ? "10.0.2.2:4000" : "localhost:4000"
+
+// const host = `api.alicialonso.org/mobile`
 
 const wsLink = new WebSocketLink({ uri: `ws://${host}`, options: { reconnect: true } })
-const httpLink = new HttpLink({ uri: `http://${host}`, credentials: 'include' })
+const httpLink = new HttpLink({ uri: `http://${host}`, credentials: 'omit' })
 
 const link = split(({query}) => {
     // split based on operation kind
@@ -22,7 +23,9 @@ const cache:InMemoryCache = new InMemoryCache({
     cacheRedirects: {
         Query: {
             oneEvent: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'Event', id }),
-            oneNews: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'News', id })
+            oneNews: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'News', id }),
+            allAlerts: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'News', id }),
+            allCalls: (_, {id}, { getCacheKey }) => getCacheKey({ __typename: 'News', id })
         }
     }
 })
