@@ -46,7 +46,7 @@ export const CallScroll: React.FC<Props> = ({calls, pushDetails}) => {
     return (
         <View style={styles.callView}>
             <LinearGradient style={styles.shadowH} colors={['rgba(15,15,15,0.3)','rgba(15,15,15,0)']} />
-                <Text style={styles.callHeader}>convocatorias</Text>
+                <Text style={styles.callHeader}>CONVOCATORIAS</Text>
                 <ScrollView horizontal={true} style={styles.callScroll}>
                 {
                     calls.map(a => (

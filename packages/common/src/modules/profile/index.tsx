@@ -50,7 +50,6 @@ class Profile extends React.Component<NavigationScreenProps&{appStore: AppStore}
         this.setState({ guest: !this.props.appStore.per})
     }
     render() {
-        
         const { navigation, appStore } = this.props
         console.log('AT PROFILE RENDER: ', appStore.per)
         if (!this.state.guest) return (

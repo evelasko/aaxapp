@@ -1,6 +1,6 @@
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Logo from '../../icons/logo/index';
 const WIDTH = Dimensions.get('window').width
 const HEIGHT =  Dimensions.get('window').height
@@ -55,16 +55,16 @@ export default class DrawerMenu extends React.Component<Props> {
                     </View>   
                     <View style={styles.linkList}>
                         { this.navLink('Nosotros', 'Nosotros') }
-                        { this.navLink('Soporte', 'Soporte') }
+                        { this.navLink('Contacto', 'Contacto') }
                         { this.navLink('Privacidad', 'Privacidad') }
                     </View>
                 </View>
                 <View style={styles.footerContainer}>
                     <View style={styles.linkSocialList}>
-                        <AntDesign name='twitter' style={styles.linkSocial} color='#C77139' size={32} />
-                        <Entypo name='instagram' style={styles.linkSocial} color='#C77139' size={32} />
-                        <Entypo name='facebook' style={styles.linkSocial} color='#C77139' size={32} />
-                        <AntDesign name='linkedin-square' style={styles.linkSocial} color='#C77139' size={32} />
+                        <AntDesign name='twitter' style={styles.linkSocial} color='#C77139' size={32}/>
+                        <Entypo name='instagram' style={styles.linkSocial} color='#C77139' size={32} onPress={() => Linking.openURL('https://www.instagram.com/instituto_danza/')}/>
+                        <Entypo name='facebook' style={styles.linkSocial} color='#C77139' size={32} onPress={() => Linking.openURL('https://www.facebook.com/instituto.danza/')}/>
+                        <AntDesign name='linkedin-square' style={styles.linkSocial} color='#C77139' size={32} onPress={() => Linking.openURL('https://www.linkedin.com/company/14018834')} />
                     </View>
                     <Text style={styles.footerText}>@ 2019 Fundación Alicia Alonso</Text>
                 </View>

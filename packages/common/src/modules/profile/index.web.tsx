@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import ProfileView from './components/ProfileView';
 
 const Profile: React.FC = () => {
     return (
-        <View>
-            <Text>Profile Us...</Text>
+        <View style={StyleSheet.absoluteFill}>
+            <ProfileView logOutUser={() => {return {}}} userQRID='34edhwelfhwoechwjlb' />
         </View>
     )
 }

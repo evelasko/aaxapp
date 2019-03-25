@@ -17,6 +17,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+var react_native_1 = require("react-native");
+var HeaderMain_1 = __importDefault(require("../../web/HeaderMain"));
 var News_1 = __importDefault(require("./News"));
 var News = /** @class */ (function (_super) {
     __extends(News, _super);
@@ -28,7 +30,10 @@ var News = /** @class */ (function (_super) {
         return _this;
     }
     News.prototype.render = function () {
-        return (react_1.default.createElement(News_1.default, { pushDetails: this.pushDetails }));
+        var history = this.props.history;
+        return (react_1.default.createElement(react_native_1.View, null,
+            react_1.default.createElement(HeaderMain_1.default, { goLogin: function () { history.push('/login'); }, goMenu: function () { }, title: "Noticias" }),
+            react_1.default.createElement(News_1.default, { pushDetails: this.pushDetails })));
     };
     return News;
 }(react_1.default.Component));

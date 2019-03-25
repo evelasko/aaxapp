@@ -16,9 +16,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
-var Support_1 = __importDefault(require("./Support"));
-var Support = function () {
+var Contact_1 = __importDefault(require("./Contact"));
+var Contact = function () {
     return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { paddingTop: 50 }) },
-        react_1.default.createElement(Support_1.default, null)));
+        react_1.default.createElement(Contact_1.default, null)));
 };
-exports.default = Support;
+exports.default = Contact;

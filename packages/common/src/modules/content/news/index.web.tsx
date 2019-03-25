@@ -1,15 +1,27 @@
 import React from 'react';
+import { View } from 'react-native';
 import { RouteComponentProps } from 'react-router';
+import HeaderMain from '../../web/HeaderMain';
 import NewsComponent from './News';
-interface Props extends RouteComponentProps {
+interface Props {
 }
 
-class News extends React.Component<Props> {
+class News extends React.Component<Props & RouteComponentProps> {
     pushDetails = (id:string, title:string) => {
         this.props.history.push(`/news/${id}`)
     }
     render () {
-        return ( <NewsComponent pushDetails={this.pushDetails} />)
+        const {history} = this.props
+        return ( 
+            <View>
+                <HeaderMain 
+                    goLogin={() => {history.push('/login')}}
+                    goMenu={() => {}}
+                    title="Noticias" 
+                />
+                <NewsComponent pushDetails={this.pushDetails} />
+            </View>
+        )
     }
 }
 

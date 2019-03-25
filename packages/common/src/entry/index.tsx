@@ -1,8 +1,9 @@
-import { AppLoading, Notifications, Permissions } from 'expo';
+import { AppLoading, Notifications } from 'expo';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { AsyncStorage } from 'react-native';
 import AppContainer from '../App';
+import { handleNotifications, registerForPushNotificationsAsync } from '../modules/notifications';
 import appStore from '../store';
 
 @observer
@@ -10,18 +11,11 @@ export default class App extends React.Component {
   state = { isReady: false}
 
   async _setStore() {
-    // register for push notifications
     try {
-      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
-      console.log('PUSH NOTIFICATIONS CURRENT STATUS: ', existingStatus)
-      let finalStatus = existingStatus
-      if (existingStatus !== 'granted') {
-          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
-          finalStatus = status
-      }
-      console.log('NOTIF STATUS: ', finalStatus )
-    } catch(err) { console.log('ERROR WHILE REGISTERING FOR PUSH NOTIFICATIONS: ', err) }
-    // setup device's user
+      const token = await registerForPushNotificationsAsync()
+      if (token) { Notifications.addListener(handleNotifications) }
+    } catch(err) { console.log('ERROR WHILE REGISTERING FOR PUSH NOTIFICATIONS: ', err)}
+    
     try {
       const per = await AsyncStorage.getItem('per')
       if (per) { appStore.setUser(per) }

@@ -46,7 +46,7 @@ exports.CallScroll = function (_a) {
     }
     return (react_1.default.createElement(react_native_1.View, { style: styles.callView },
         react_1.default.createElement(index_1.default, { style: styles.shadowH, colors: ['rgba(15,15,15,0.3)', 'rgba(15,15,15,0)'] }),
-        react_1.default.createElement(react_native_1.Text, { style: styles.callHeader }, "convocatorias"),
+        react_1.default.createElement(react_native_1.Text, { style: styles.callHeader }, "CONVOCATORIAS"),
         react_1.default.createElement(react_native_1.ScrollView, { horizontal: true, style: styles.callScroll }, calls.map(function (a) { return (react_1.default.createElement(react_native_1.TouchableOpacity, { key: a.id, onPress: function () { pushDetails(a.id, a.title); } },
             react_1.default.createElement(react_native_1.View, { style: styles.callCard },
                 react_1.default.createElement(react_native_1.Text, { style: styles.callCardTitle }, a.title),

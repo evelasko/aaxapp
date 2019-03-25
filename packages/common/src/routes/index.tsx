@@ -4,12 +4,12 @@ import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { createAppContainer, createBottomTabNavigator, createDrawerNavigator, createStackNavigator, createSwitchNavigator, NavigationContainer } from 'react-navigation';
 import About from '../modules/content/about/index';
+import Contact from '../modules/content/contact/index';
 import EventDetails from '../modules/content/events/EventDetails';
 import Events from "../modules/content/events/index";
 import News from "../modules/content/news/index";
 import NewsDetails from '../modules/content/news/NewsDetails';
 import Policy from '../modules/content/policy/index';
-import Support from '../modules/content/support/index';
 import Profile from '../modules/profile/index';
 import Settings from '../modules/settings/index';
 import SignUp from '../modules/signup/index';
@@ -54,7 +54,11 @@ EventNavigator.navigationOptions = ({ navigation }:any) => {
 // ----------------------------------------- PROFILE STACK
 const ProfileNavigator:NavigationContainer = createStackNavigator({ 
     Profile,
-    Settings,
+    Settings: {screen: Settings,
+        navigationOptions: ({navigation}:any) => ({
+            title: "Ajustes"
+        })
+    },
 })
 
 // ----------------------------------------- CONTENT TABS
@@ -93,7 +97,7 @@ const WIDTH = Dimensions.get('window').width
 
 const DrawerScreens = createStackNavigator({
     Privacidad: {screen: Policy},
-    Soporte: {screen: Support},
+    Contacto: {screen: Contact},
     Nosotros: {screen: About}
 }, 
 {

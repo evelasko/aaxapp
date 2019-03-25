@@ -1,16 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RouteComponentProps } from 'react-router';
-import SupportContent from './Support';
+import ContactContent from './Contact';
 
 interface Props {}
 
-const Support: React.FC<Props & RouteComponentProps> = () => {
+const Contact: React.FC<Props & RouteComponentProps> = () => {
     return (
         <View style={{...StyleSheet.absoluteFillObject, paddingTop: 50}}>
-            <SupportContent />
+            <ContactContent />
         </View>
     )
 }
 
-export default Support
+export default Contact

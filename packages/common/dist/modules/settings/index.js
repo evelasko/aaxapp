@@ -37,6 +37,7 @@ var expo_1 = require("expo");
 var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
+var Styles_1 = require("../../ui/shared/Styles");
 var styles = react_native_1.StyleSheet.create({
     listHeaderContainer: {
         margin: 5, marginTop: 25
@@ -44,26 +45,26 @@ var styles = react_native_1.StyleSheet.create({
     listItemContainer: {
         margin: 5
     },
-    qrContainer: {
-        alignSelf: 'center'
-    },
-    profileContainer: {
-        justifyContent: 'space-around', flex: 1
-    },
-    nameContainer: { marginBottom: 30, marginTop: 5 },
-    nameText: {
-        fontSize: 20, fontWeight: '900', letterSpacing: 1, color: 'darkgrey', alignSelf: 'center'
-    },
-    avatarContainer: {
-        flexDirection: 'row', justifyContent: 'space-around', marginTop: 30
-    },
-    avatarLines: {
-        height: 16, borderBottomWidth: react_native_1.StyleSheet.hairlineWidth, borderBottomColor: 'grey'
-    },
-    buttonsContainer: {
-        marginBottom: 10
-    }
+    headerTitleContainer: { borderBottomWidth: react_native_1.StyleSheet.hairlineWidth, borderBottomColor: Styles_1.Colors.primary, marginTop: 25, marginBottom: 5, paddingBottom: 5 },
+    headerTitleText: { fontSize: 10, fontWeight: '800', letterSpacing: 2 },
+    itemTitleText: { fontSize: 18 },
+    itemContainer: { flexDirection: 'row', justifyContent: 'space-around', marginVertical: 5 },
+    switchStyle: {}
 });
+var SettingsHeader = function (_a) {
+    var title = _a.title;
+    return (react_1.default.createElement(react_native_1.View, { style: styles.headerTitleContainer },
+        react_1.default.createElement(react_native_1.Text, { style: styles.headerTitleText }, title || '')));
+};
+var SettingsItem = function (_a) {
+    var title = _a.title, icon = _a.icon, whenSwitch = _a.whenSwitch;
+    return (react_1.default.createElement(react_native_1.View, { style: styles.itemContainer },
+        icon,
+        react_1.default.createElement(react_native_1.View, { style: { flex: 1 } },
+            react_1.default.createElement(react_native_1.Text, { style: styles.itemTitleText }, title || '')),
+        react_1.default.createElement(react_native_1.Switch, { style: styles.switchStyle, value: true, onValueChange: function (e) { if (whenSwitch)
+                whenSwitch(e); } })));
+};
 var Settings = /** @class */ (function (_super) {
     __extends(Settings, _super);
     function Settings() {
@@ -72,7 +73,19 @@ var Settings = /** @class */ (function (_super) {
     Settings.prototype.render = function () {
         var _a = this.props, navigation = _a.navigation, appStore = _a.appStore;
         return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { padding: 10, marginTop: expo_1.Constants.statusBarHeight }) },
-            react_1.default.createElement(react_native_1.Text, null, "Settings View")));
+            react_1.default.createElement(react_native_1.ScrollView, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { paddingHorizontal: 20 }) },
+                react_1.default.createElement(SettingsHeader, { title: "NOTICIAS" }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar en dispositivo", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar via email", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsHeader, { title: "ALERTAS" }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar en dispositivo", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar via email", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsHeader, { title: "CONVOCATORIAS" }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar en dispositivo", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar via email", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsHeader, { title: "EVENTOS" }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar en dispositivo", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }),
+                react_1.default.createElement(SettingsItem, { title: "Notificar via email", whenSwitch: function (e) { console.log(JSON.stringify(e)); } }))));
     };
     Settings = __decorate([
         native_1.inject('appStore')

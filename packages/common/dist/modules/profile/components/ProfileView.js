@@ -1,4 +1,8 @@
 "use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -50,70 +54,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var vector_icons_1 = require("@expo/vector-icons");
+var graphql_tag_1 = __importDefault(require("graphql-tag"));
 var react_1 = __importDefault(require("react"));
+var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var react_native_qrcode_svg_1 = __importDefault(require("react-native-qrcode-svg"));
 var index_1 = require("../../../ui/shared/SharedConstants/index");
+var Styles_1 = require("../../../ui/shared/Styles");
 var WIDTH = react_native_1.Dimensions.get('window').width;
 var styles = react_native_1.StyleSheet.create({
     listHeaderContainer: {
         margin: 5, marginTop: 25
     },
-    groupContainer: {},
-    listItemContainer: {
-        margin: 5
+    groupContainer: {
+        alignItems: 'center',
+        backgroundColor: Styles_1.Colors.primary,
+        paddingHorizontal: 15, paddingVertical: 10,
+        borderRadius: 20
     },
-    qrContainer: {
-        alignSelf: 'center'
-    },
-    profileContainer: {
-        justifyContent: 'space-around', flex: 1
-    },
-    nameContainer: { marginBottom: 30, marginTop: 5 },
+    groupText: { color: 'white', fontWeight: '900' },
+    listItemContainer: { margin: 5 },
+    qrContainer: { alignSelf: 'center' },
+    profileContainer: { justifyContent: 'space-around', flex: 1 },
+    nameContainer: { marginBottom: 15, marginTop: 15 },
     nameText: {
-        fontSize: 20, fontWeight: '900', letterSpacing: 1, color: 'darkgrey', alignSelf: 'center'
+        fontSize: 28, fontWeight: '100', letterSpacing: 1, color: 'black', alignSelf: 'center'
     },
-    avatarContainer: {
-        flexDirection: 'row', justifyContent: 'space-around', marginTop: 30
-    },
-    avatarLines: {
-        height: 16, borderBottomWidth: react_native_1.StyleSheet.hairlineWidth, borderBottomColor: 'grey'
-    },
-    buttonsContainer: {
-        marginBottom: 10
-    }
+    buttonsContainer: { marginBottom: 10 }
 });
+var userQuery = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\nquery UserQuery ($id: String!) { user (id: $id) { name lastname group isAdmin} }"], ["\nquery UserQuery ($id: String!) { user (id: $id) { name lastname group isAdmin} }"])));
 var ProfileView = function (_a) {
     var logOutUser = _a.logOutUser, userQRID = _a.userQRID;
-    return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { marginTop: index_1.headerHeight }) },
-        react_1.default.createElement(react_native_1.View, { style: styles.qrContainer },
-            react_1.default.createElement(react_native_qrcode_svg_1.default, { color: userQRID ? 'black' : 'red', size: WIDTH * 0.85, value: userQRID || 'notfound' })),
-        react_1.default.createElement(react_native_1.View, { style: styles.profileContainer },
-            react_1.default.createElement(react_native_1.View, { style: styles.avatarContainer },
-                react_1.default.createElement(vector_icons_1.FontAwesome, { name: 'user-circle', size: 32 })),
-            react_1.default.createElement(react_native_1.View, { style: styles.nameContainer },
-                react_1.default.createElement(react_native_1.Text, { style: styles.nameText }, "Nombre Apellidos Apellidos")),
-            react_1.default.createElement(react_native_1.View, { style: styles.groupContainer },
-                react_1.default.createElement(react_native_1.Text, null, "GRUPO")),
-            react_1.default.createElement(react_native_1.View, null,
-                react_1.default.createElement(react_native_1.Button, { title: 'Cerrar Sesi\u00F3n', color: 'red', onPress: function () { return __awaiter(_this, void 0, void 0, function () {
-                        var err_1;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    _a.trys.push([0, 2, , 3]);
-                                    return [4 /*yield*/, logOutUser()];
-                                case 1:
-                                    _a.sent();
-                                    return [3 /*break*/, 3];
-                                case 2:
-                                    err_1 = _a.sent();
-                                    console.log('ERROR WHILE LOGGING USER OUT: ', err_1);
-                                    return [3 /*break*/, 3];
-                                case 3: return [2 /*return*/];
-                            }
-                        });
-                    }); } })))));
+    return (react_1.default.createElement(react_apollo_1.Query, { query: userQuery, variables: { id: userQRID } }, function (_a) {
+        var data = _a.data, loading = _a.loading, error = _a.error;
+        if (error)
+            return react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.Text, null, "Ha ocurrido un error..."));
+        if (loading)
+            return react_1.default.createElement(react_native_1.ActivityIndicator, null);
+        var _b = data.user, _c = _b.name, name = _c === void 0 ? '' : _c, _d = _b.lastname, lastname = _d === void 0 ? '' : _d, _e = _b.group, group = _e === void 0 ? 'PUBLIC' : _e, _f = _b.isAdmin, isAdmin = _f === void 0 ? false : _f;
+        var fullName = name + " " + lastname;
+        var trimmedString = fullName.substr(0, 25);
+        trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")));
+        return (react_1.default.createElement(react_native_1.View, { style: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { marginTop: index_1.headerHeight }) },
+            react_1.default.createElement(react_native_1.View, { style: styles.qrContainer },
+                react_1.default.createElement(react_native_qrcode_svg_1.default, { color: userQRID ? 'black' : 'red', size: WIDTH * 0.85, value: userQRID || 'notfound' })),
+            react_1.default.createElement(react_native_1.View, { style: styles.profileContainer },
+                react_1.default.createElement(react_native_1.View, { style: styles.nameContainer },
+                    react_1.default.createElement(react_native_1.Text, { style: styles.nameText }, trimmedString)),
+                react_1.default.createElement(react_native_1.View, { style: { width: '100%', alignItems: 'center' } },
+                    react_1.default.createElement(react_native_1.View, { style: styles.groupContainer },
+                        react_1.default.createElement(react_native_1.Text, { style: styles.groupText }, group))),
+                react_1.default.createElement(react_native_1.View, null,
+                    react_1.default.createElement(react_native_1.Button, { title: 'Cerrar Sesi\u00F3n', color: 'red', onPress: function () { return __awaiter(_this, void 0, void 0, function () {
+                            var err_1;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        _a.trys.push([0, 2, , 3]);
+                                        return [4 /*yield*/, logOutUser()];
+                                    case 1:
+                                        _a.sent();
+                                        return [3 /*break*/, 3];
+                                    case 2:
+                                        err_1 = _a.sent();
+                                        console.log('ERROR WHILE LOGGING USER OUT: ', err_1);
+                                        return [3 /*break*/, 3];
+                                    case 3: return [2 /*return*/];
+                                }
+                            });
+                        }); } })))));
+    }));
 };
 exports.default = ProfileView;
+var templateObject_1;

@@ -39,7 +39,7 @@ const NewsList: React.FC<Props> = ({newses, pushDetails}) => {
     if (!newses.length) { return <View style={{display: 'none'}} />}
     return (
         <View style={styles.newsListView}>
-            <Text style={styles.newsHeader}>noticias</Text>
+            <Text style={styles.newsHeader}>NOTICIAS</Text>
             <FlatList
                 data={newses}
                 keyExtractor={(item) => item.id}

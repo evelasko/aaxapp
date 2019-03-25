@@ -43,14 +43,13 @@ export const AlertScroll: React.FC<Props> = ({alerts, pushDetails}) => {
     return (
         <View style={styles.alertView}>
             <LinearGradient style={styles.shadowH} colors={['rgba(35,35,35,0.2)','rgba(35,35,35,0)']} />
-                <Text style={styles.alertHeader}>alertas</Text>
+                <Text style={styles.alertHeader}>ALERTAS</Text>
                 <ScrollView horizontal={true} style={styles.alertScroll}>
                 {
                     alerts.map(a => (
                         <TouchableOpacity key={a.id} onPress={() => { pushDetails(a.id,a.title) }}>
                             <View style={styles.alertCard} >
                                 <Text style={styles.alertCardTitle}>{a.title}</Text>
-                                <Text style={styles.alertCardText}>{a.body}</Text>
                             </View>
                         </TouchableOpacity>
                     ))

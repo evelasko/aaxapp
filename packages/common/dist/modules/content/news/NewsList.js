@@ -38,7 +38,7 @@ var NewsList = function (_a) {
         return react_1.default.createElement(react_native_1.View, { style: { display: 'none' } });
     }
     return (react_1.default.createElement(react_native_1.View, { style: styles.newsListView },
-        react_1.default.createElement(react_native_1.Text, { style: styles.newsHeader }, "noticias"),
+        react_1.default.createElement(react_native_1.Text, { style: styles.newsHeader }, "NOTICIAS"),
         react_1.default.createElement(react_native_1.FlatList, { data: newses, keyExtractor: function (item) { return item.id; }, renderItem: function (_a) {
                 var item = _a.item;
                 return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: { height: 132 }, onPress: function () { pushDetails(item.id, item.title); } },

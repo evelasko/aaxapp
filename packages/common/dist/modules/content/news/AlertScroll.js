@@ -42,10 +42,9 @@ exports.AlertScroll = function (_a) {
     }
     return (react_1.default.createElement(react_native_1.View, { style: styles.alertView },
         react_1.default.createElement(index_1.default, { style: styles.shadowH, colors: ['rgba(35,35,35,0.2)', 'rgba(35,35,35,0)'] }),
-        react_1.default.createElement(react_native_1.Text, { style: styles.alertHeader }, "alertas"),
+        react_1.default.createElement(react_native_1.Text, { style: styles.alertHeader }, "ALERTAS"),
         react_1.default.createElement(react_native_1.ScrollView, { horizontal: true, style: styles.alertScroll }, alerts.map(function (a) { return (react_1.default.createElement(react_native_1.TouchableOpacity, { key: a.id, onPress: function () { pushDetails(a.id, a.title); } },
             react_1.default.createElement(react_native_1.View, { style: styles.alertCard },
-                react_1.default.createElement(react_native_1.Text, { style: styles.alertCardTitle }, a.title),
-                react_1.default.createElement(react_native_1.Text, { style: styles.alertCardText }, a.body)))); })),
+                react_1.default.createElement(react_native_1.Text, { style: styles.alertCardTitle }, a.title)))); })),
         react_1.default.createElement(index_1.default, { style: styles.shadowH, colors: ['rgba(35,35,35,0)', 'rgba(35,35,35,0.2)'] })));
 };

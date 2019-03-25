@@ -1,11 +1,10 @@
-import { Notifications, Permissions } from 'expo';
 import { Field, FormikErrors, FormikProps, withFormik } from 'formik';
 import React from 'react';
-import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, Dimensions, StyleSheet, Text, View } from 'react-native';
 import LogoColor from '../../../ui/icons/logoColor/index';
 import { InputField } from '../../../ui/shared/InputField';
 import { loginSchema } from '../../../yupSchemas/user';
-
+import { registerForPushNotificationsAsync } from '../../notifications';
 
 const WIDTH = Dimensions.get('window').width
 const styles = StyleSheet.create({
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
 interface FormValues {
     email: string
     password: string
-    device: string
+    device: string | null
     permission: boolean
 }
 
@@ -47,7 +46,14 @@ interface Props {
 
 class L extends React.Component<FormikProps<FormValues> & Props> {
     render() {
-        const {handleSubmit, handleForgot, handleSignUp} = this.props
+        const {handleSubmit, handleForgot, handleSignUp, isSubmitting} = this.props
+        if (isSubmitting) {
+            return (
+                <View style={{flex:1, flexDirection: 'column', alignItems: 'center'}}>
+                    <ActivityIndicator/>
+                </View>
+            )
+        }
         return (
             <View style={{flex:1, flexDirection: 'column', alignItems: 'center'}}>
                 <View style={styles.logoContainer}>
@@ -95,12 +101,15 @@ const LoginView = withFormik<Props, FormValues>({
     mapPropsToValues: () => ({ email: "", password: "", device: "", permission: false }),
     handleSubmit: async (values, { props, setErrors }) => {
         try {
-            const { status: existingStatus } = await Permissions.getAsync( Permissions.NOTIFICATIONS)
-            if (existingStatus !== 'granted') { values.permission = false }
-            else { values.permission = true }
-            values.device = await Notifications.getExpoPushTokenAsync()
+            const pushToken = await registerForPushNotificationsAsync()
+            if (pushToken) {
+                values.permission = true
+                values.device = pushToken
+            } else { 
+                values.permission = false
+                values.device = null
+            }
         } catch(err) { console.log('ERROR WHILE SETING UP PUSH NOTIFICATIONS @LOGIN: ', err)}
-        
         const errors = await props.submit(values)
         if (errors) { return setErrors(errors) }
     },

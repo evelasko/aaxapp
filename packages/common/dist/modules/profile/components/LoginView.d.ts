@@ -3,7 +3,7 @@ import React from 'react';
 interface FormValues {
     email: string;
     password: string;
-    device: string;
+    device: string | null;
     permission: boolean;
 }
 interface Props {

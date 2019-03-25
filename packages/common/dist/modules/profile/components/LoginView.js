@@ -52,13 +52,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var expo_1 = require("expo");
 var formik_1 = require("formik");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var index_1 = __importDefault(require("../../../ui/icons/logoColor/index"));
 var InputField_1 = require("../../../ui/shared/InputField");
 var user_1 = require("../../../yupSchemas/user");
+var notifications_1 = require("../../notifications");
 var WIDTH = react_native_1.Dimensions.get('window').width;
 var styles = react_native_1.StyleSheet.create({
     logoContainer: {
@@ -89,7 +89,11 @@ var L = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     L.prototype.render = function () {
-        var _a = this.props, handleSubmit = _a.handleSubmit, handleForgot = _a.handleForgot, handleSignUp = _a.handleSignUp;
+        var _a = this.props, handleSubmit = _a.handleSubmit, handleForgot = _a.handleForgot, handleSignUp = _a.handleSignUp, isSubmitting = _a.isSubmitting;
+        if (isSubmitting) {
+            return (react_1.default.createElement(react_native_1.View, { style: { flex: 1, flexDirection: 'column', alignItems: 'center' } },
+                react_1.default.createElement(react_native_1.ActivityIndicator, null)));
+        }
         return (react_1.default.createElement(react_native_1.View, { style: { flex: 1, flexDirection: 'column', alignItems: 'center' } },
             react_1.default.createElement(react_native_1.View, { style: styles.logoContainer },
                 react_1.default.createElement(index_1.default, { width: 236, height: 236, color: "silver" })),
@@ -111,32 +115,30 @@ var LoginView = formik_1.withFormik({
     handleSubmit: function (values, _a) {
         var props = _a.props, setErrors = _a.setErrors;
         return __awaiter(_this, void 0, void 0, function () {
-            var existingStatus, _b, err_1, errors;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var pushToken, err_1, errors;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        _c.trys.push([0, 3, , 4]);
-                        return [4 /*yield*/, expo_1.Permissions.getAsync(expo_1.Permissions.NOTIFICATIONS)];
+                        _b.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, notifications_1.registerForPushNotificationsAsync()];
                     case 1:
-                        existingStatus = (_c.sent()).status;
-                        if (existingStatus !== 'granted') {
-                            values.permission = false;
+                        pushToken = _b.sent();
+                        if (pushToken) {
+                            values.permission = true;
+                            values.device = pushToken;
                         }
                         else {
-                            values.permission = true;
+                            values.permission = false;
+                            values.device = null;
                         }
-                        _b = values;
-                        return [4 /*yield*/, expo_1.Notifications.getExpoPushTokenAsync()];
+                        return [3 /*break*/, 3];
                     case 2:
-                        _b.device = _c.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        err_1 = _c.sent();
+                        err_1 = _b.sent();
                         console.log('ERROR WHILE SETING UP PUSH NOTIFICATIONS @LOGIN: ', err_1);
-                        return [3 /*break*/, 4];
-                    case 4: return [4 /*yield*/, props.submit(values)];
-                    case 5:
-                        errors = _c.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [4 /*yield*/, props.submit(values)];
+                    case 4:
+                        errors = _b.sent();
                         if (errors) {
                             return [2 /*return*/, setErrors(errors)];
                         }

@@ -28,8 +28,8 @@ var PinIcon = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PinIcon.prototype.render = function () {
-        var _a = this.props, width = _a.width, height = _a.height, color = _a.color;
-        return (react_1.default.createElement(react_native_svg_1.default, { width: width || 24, height: height || 24, viewBox: "0 0 24 24", "stroke-linecap": "round", "stroke-linejoin": "round" },
+        var _a = this.props, size = _a.size, color = _a.color;
+        return (react_1.default.createElement(react_native_svg_1.default, { width: size || 24, height: size || 24, viewBox: "0 0 24 24", "stroke-linecap": "round", "stroke-linejoin": "round" },
             react_1.default.createElement(react_native_svg_1.Path, { d: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z", stroke: color || "#BDBDBD", fill: "none" }),
             react_1.default.createElement(react_native_svg_1.Circle, { cx: "12", cy: "10", r: "3", stroke: color || "#BDBDBD", fill: "none" })));
     };

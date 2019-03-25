@@ -4,6 +4,7 @@ export const Categories = {
     CALL:['Convocatoria', 'convocatoria']
 }
 
+
 export const UserGroups = {
     PUBLIC:['General', 'general'],
     STAFF:['Staff', 'staff'],

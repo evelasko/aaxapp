@@ -41,7 +41,7 @@ exports.RecentNewsList = function (_a) {
         return react_1.default.createElement(react_native_1.View, { style: { display: 'none' } });
     }
     return (react_1.default.createElement(react_native_1.View, { style: styles.recentNewsListView },
-        react_1.default.createElement(react_native_1.Text, { style: styles.recentHeader }, "recientes"),
+        react_1.default.createElement(react_native_1.Text, { style: styles.recentHeader }, "RECIENTES"),
         react_1.default.createElement(react_native_1.FlatList, { data: recents, keyExtractor: function (item) { return item.id; }, renderItem: function (_a) {
                 var item = _a.item;
                 return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: { height: 132 }, onPress: function () { pushDetails(item.id, item.title); } },

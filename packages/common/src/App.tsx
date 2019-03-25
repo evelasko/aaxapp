@@ -11,17 +11,6 @@ interface Props {
 }
 
 export default class AppContainer extends React.Component<Props> {
-
-  componentDidMount() {
-    if (this.props.notifications) {
-      this.props.notifications.addListener(this._handleNotification) 
-    }
-  }
-  _handleNotification = (notification:any) => {
-    console.log(`NOTIFICATION DATA: 
-    ORIGIN: ${notification.origin}
-    DATA: ${notification.data}`)
-  }
   render() {
     return (
       <ApolloProvider client={client}>

@@ -67,14 +67,14 @@ var DrawerMenu = /** @class */ (function (_super) {
                     react_1.default.createElement(index_1.default, { width: 100, height: 100 })),
                 react_1.default.createElement(react_native_1.View, { style: styles.linkList },
                     this.navLink('Nosotros', 'Nosotros'),
-                    this.navLink('Soporte', 'Soporte'),
+                    this.navLink('Contacto', 'Contacto'),
                     this.navLink('Privacidad', 'Privacidad'))),
             react_1.default.createElement(react_native_1.View, { style: styles.footerContainer },
                 react_1.default.createElement(react_native_1.View, { style: styles.linkSocialList },
                     react_1.default.createElement(vector_icons_1.AntDesign, { name: 'twitter', style: styles.linkSocial, color: '#C77139', size: 32 }),
-                    react_1.default.createElement(vector_icons_1.Entypo, { name: 'instagram', style: styles.linkSocial, color: '#C77139', size: 32 }),
-                    react_1.default.createElement(vector_icons_1.Entypo, { name: 'facebook', style: styles.linkSocial, color: '#C77139', size: 32 }),
-                    react_1.default.createElement(vector_icons_1.AntDesign, { name: 'linkedin-square', style: styles.linkSocial, color: '#C77139', size: 32 })),
+                    react_1.default.createElement(vector_icons_1.Entypo, { name: 'instagram', style: styles.linkSocial, color: '#C77139', size: 32, onPress: function () { return react_native_1.Linking.openURL('https://www.instagram.com/instituto_danza/'); } }),
+                    react_1.default.createElement(vector_icons_1.Entypo, { name: 'facebook', style: styles.linkSocial, color: '#C77139', size: 32, onPress: function () { return react_native_1.Linking.openURL('https://www.facebook.com/instituto.danza/'); } }),
+                    react_1.default.createElement(vector_icons_1.AntDesign, { name: 'linkedin-square', style: styles.linkSocial, color: '#C77139', size: 32, onPress: function () { return react_native_1.Linking.openURL('https://www.linkedin.com/company/14018834'); } })),
                 react_1.default.createElement(react_native_1.Text, { style: styles.footerText }, "@ 2019 Fundaci\u00F3n Alicia Alonso"))));
     };
     return DrawerMenu;

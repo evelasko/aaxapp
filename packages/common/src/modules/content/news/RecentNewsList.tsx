@@ -42,7 +42,7 @@ export const RecentNewsList: React.FC<Props> = ({recents, pushDetails}) => {
     if (!recents.length) { return <View style={{display: 'none'}} />}
     return (
         <View style={styles.recentNewsListView}>
-            <Text style={styles.recentHeader}>recientes</Text>
+            <Text style={styles.recentHeader}>RECIENTES</Text>
             <FlatList
                 data={recents}
                 keyExtractor={(item) => item.id}

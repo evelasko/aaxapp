@@ -28,8 +28,8 @@ var PinIcon = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PinIcon.prototype.render = function () {
-        var _a = this.props, width = _a.width, height = _a.height, color = _a.color;
-        return (react_1.default.createElement(vector_icons_1.Feather, { name: "map-pin", size: width || 24, color: color || "grey" }));
+        var _a = this.props, size = _a.size, color = _a.color;
+        return (react_1.default.createElement(vector_icons_1.Feather, { name: "map-pin", size: size || 24, color: color || "grey" }));
     };
     return PinIcon;
 }(react_1.Component));

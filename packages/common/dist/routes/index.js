@@ -9,19 +9,19 @@ var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var react_navigation_1 = require("react-navigation");
 var index_1 = __importDefault(require("../modules/content/about/index"));
+var index_2 = __importDefault(require("../modules/content/contact/index"));
 var EventDetails_1 = __importDefault(require("../modules/content/events/EventDetails"));
-var index_2 = __importDefault(require("../modules/content/events/index"));
-var index_3 = __importDefault(require("../modules/content/news/index"));
+var index_3 = __importDefault(require("../modules/content/events/index"));
+var index_4 = __importDefault(require("../modules/content/news/index"));
 var NewsDetails_1 = __importDefault(require("../modules/content/news/NewsDetails"));
-var index_4 = __importDefault(require("../modules/content/policy/index"));
-var index_5 = __importDefault(require("../modules/content/support/index"));
+var index_5 = __importDefault(require("../modules/content/policy/index"));
 var index_6 = __importDefault(require("../modules/profile/index"));
 var index_7 = __importDefault(require("../modules/settings/index"));
 var index_8 = __importDefault(require("../modules/signup/index"));
 var index_9 = __importDefault(require("../ui/shared/DrawerMenu/index"));
 // ----------------------------------------- NEWS STACK
 var NewsNavigator = react_navigation_1.createStackNavigator({
-    News: index_3.default,
+    News: index_4.default,
     NewsDetails: {
         screen: NewsDetails_1.default,
         navigationOptions: function (_a) {
@@ -42,7 +42,7 @@ NewsNavigator.navigationOptions = function (_a) {
 };
 // ----------------------------------------- EVENTS STACK
 var EventNavigator = react_navigation_1.createStackNavigator({
-    Events: index_2.default,
+    Events: index_3.default,
     EventDetails: {
         screen: EventDetails_1.default,
         navigationOptions: function (_a) {
@@ -72,7 +72,14 @@ EventNavigator.navigationOptions = function (_a) {
 // ----------------------------------------- PROFILE STACK
 var ProfileNavigator = react_navigation_1.createStackNavigator({
     Profile: index_6.default,
-    Settings: index_7.default,
+    Settings: { screen: index_7.default,
+        navigationOptions: function (_a) {
+            var navigation = _a.navigation;
+            return ({
+                title: "Ajustes"
+            });
+        }
+    },
 });
 // ----------------------------------------- CONTENT TABS
 var ContentTabs = react_navigation_1.createBottomTabNavigator({
@@ -110,8 +117,8 @@ var ContentTabs = react_navigation_1.createBottomTabNavigator({
 // ----------------------------------------- DRAWER STACK
 var WIDTH = react_native_1.Dimensions.get('window').width;
 var DrawerScreens = react_navigation_1.createStackNavigator({
-    Privacidad: { screen: index_4.default },
-    Soporte: { screen: index_5.default },
+    Privacidad: { screen: index_5.default },
+    Contacto: { screen: index_2.default },
     Nosotros: { screen: index_1.default }
 }, {
     defaultNavigationOptions: function (_a) {

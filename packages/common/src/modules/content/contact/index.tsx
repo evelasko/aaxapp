@@ -1,16 +1,16 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
-import SupportContent from './Support';
+import ContactContent from './Contact';
 
 interface Props {}
 
-const Support: React.FC<Props & NavigationScreenProps> = () => {
+const Contact: React.FC<Props & NavigationScreenProps> = () => {
     return (
         <View style={{...StyleSheet.absoluteFillObject, paddingTop: 50}}>
-            <SupportContent />
+            <ContactContent />
         </View>
     )
 }
 
-export default Support
+export default Contact
