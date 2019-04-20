@@ -8,13 +8,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var graphql_tag_1 = __importDefault(require("graphql-tag"));
+require("moment/min/locales");
 var react_1 = __importDefault(require("react"));
 var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var index_1 = __importDefault(require("../../../ui/icons/date/index"));
 var index_2 = __importDefault(require("../../../ui/icons/pin/index"));
-var index_3 = __importDefault(require("./mapView/index"));
 var moment = require("moment");
+moment.locale('es');
 var styles = react_native_1.StyleSheet.create({
     detailsView: { margin: 15, padding: 20 },
     detailsImage: { width: '100%', height: 254 },
@@ -64,7 +65,7 @@ var EventDetails = function (_a) {
                         react_1.default.createElement(react_native_1.View, { style: styles.detailsInfoRow },
                             react_1.default.createElement(index_1.default, { color: "#555555" }),
                             react_1.default.createElement(react_native_1.View, { style: styles.detailsInfoData },
-                                react_1.default.createElement(react_native_1.Text, { style: styles.detailsInfoText }, moment(oneEvent.date).format('dddd D de MMMM')),
+                                react_1.default.createElement(react_native_1.Text, { style: styles.detailsInfoText }, moment(oneEvent.date).format('dddd D [de] MMMM')),
                                 react_1.default.createElement(react_native_1.Text, { style: styles.detailsInfoSubtext }, moment(oneEvent.date).format('HH:mm') + " H"))),
                         react_1.default.createElement(react_native_1.View, { style: styles.detailsInfoRow },
                             react_1.default.createElement(index_2.default, { color: "#555555" }),
@@ -73,9 +74,7 @@ var EventDetails = function (_a) {
                                 react_1.default.createElement(react_native_1.Text, { style: styles.detailsInfoSubtext }, oneEvent.venue.address)))),
                     react_1.default.createElement(react_native_1.View, { style: { width: '100%' } },
                         react_1.default.createElement(react_native_1.Text, { style: styles.detailsBody }, oneEvent.body)),
-                    react_1.default.createElement(react_native_1.View, { style: styles.divider })),
-                react_1.default.createElement(react_native_1.View, { style: styles.detailsLocation },
-                    react_1.default.createElement(index_3.default, { latlng: latlng }))));
+                    react_1.default.createElement(react_native_1.View, { style: styles.divider }))));
         })));
 };
 exports.default = EventDetails;

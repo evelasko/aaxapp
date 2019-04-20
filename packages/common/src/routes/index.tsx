@@ -1,7 +1,7 @@
 import { EvilIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import { BlurView } from 'expo';
 import React from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { createAppContainer, createBottomTabNavigator, createDrawerNavigator, createStackNavigator, createSwitchNavigator, NavigationContainer } from 'react-navigation';
 import About from '../modules/content/about/index';
 import Contact from '../modules/content/contact/index';
@@ -107,7 +107,11 @@ const DrawerScreens = createStackNavigator({
             title: routeName,
             headerTransparent: true,
             animationEnabled: true,
-            headerLeft: <EvilIcons style={{marginLeft:15}} name='close' color="gray" size={32} onPress={() => navigation.navigate('Content') }/>,
+            headerLeft: (
+                <TouchableOpacity>
+                    <EvilIcons style={{marginLeft:15}} name='close' color="gray" size={32} onPress={() => navigation.navigate('Content') }/>
+                </TouchableOpacity>
+            ),
             headerBackground: <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />,
             headerTitleStyle: { fontWeight: 'bold' }
         }

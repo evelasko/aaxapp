@@ -65,6 +65,7 @@ export declare const styles: {
     };
 };
 export default class SignUpComponent extends React.Component<Props> {
+    remountComponent: () => void;
     render(): JSX.Element;
 }
 export {};

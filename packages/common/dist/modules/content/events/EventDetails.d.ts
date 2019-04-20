@@ -1,3 +1,4 @@
+import 'moment/min/locales';
 import React from 'react';
 import { NavigationScreenProps } from 'react-navigation';
 import { RouteComponentProps } from 'react-router';

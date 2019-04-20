@@ -12,7 +12,6 @@ declare class Profile extends React.Component<NavigationScreenProps & {
         headerTransparent: boolean;
         animationEnabled: boolean;
         headerLeft: JSX.Element;
-        headerRight: "" | JSX.Element | null;
         headerBackground: JSX.Element;
         headerTitleStyle: {
             fontWeight: string;

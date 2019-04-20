@@ -1,4 +1,4 @@
-import { Feather, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo';
 import gql from 'graphql-tag';
 import { inject } from 'mobx-react/native';
@@ -6,9 +6,9 @@ import React from 'react';
 import { AsyncStorage, Linking, StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { client } from '../../apollo';
-import appStore, { AppStore } from '../../store';
+import { AppStore } from '../../store';
 import { headerHeight } from '../../ui/shared/SharedConstants/index';
-import { LoginConnector } from './components/LoginConnector';
+import LoginComponent from './components/LoginComponent';
 import ProfileView from './components/ProfileView';
 
 const styles = StyleSheet.create({
@@ -34,25 +34,24 @@ class Profile extends React.Component<NavigationScreenProps&{appStore: AppStore}
                         onPress={() => navigation.openDrawer()}
                         style={{marginLeft: 15}}
                     />,
-        headerRight: appStore.per && <Feather name='sliders'
-                        color="gray"
-                        size={24}
-                        onPress={() => navigation.navigate('Settings')}
-                        style={{marginRight: 15}}
-                    />,
+        // headerRight: navigation.state.params.per ? <Feather name='sliders'
+        //                 color="gray"
+        //                 size={24}
+        //                 onPress={() => navigation.navigate('Settings')}
+        //                 style={{marginRight: 15}}
+        //             /> : <View />,
         headerBackground: (
             <BlurView tint="light" intensity={100} style={StyleSheet.absoluteFill} />
         ),
         headerTitleStyle: { fontWeight: 'bold' }
     })
-
     shiftUser = () => {
         this.setState({ guest: !this.props.appStore.per})
     }
     render() {
         const { navigation, appStore } = this.props
         console.log('AT PROFILE RENDER: ', appStore.per)
-        if (!this.state.guest) return (
+        if (!this.state.guest && appStore.per) return (
             <View style={styles.container}>
                 <ProfileView
                     userQRID={appStore.per}
@@ -75,11 +74,9 @@ class Profile extends React.Component<NavigationScreenProps&{appStore: AppStore}
         )
         return  (
             <View style={styles.container}>
-                <LoginConnector
-                    loginSuccess={ (per:string) => {
-                        if (per) { appStore.setUser(per) }
-                        this.shiftUser() 
-                    }}
+                <LoginComponent
+                    loginSuccess={ (per:string) => { if (per) { appStore.setUser(per) }; this.shiftUser() }}
+                    loginFailed={() => { this.shiftUser() }}
                     handleForgot={ () => { Linking.openURL('https://admin.alicialonso.org/forgot/')} }
                     handleSignUp={ () => { navigation.navigate('SignUp') } }
                 />

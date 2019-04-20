@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import 'moment/min/locales';
 import React from 'react';
 import { Query } from 'react-apollo';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -6,8 +7,8 @@ import { NavigationScreenProps } from 'react-navigation';
 import { RouteComponentProps } from 'react-router';
 import DateIcon from '../../../ui/icons/date/index';
 import PinIcon from '../../../ui/icons/pin/index';
-import EventMap from './mapView/index';
 import moment = require('moment');
+moment.locale('es');
 
 interface Props extends RouteComponentProps<{ event: string }> {}
 
@@ -64,7 +65,7 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
                                     <View style={styles.detailsInfoRow}>
                                         <DateIcon color="#555555"/>
                                         <View style={styles.detailsInfoData}>
-                                            <Text style={styles.detailsInfoText}>{moment(oneEvent.date).format('dddd D de MMMM')}</Text>
+                                            <Text style={styles.detailsInfoText}>{moment(oneEvent.date).format('dddd D [de] MMMM')}</Text>
                                             <Text style={styles.detailsInfoSubtext}>{`${moment(oneEvent.date).format('HH:mm')} H`}</Text>
                                         </View>
                                     </View>
@@ -81,9 +82,9 @@ const EventDetails: React.FC<Props & NavigationScreenProps> = ({history, match, 
                                 </View>
                                 <View style={styles.divider} />
                             </View>
-                            <View style={styles.detailsLocation}>
+                            {/* <View style={styles.detailsLocation}>
                                 <EventMap latlng={latlng} />
-                            </View>
+                            </View> */}
                         </View> 
                     )
                 }}

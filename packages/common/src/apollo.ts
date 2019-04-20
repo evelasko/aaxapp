@@ -9,7 +9,7 @@ import { getMainDefinition } from 'apollo-utilities';
 
 const host = `api.alicialonso.org/mobile`
 
-const wsLink = new WebSocketLink({ uri: `ws://${host}`, options: { reconnect: true } })
+const wsLink = new WebSocketLink({ uri: `wss://${host}`, options: { reconnect: true } })
 const httpLink = new HttpLink({ uri: `https://${host}`, credentials: 'omit' })
 
 const link = split(({query}) => {

@@ -62,7 +62,7 @@ var notifications_1 = require("../../notifications");
 var WIDTH = react_native_1.Dimensions.get('window').width;
 var styles = react_native_1.StyleSheet.create({
     logoContainer: {
-        width: '100%', marginBottom: 35, alignItems: 'center'
+        width: '100%', marginBottom: 30, alignItems: 'center', marginTop: 30
     },
     inputFieldsView: {
         marginBottom: 25, width: '100%'
@@ -81,7 +81,7 @@ var styles = react_native_1.StyleSheet.create({
     linkTextButtons: {
         color: "#EB894A",
         marginTop: 10, marginBottom: 15
-    }
+    },
 });
 var L = /** @class */ (function (_super) {
     __extends(L, _super);
@@ -94,18 +94,20 @@ var L = /** @class */ (function (_super) {
             return (react_1.default.createElement(react_native_1.View, { style: { flex: 1, flexDirection: 'column', alignItems: 'center' } },
                 react_1.default.createElement(react_native_1.ActivityIndicator, null)));
         }
-        return (react_1.default.createElement(react_native_1.View, { style: { flex: 1, flexDirection: 'column', alignItems: 'center' } },
+        return (react_1.default.createElement(react_native_1.ScrollView, { style: react_native_1.StyleSheet.absoluteFill },
             react_1.default.createElement(react_native_1.View, { style: styles.logoContainer },
-                react_1.default.createElement(index_1.default, { width: 236, height: 236, color: "silver" })),
-            react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
-                react_1.default.createElement(formik_1.Field, { name: "email", placeholder: "email", textContentType: "username", placeholderTextColor: 'grey', spellCheck: false, autocapitalize: "none", style: styles.inputFields, component: InputField_1.InputField })),
-            react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
-                react_1.default.createElement(formik_1.Field, { name: "password", type: "password", textContentType: "password", placeholder: "contrase\u00F1a", placeholderTextColor: 'grey', secureTextEntry: true, spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
-            react_1.default.createElement(react_native_1.View, { style: styles.submitButton },
-                react_1.default.createElement(react_native_1.Button, { title: "Iniciar Sesi\u00F3n", color: "#EB894A", onPress: handleSubmit })),
-            react_1.default.createElement(react_native_1.View, { style: styles.linkTextView },
-                react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleForgot }, "recuerda tu contrase\u00F1a"),
-                react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleSignUp }, "reg\u00EDstrate aqu\u00ED"))));
+                react_1.default.createElement(index_1.default, { width: 216, height: 216, color: "silver" })),
+            react_1.default.createElement(react_native_1.View, null,
+                react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
+                    react_1.default.createElement(formik_1.Field, { name: "email", type: "email", textContentType: "username", autoCapitalize: "none", placeholder: "email", placeholderTextColor: 'grey', spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
+                react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
+                    react_1.default.createElement(formik_1.Field, { name: "password", type: "password", textContentType: "password", placeholder: "contrase\u00F1a", placeholderTextColor: 'grey', secureTextEntry: true, spellCheck: false, style: styles.inputFields, component: InputField_1.InputField }))),
+            react_1.default.createElement(react_native_1.View, { style: { marginBottom: 150 } },
+                react_1.default.createElement(react_native_1.View, { style: styles.submitButton },
+                    react_1.default.createElement(react_native_1.Button, { title: "Iniciar Sesi\u00F3n", color: "#EB894A", onPress: handleSubmit })),
+                react_1.default.createElement(react_native_1.View, { style: styles.linkTextView },
+                    react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleForgot }, "recuerda tu contrase\u00F1a"),
+                    react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleSignUp }, "reg\u00EDstrate aqu\u00ED")))));
     };
     return L;
 }(react_1.default.Component));

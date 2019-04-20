@@ -3,7 +3,6 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from 'react-native';
 import Logo from '../../../ui/icons/logo/index';
 import { InputField } from '../../../ui/shared/InputField';
-import LinearGradient from '../../../ui/shared/LGradient/index';
 import { loginSchema } from "../../../yupSchemas/user";
 
 interface FormValues {
@@ -62,7 +61,6 @@ class L extends React.Component<FormikProps<FormValues> & Props> {
     render() {
         const {handleSubmit, handleForgot, handleSignUp, handleGuest} = this.props
         return (
-            <LinearGradient style={styles.loginView} colors={['rgb(35,35,35)','rgb(46,46,46)','rgb(33,33,33)']} locations={[0.06, 0.80, 1]}>
                 <View style={styles.loginWrapper}>
                     <View style={styles.logo}>
                         <Logo width={200} height={200} />
@@ -100,7 +98,6 @@ class L extends React.Component<FormikProps<FormValues> & Props> {
                         <Text style={styles.linkTextButtons} onPress={handleGuest}>entrar como visitante</Text>
                     </View>
                 </View>
-            </LinearGradient>
     )}
 }
 

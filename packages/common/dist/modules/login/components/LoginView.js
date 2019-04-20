@@ -57,7 +57,6 @@ var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var index_1 = __importDefault(require("../../../ui/icons/logo/index"));
 var InputField_1 = require("../../../ui/shared/InputField");
-var index_2 = __importDefault(require("../../../ui/shared/LGradient/index"));
 var user_1 = require("../../../yupSchemas/user");
 var styles = react_native_1.StyleSheet.create({
     loginView: {
@@ -106,20 +105,19 @@ var L = /** @class */ (function (_super) {
     }
     L.prototype.render = function () {
         var _a = this.props, handleSubmit = _a.handleSubmit, handleForgot = _a.handleForgot, handleSignUp = _a.handleSignUp, handleGuest = _a.handleGuest;
-        return (react_1.default.createElement(index_2.default, { style: styles.loginView, colors: ['rgb(35,35,35)', 'rgb(46,46,46)', 'rgb(33,33,33)'], locations: [0.06, 0.80, 1] },
-            react_1.default.createElement(react_native_1.View, { style: styles.loginWrapper },
-                react_1.default.createElement(react_native_1.View, { style: styles.logo },
-                    react_1.default.createElement(index_1.default, { width: 200, height: 200 })),
-                react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
-                    react_1.default.createElement(formik_1.Field, { name: "email", placeholder: "email", textContentType: "username", placeholderTextColor: 'grey', spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
-                react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
-                    react_1.default.createElement(formik_1.Field, { name: "password", type: "password", textContentType: "password", placeholder: "contrase\u00F1a", placeholderTextColor: 'grey', secureTextEntry: true, spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
-                react_1.default.createElement(react_native_1.View, { style: styles.submitButton },
-                    react_1.default.createElement(react_native_1.Button, { title: "Login", color: "#EB894A", onPress: handleSubmit })),
-                react_1.default.createElement(react_native_1.View, { style: styles.linkTextView },
-                    react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleForgot }, "recuerda tu contrase\u00F1a"),
-                    react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleSignUp }, "reg\u00EDstrate aqu\u00ED"),
-                    react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleGuest }, "entrar como visitante")))));
+        return (react_1.default.createElement(react_native_1.View, { style: styles.loginWrapper },
+            react_1.default.createElement(react_native_1.View, { style: styles.logo },
+                react_1.default.createElement(index_1.default, { width: 200, height: 200 })),
+            react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
+                react_1.default.createElement(formik_1.Field, { name: "email", placeholder: "email", textContentType: "username", placeholderTextColor: 'grey', spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
+            react_1.default.createElement(react_native_1.View, { style: styles.inputFieldsView },
+                react_1.default.createElement(formik_1.Field, { name: "password", type: "password", textContentType: "password", placeholder: "contrase\u00F1a", placeholderTextColor: 'grey', secureTextEntry: true, spellCheck: false, style: styles.inputFields, component: InputField_1.InputField })),
+            react_1.default.createElement(react_native_1.View, { style: styles.submitButton },
+                react_1.default.createElement(react_native_1.Button, { title: "Login", color: "#EB894A", onPress: handleSubmit })),
+            react_1.default.createElement(react_native_1.View, { style: styles.linkTextView },
+                react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleForgot }, "recuerda tu contrase\u00F1a"),
+                react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleSignUp }, "reg\u00EDstrate aqu\u00ED"),
+                react_1.default.createElement(react_native_1.Text, { style: styles.linkTextButtons, onPress: handleGuest }, "entrar como visitante"))));
     };
     return L;
 }(react_1.default.Component));

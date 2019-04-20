@@ -79,9 +79,8 @@ var native_1 = require("mobx-react/native");
 var react_1 = __importDefault(require("react"));
 var react_native_1 = require("react-native");
 var apollo_1 = require("../../apollo");
-var store_1 = __importDefault(require("../../store"));
 var index_1 = require("../../ui/shared/SharedConstants/index");
-var LoginConnector_1 = require("./components/LoginConnector");
+var LoginComponent_1 = __importDefault(require("./components/LoginComponent"));
 var ProfileView_1 = __importDefault(require("./components/ProfileView"));
 var styles = react_native_1.StyleSheet.create({
     container: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { padding: 10, paddingTop: 50, marginTop: index_1.headerHeight })
@@ -100,7 +99,7 @@ var Profile = /** @class */ (function (_super) {
         var _this = this;
         var _a = this.props, navigation = _a.navigation, appStore = _a.appStore;
         console.log('AT PROFILE RENDER: ', appStore.per);
-        if (!this.state.guest)
+        if (!this.state.guest && appStore.per)
             return (react_1.default.createElement(react_native_1.View, { style: styles.container },
                 react_1.default.createElement(ProfileView_1.default, { userQRID: appStore.per, logOutUser: function () { return __awaiter(_this, void 0, void 0, function () {
                         var logOutMutation, err_1;
@@ -130,12 +129,9 @@ var Profile = /** @class */ (function (_super) {
                         });
                     }); } })));
         return (react_1.default.createElement(react_native_1.View, { style: styles.container },
-            react_1.default.createElement(LoginConnector_1.LoginConnector, { loginSuccess: function (per) {
-                    if (per) {
-                        appStore.setUser(per);
-                    }
-                    _this.shiftUser();
-                }, handleForgot: function () { react_native_1.Linking.openURL('https://admin.alicialonso.org/forgot/'); }, handleSignUp: function () { navigation.navigate('SignUp'); } })));
+            react_1.default.createElement(LoginComponent_1.default, { loginSuccess: function (per) { if (per) {
+                    appStore.setUser(per);
+                } ; _this.shiftUser(); }, loginFailed: function () { _this.shiftUser(); }, handleForgot: function () { react_native_1.Linking.openURL('https://admin.alicialonso.org/forgot/'); }, handleSignUp: function () { navigation.navigate('SignUp'); } })));
     };
     Profile.navigationOptions = function (_a) {
         var navigation = _a.navigation;
@@ -144,7 +140,12 @@ var Profile = /** @class */ (function (_super) {
             headerTransparent: true,
             animationEnabled: true,
             headerLeft: react_1.default.createElement(vector_icons_1.Ionicons, { name: "ios-menu", color: "gray", size: 32, onPress: function () { return navigation.openDrawer(); }, style: { marginLeft: 15 } }),
-            headerRight: store_1.default.per && react_1.default.createElement(vector_icons_1.Feather, { name: 'sliders', color: "gray", size: 24, onPress: function () { return navigation.navigate('Settings'); }, style: { marginRight: 15 } }),
+            // headerRight: navigation.state.params.per ? <Feather name='sliders'
+            //                 color="gray"
+            //                 size={24}
+            //                 onPress={() => navigation.navigate('Settings')}
+            //                 style={{marginRight: 15}}
+            //             /> : <View />,
             headerBackground: (react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill })),
             headerTitleStyle: { fontWeight: 'bold' }
         });

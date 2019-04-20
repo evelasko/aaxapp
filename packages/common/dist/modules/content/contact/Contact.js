@@ -40,7 +40,7 @@ var ContactContent = function () {
                 react_1.default.createElement(index_1.default, { size: 32, color: "grey" })),
             react_1.default.createElement(react_native_1.View, null,
                 react_1.default.createElement(react_native_1.Text, { style: styles.cardTextHeader }, "Escr\u00EDbenos"),
-                react_1.default.createElement(react_native_1.Text, { style: styles.cardText }, "info@alicialonso.org"))),
+                react_1.default.createElement(react_native_1.Text, { style: styles.cardText }, "fundacion@alicialonso.org"))),
         react_1.default.createElement(react_native_1.View, { style: styles.cardWrapper },
             react_1.default.createElement(react_native_1.View, { style: { marginHorizontal: 15 } },
                 react_1.default.createElement(index_3.default, { size: 32, color: "grey" })),

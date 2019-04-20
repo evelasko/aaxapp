@@ -42,6 +42,12 @@ const SettingsItem: React.FC<settingsProps> = ({title, icon, whenSwitch}) => {
 
 @inject('appStore')
 class Settings extends React.Component<NavigationScreenProps&{appStore: AppStore}> {
+    state = { 
+        nod_News: false, noe_News: false,
+        nod_Alert: false, noe_Alert: false,
+        nod_Call: false, noe_Call: false,
+        nod_Event: false, noe_Event: false
+    }
     render() {
         const { navigation, appStore } = this.props
         return (

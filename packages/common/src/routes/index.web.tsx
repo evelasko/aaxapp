@@ -11,13 +11,14 @@ import Login from '../modules/login/index';
 import Profile from '../modules/profile/index';
 import RNav from '../modules/rnav/index';
 import SignUp from '../modules/signup/index';
+import WebEntry from '../modules/web/index';
 import { Route, Router, Switch } from '../router/index';
 
 const Routes = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path="/" component={Login} />
+                <Route exact path="/" component={WebEntry} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/news" component={News} />
                 <Route exact path="/news/:news" component={NewsDetails} />

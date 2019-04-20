@@ -73,13 +73,13 @@ var react_apollo_1 = require("react-apollo");
 var react_native_1 = require("react-native");
 var index_1 = __importDefault(require("../../ui/icons/close/index"));
 var InputField_1 = require("../../ui/shared/InputField");
-var SelectField_1 = require("../../ui/shared/SelectField");
-var index_2 = require("../../ui/shared/Styles/index");
+var index_2 = require("../../ui/shared/SelectField/index");
+var index_3 = require("../../ui/shared/Styles/index");
 var user_1 = require("../../yupSchemas/user");
 var SignUpSuccess_1 = __importDefault(require("./SignUpSuccess"));
 var signUpUserMutation = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    mutation SignUpUserMutation (   $email: String!, \n                                    $password: String!, \n                                    $name: String!, \n                                    $lastname: String!,\n                                    $groupRequest: UserGroup\n                                    $nID: String,\n                                    $nIDType: nIdType\n                                ) \n    {\n        signUpUser( data: { email: $email, \n                            password: $password,\n                            name: $name, lastname: $lastname,\n                            groupRequest: $groupRequest,\n                            nID: $nID, nIDType: $nIDType\n                        } \n                    )\n        { token error } \n    }   \n"], ["\n    mutation SignUpUserMutation (   $email: String!, \n                                    $password: String!, \n                                    $name: String!, \n                                    $lastname: String!,\n                                    $groupRequest: UserGroup\n                                    $nID: String,\n                                    $nIDType: nIdType\n                                ) \n    {\n        signUpUser( data: { email: $email, \n                            password: $password,\n                            name: $name, lastname: $lastname,\n                            groupRequest: $groupRequest,\n                            nID: $nID, nIDType: $nIDType\n                        } \n                    )\n        { token error } \n    }   \n"])));
 exports.styles = react_native_1.StyleSheet.create({
-    signUpContainer: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { paddingTop: react_native_1.Platform.OS == 'web' ? 20 : 40, backgroundColor: index_2.Colors.dark, alignItems: 'center', justifyContent: 'space-between' }),
+    signUpContainer: __assign({}, react_native_1.StyleSheet.absoluteFillObject, { paddingTop: react_native_1.Platform.OS == 'web' ? 20 : 40, backgroundColor: index_3.Colors.dark, alignItems: 'center', justifyContent: 'space-between' }),
     signUpHeader: { width: '100%', flexDirection: 'row', paddingLeft: 20, marginTop: 30 },
     signUpHeaderTitle: { textAlign: 'center', alignSelf: 'center', fontWeight: 'bold', color: 'silver', fontSize: 18, paddingRight: 40 },
     signUpFormContainer: { width: '100%', alignItems: 'center', paddingLeft: 40, paddingRight: 40 },
@@ -88,21 +88,32 @@ exports.styles = react_native_1.StyleSheet.create({
         marginBottom: 5, marginTop: 25, width: '100%', paddingBottom: 5, height: 20,
         fontSize: 16, color: 'silver'
     },
-    signUpPick: { width: '100%', color: 'grey' },
-    signUpPickLabel: { fontSize: 16, color: 'grey' },
-    signUpPickHeader: { fontSize: 12, color: 'grey', textAlign: 'justify' },
+    signUpPick: { width: '100%', color: 'silver' },
+    signUpPickLabel: { fontSize: 16, color: 'silver' },
+    signUpPickHeader: { fontSize: 12, color: 'silver', textAlign: 'justify' },
     signUpButton: { marginBottom: 90, alignSelf: 'center' }
 });
 var SignUpComponent = /** @class */ (function (_super) {
     __extends(SignUpComponent, _super);
     function SignUpComponent() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.remountComponent = function () { _this.forceUpdate(); };
+        return _this;
     }
     SignUpComponent.prototype.render = function () {
         var _this = this;
         var navToProfile = this.props.navToProfile;
         return (react_1.default.createElement(react_apollo_1.Mutation, { mutation: signUpUserMutation }, function (signUp, _a) {
             var data = _a.data, loading = _a.loading, error = _a.error;
+            if (error) {
+                return (react_1.default.createElement(react_native_1.View, { style: exports.styles.signUpContainer },
+                    react_1.default.createElement(react_native_1.View, null,
+                        react_1.default.createElement(react_native_1.Text, { style: { fontWeight: 'bold' } }, "Ha ocurrido un error...")),
+                    react_1.default.createElement(react_native_1.View, null,
+                        react_1.default.createElement(react_native_1.Text, null, error.message.split(': ')[1])),
+                    react_1.default.createElement(react_native_1.View, { style: { marginTop: 25 } },
+                        react_1.default.createElement(react_native_1.Text, { onPress: _this.remountComponent }, "Reintentar"))));
+            }
             if (data && data.signUpUser.token) {
                 return react_1.default.createElement(SignUpSuccess_1.default, { navToProfile: navToProfile });
             }
@@ -114,7 +125,7 @@ var SignUpComponent = /** @class */ (function (_super) {
                             return [2 /*return*/];
                     }
                 }); }); } }, function (_a) {
-                var handleSubmit = _a.handleSubmit, handleBlur = _a.handleBlur, errors = _a.errors;
+                var handleSubmit = _a.handleSubmit, handleBlur = _a.handleBlur, errors = _a.errors, setFieldValue = _a.setFieldValue, values = _a.values;
                 return (react_1.default.createElement(react_native_1.View, { style: exports.styles.signUpContainer },
                     react_1.default.createElement(react_native_1.View, { style: exports.styles.signUpHeader },
                         react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: function () { navToProfile(); } },
@@ -123,20 +134,19 @@ var SignUpComponent = /** @class */ (function (_super) {
                             react_1.default.createElement(react_native_1.Text, { style: exports.styles.signUpHeaderTitle }, "Nuevo Usuario"))),
                     react_1.default.createElement(react_native_1.View, { style: exports.styles.signUpFormContainer },
                         loading && react_1.default.createElement(react_native_1.ActivityIndicator, null),
-                        error && react_1.default.createElement(react_native_1.Text, null, error.message.split(': ')[1]),
                         react_1.default.createElement(formik_1.Field, { name: "email", type: "email", textContentType: "username", autoCapitalize: "none", placeholder: "email", placeholderTextColor: 'grey', spellCheck: false, component: InputField_1.InputField, error: errors.email, onBlur: handleBlur('email'), style: exports.styles.signUpInputs }),
                         react_1.default.createElement(formik_1.Field, { name: "password", type: "password", autoCapitalize: "none", textContentType: "password", placeholder: "contrase\u00F1a", placeholderTextColor: 'grey', spellCheck: false, secureTextEntry: true, component: InputField_1.InputField, error: errors.password, onBlur: handleBlur('password'), style: exports.styles.signUpInputs }),
                         react_1.default.createElement(formik_1.Field, { name: "name", textContentType: "username", placeholder: "nombre", placeholderTextColor: 'grey', spellCheck: false, component: InputField_1.InputField, error: errors.name, onBlur: handleBlur('name'), style: exports.styles.signUpInputs }),
                         react_1.default.createElement(formik_1.Field, { name: "lastname", textContentType: "username", placeholder: "apellidos", placeholderTextColor: 'grey', spellCheck: false, component: InputField_1.InputField, error: errors.lastname, onBlur: handleBlur('lastname'), style: exports.styles.signUpInputs }),
-                        react_1.default.createElement(react_native_1.View, { style: { marginTop: 20, marginBottom: 5 } },
-                            react_1.default.createElement(react_native_1.Text, { style: exports.styles.signUpPickHeader }, "Especifique a continuaci\u00F3n el grupo al que pertenece. Su selecci\u00F3n ser\u00E1 verificada a partir de su nombre completo y apellidos cotejados con su registro dentro de la organizaci\u00F3n; posteriormente recibir\u00E1 un email confirmando su grupo.")),
-                        react_1.default.createElement(formik_1.Field, { name: "groupRequest", component: SelectField_1.SelectField, options: [
+                        react_1.default.createElement(formik_1.Field, { name: "groupRequest", component: index_2.SelectField, items: [
                                 { value: 'PUBLIC', label: 'General' },
                                 { value: 'STAFF', label: 'Staff' },
                                 { value: 'STUDENT', label: 'Estudiante' }
-                            ], style: exports.styles.signUpPick, itemStyle: exports.styles.signUpPickLabel })),
+                            ], placeholder: { label: 'Seleccione un grupo...', value: 'PUBLIC', color: 'grey' }, textInputProps: exports.styles.signUpInputs }),
+                        react_1.default.createElement(react_native_1.View, { style: { marginTop: 30, marginBottom: 15 } },
+                            react_1.default.createElement(react_native_1.Text, { style: exports.styles.signUpPickHeader }, "Especifique el grupo al que pertenece. Su selecci\u00F3n ser\u00E1 verificada a partir de su nombre completo y apellidos cotejados con su registro dentro de la organizaci\u00F3n; posteriormente recibir\u00E1 un email confirmando su grupo."))),
                     react_1.default.createElement(react_native_1.View, { style: exports.styles.signUpButton },
-                        react_1.default.createElement(react_native_1.Button, { onPress: function (e) { return handleSubmit(); }, title: "Registrarse", color: index_2.Colors.primary }))));
+                        react_1.default.createElement(react_native_1.Button, { onPress: function (e) { return handleSubmit(); }, title: "Registrarse", color: index_3.Colors.primary }))));
             }));
         }));
     };

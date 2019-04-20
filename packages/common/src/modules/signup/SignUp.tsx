@@ -5,7 +5,7 @@ import { Mutation } from 'react-apollo';
 import { ActivityIndicator, Button, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CloseIcon from '../../ui/icons/close/index';
 import { InputField } from '../../ui/shared/InputField';
-import { SelectField } from '../../ui/shared/SelectField';
+import { SelectField } from '../../ui/shared/SelectField/index';
 import { Colors } from '../../ui/shared/Styles/index';
 import { userSignUpSchema } from '../../yupSchemas/user';
 import SignUpSuccess from './SignUpSuccess';
@@ -50,18 +50,26 @@ export const styles = StyleSheet.create({
         marginBottom: 5, marginTop: 25, width: '100%', paddingBottom: 5, height: 20,
         fontSize: 16, color: 'silver'
     },
-    signUpPick: { width: '100%', color: 'grey' },
-    signUpPickLabel: { fontSize: 16, color: 'grey'},
-    signUpPickHeader: {fontSize: 12, color: 'grey', textAlign: 'justify'},
+    signUpPick: { width: '100%', color: 'silver' },
+    signUpPickLabel: { fontSize: 16, color: 'silver' },
+    signUpPickHeader: {fontSize: 12, color: 'silver', textAlign: 'justify'},
     signUpButton: { marginBottom:90, alignSelf:'center' }
 })
 
 export default class SignUpComponent extends React.Component<Props> {
+    remountComponent = () => { this.forceUpdate() }
     render() {
         const {navToProfile} = this.props
         return (
             <Mutation mutation={signUpUserMutation}>
                 {(signUp, { data, loading, error }) => {
+                    if (error) { return (
+                        <View style={styles.signUpContainer}>
+                            <View><Text style={{fontWeight:'bold'}}>Ha ocurrido un error...</Text></View>
+                            <View><Text>{error.message.split(': ')[1]}</Text></View>
+                            <View style={{marginTop:25}}><Text onPress={this.remountComponent}>Reintentar</Text></View>
+                        </View>
+                    )}
                     if (data && data.signUpUser.token) { return <SignUpSuccess navToProfile={navToProfile} /> }
                     return (
                         <Formik 
@@ -69,7 +77,7 @@ export default class SignUpComponent extends React.Component<Props> {
                             validationSchema={userSignUpSchema}
                             onSubmit={async (values) => { await signUp({variables: values}) }}
                         >
-                            {({handleSubmit, handleBlur, errors}) => (
+                            {({handleSubmit, handleBlur, errors, setFieldValue, values}) => (
                                 <View style={styles.signUpContainer}>
                                     <View style={styles.signUpHeader}>
                                         <TouchableOpacity onPress={() => {navToProfile()}}>
@@ -81,7 +89,6 @@ export default class SignUpComponent extends React.Component<Props> {
                                     </View>
                                     <View style={styles.signUpFormContainer}> 
                                         { loading && <ActivityIndicator />}
-                                        { error && <Text>{error.message.split(': ')[1]}</Text>}
                                         <Field 
                                             name="email"
                                             type="email"
@@ -131,20 +138,20 @@ export default class SignUpComponent extends React.Component<Props> {
                                             onBlur={handleBlur('lastname')}
                                             style={styles.signUpInputs}
                                         />
-                                        <View style={{marginTop: 20, marginBottom: 5}}>
-                                            <Text style={styles.signUpPickHeader}>Especifique a continuación el grupo al que pertenece. Su selección será verificada a partir de su nombre completo y apellidos cotejados con su registro dentro de la organización; posteriormente recibirá un email confirmando su grupo.</Text>
-                                        </View>
                                         <Field 
                                             name="groupRequest"
                                             component={SelectField}
-                                            options={[
+                                            items={[
                                                 {value:'PUBLIC', label: 'General'}, 
                                                 {value:'STAFF', label:'Staff'},
                                                 {value: 'STUDENT', label: 'Estudiante'}
                                             ]}
-                                            style={styles.signUpPick}
-                                            itemStyle={styles.signUpPickLabel}
+                                            placeholder={{label: 'Seleccione un grupo...', value: 'PUBLIC', color: 'grey' }}
+                                            textInputProps={styles.signUpInputs}
                                         />
+                                        <View style={{marginTop: 30, marginBottom: 15}}>
+                                            <Text style={styles.signUpPickHeader}>Especifique el grupo al que pertenece. Su selección será verificada a partir de su nombre completo y apellidos cotejados con su registro dentro de la organización; posteriormente recibirá un email confirmando su grupo.</Text>
+                                        </View>
                                     </View>
                                     <View style={styles.signUpButton}>
                                         <Button onPress={(e:any) => handleSubmit()} title="Registrarse" color={Colors.primary} />

@@ -34,8 +34,8 @@ const {
     }), 
     babelInclude([
       path.resolve('src'), // make sure you link your own source
-      path.resolve('node_modules/react-native-vector-icons'),
-      path.resolve('node_modules/react-native-paper'),
+      // path.resolve('node_modules/react-native-vector-icons'),
+      // path.resolve('node_modules/react-native-paper'),
       /node_modules\/react-native-/,
     //   path.resolve('node_modules/react-router-native'),
     ]),

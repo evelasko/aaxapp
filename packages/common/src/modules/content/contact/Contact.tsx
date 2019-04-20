@@ -29,7 +29,7 @@ const ContactContent: React.FC<Props> = () => {
             <View style={{marginHorizontal: 15}}><Email size={32} color="grey"/></View>
                 <View>
                     <Text style={styles.cardTextHeader}>Escríbenos</Text>
-                    <Text style={styles.cardText}>info@alicialonso.org</Text>
+                    <Text style={styles.cardText}>fundacion@alicialonso.org</Text>
                 </View>
             </View>
             <View style={styles.cardWrapper}>

@@ -31,18 +31,27 @@ const styles = StyleSheet.create({
 
 interface Props {
     logOutUser: () => {}
-    userQRID: string | null
+    userQRID: string
 }
 
 const userQuery = gql`
-query UserQuery ($id: String!) { user (id: $id) { name lastname group isAdmin} }`
+query UserQuery ($id: String!) { user (id: $id) { name lastname group isAdmin } }`
 
 const ProfileView:React.FC<Props> = ({logOutUser, userQRID}) => {
-    
     return (
         <Query query={userQuery} variables={{id: userQRID}}>
             {({data, loading, error}) => {
-                if (error) return <View><Text>Ha ocurrido un error...</Text></View>
+                console.log('User ID?:', userQRID)
+                if (error) return (
+                    <View>
+                        <Text>Ha ocurrido un error...</Text>
+                        <View style={{marginVertical:25}}><Text>{error.message}</Text></View>
+                        <Button title='Restaurar' onPress={ async() => {
+                                    try { await logOutUser() }
+                                    catch(err) { console.log('ERROR WHILE RESETTING APP: ', err) }
+                                }} />
+                    </View>
+                )
                 if (loading) return <ActivityIndicator />
                 const { name = '', lastname = '', group = 'PUBLIC', isAdmin = false } = data.user
                 let fullName = `${name} ${lastname}`

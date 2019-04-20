@@ -68,7 +68,14 @@ var SettingsItem = function (_a) {
 var Settings = /** @class */ (function (_super) {
     __extends(Settings, _super);
     function Settings() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            nod_News: false, noe_News: false,
+            nod_Alert: false, noe_Alert: false,
+            nod_Call: false, noe_Call: false,
+            nod_Event: false, noe_Event: false
+        };
+        return _this;
     }
     Settings.prototype.render = function () {
         var _a = this.props, navigation = _a.navigation, appStore = _a.appStore;

@@ -128,7 +128,8 @@ var DrawerScreens = react_navigation_1.createStackNavigator({
             title: routeName,
             headerTransparent: true,
             animationEnabled: true,
-            headerLeft: react_1.default.createElement(vector_icons_1.EvilIcons, { style: { marginLeft: 15 }, name: 'close', color: "gray", size: 32, onPress: function () { return navigation.navigate('Content'); } }),
+            headerLeft: (react_1.default.createElement(react_native_1.TouchableOpacity, null,
+                react_1.default.createElement(vector_icons_1.EvilIcons, { style: { marginLeft: 15 }, name: 'close', color: "gray", size: 32, onPress: function () { return navigation.navigate('Content'); } }))),
             headerBackground: react_1.default.createElement(expo_1.BlurView, { tint: "light", intensity: 100, style: react_native_1.StyleSheet.absoluteFill }),
             headerTitleStyle: { fontWeight: 'bold' }
         };

@@ -1,53 +1,42 @@
 const AboutContentMD = `
-# Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+# Fundación Alicia Alonso
 
+Tomando en consideración la incesante demanda de las industrias culturales, nosotros damos espacio a creadores e interpretes para enfocar su pasión en el afán de mostar al mundo a través del arte la simple y emocionante razón de la condición humana. Mantenemos nuestro brillo promoviendo un arte ecléctico y de excelencia. Son 25 años siendo la vanguardia en formación universitaria en artes escénicas y de posgrado, llevando el ballet clásico por toda España, generando piezas de nueva creación en colaboración con artistas y profesionales consagrados y nuestras continuas ganas de hacer nos han convertido desde hace un año en la conexión de este país con el mundo internacional del teatro.
 
-## Sed libero ligula, convallis a odio sed, accumsan porta ipsum. 
+![](https://res.cloudinary.com/huh9ixig7/image/upload/v1553719514/default_images/aa_infographic.png)
 
-Maecenas quis dapibus orci, ac pretium ipsum. Vivamus justo ligula, consequat ac turpis sed, porta suscipit erat. Donec tempor, urna nec facilisis euismod, diam dolor blandit felis, id fermentum ex mi quis tortor. *Maecenas a euismod mi*. Vestibulum vel porttitor justo. Sed egestas nunc non ex ornare cursus eget a nibh. Proin finibus, odio ut pretium maximus, justo neque tempor lorem, at blandit tortor nisi eu augue. Vivamus convallis arcu viverra sagittis consequat.
+## El Instituto Universitario
 
-## Aenean lacinia, arcu id varius placerat.
+El Instituto Universitario Alicia Alonso es un centro de la Fundación Alicia Alonso adscrito a la Universidad Rey Juan Carlos y miembro del ejecutivo del Comité Internacional de la Danza UNESCO. Esta organización es pionera en España habiendo implantado las primeras titulaciones oficiales en Danza. En la actualidad imparte los Grados Universitarios en Artes Visuales y Danza, los Grados Superiores en Danza, el Master en Artes Escénicas, y el Master en Gestión y Liderazgo de Proyectos Culturales. Entre sus programas académicos también se encuentran varias líneas de investigación del Doctorado en Arte de la Universidad Rey Juan Carlos, los Títulos Propios Master en Estudios de la India y el Curso de Especialista en Danzas Tradicionales.
 
-**Nulla tortor blandit justo, ac semper velit enim nec dui.** Donec sagittis justo a enim maximus, imperdiet vehicula metus dignissim. Aliquam pellentesque elit turpis, fermentum dignissim dolor mattis quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+**2014: GRAND PRIX ALASSIO**
+Por el desarrollo de las metodologías y técnicas para la enseñanza del ballet clásico.
+**2013: PREMIO CIUDAD DE BARCELONA**
+Por el desarrollo de la Investigación en Danza y por la proyección internacional de la labor del Instituto Universitario de la Danza Alicia Alonso.
+**2005: PREMIO NACIONAL A LA MEJOR INSTITUCIÓN DOCENTE DE ENSEÑANZAS ARTÍSTICAS SUPERIORES.**
+El Jurado de Cultura Viva, integrado por destacados académicos e investigadores del Consejo Superior de Investigaciones Científicas de España otorgó este galardón en su XV edición al Centro, por su excelencia académica, su impulso a la investigación, a la creación artística de calidad y su proyección internacional. Desde entonces continúa siendo un centro europeo de referencia.
 
-> Duis tincidunt varius sem, nec interdum tortor aliquam at. Praesent quis augue sit amet sapien aliquet rhoncus. Etiam lobortis euismod sapien, eu finibus quam blandit at. Nulla id posuere sem. Nulla sed turpis nibh. 
+## Ballet de Cámara de Madrid
 
-Vestibulum ut est a nibh efficitur pretium. Curabitur ultrices, elit et suscipit consectetur, enim nisi iaculis mauris, vel lobortis dolor odio sed ex. Vestibulum eget dignissim arcu.
+Fundado en 1997 bajo la Dirección General de Alicia Alonso y con la participación de Alberto García Castaño, Director Ejecutivo, quien junto a destacados Maîtres del Ballet Nacional de Cuba ha sido gran impulsor de este proyecto. Su creación responde a la necesidad de asegurar el desempeño profesional a los alumnos del Instituto Universitario, y ofrecer un marco de creación para jóvenes coreógrafos. Su objetivo es que los bailarines completen su andadura en el camino hacia la madurez escénica. Para cumplimentar esta tarea, la Compañía realiza una media de veinte funciones anuales en teatros de la Red de la Comunidad de Madrid, además de giras nacionales e internacionales.
+La agrupación posee un amplio repertorio que abarca la danza clásica, contemporánea, española y el teatro físico del movimiento. A lo largo de estos años ha realizado más de trescientas representaciones y participado en festivales y concursos nacionales e internacionales. En los últimos años ha podido contar entre sus filas a los bailarines galardonados con los Premios Nacionales de Danza Clásica convocados por el Ministerio de Educación, Cultura y Deporte. Suma a su currículo los premios obtenidos en eventos tales como: el Concurso Iberoamericano de Coreografía, el Concurso Internacional Burgos-New York, el Concurso Nacional de Castellón de la Plana, el Concurso Coreográfico de la Comunidad de Madrid o como finalistas del Concurso Coreográfico de la Fundación Onassis, entre otros muchos reconocimientos.
 
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-- In lacinia leo vel ex vehicula feugiat.
-- Ut feugiat orci id est elementum pharetra.
-- Nullam nec risus hendrerit, venenatis purus at, egestas turpis.
+## Teatro de Cámara de Madrid
 
-Ut vehicula at velit eu mattis. Pellentesque eu dolor consequat, bibendum orci in, pharetra leo. Nullam finibus faucibus venenatis. Cras sagittis, lorem eget porta varius, nisi turpis condimentum felis, sit amet lobortis nisl dolor quis odio. Maecenas rhoncus aliquet sapien a molestie. Nulla id odio diam.
+Desde el año 2010 como resultado de los procesos de investigación de creación escénica, la compañía Teatro de Cámara de Madrid promociona sus mejores proyectos teatrales estrenándolos en diferentes espacios escénicos internacionales y festivales de teatro joven. Sus integrantes han sido formados y dirigidos por actores y directores con relevante experiencia en la escena contemporánea  española y profesores del IUDAA. Desde el último año mientras cursan el Grado Oficial Universitario en Artes Visuales y Danza, con mención en Teatro Físico y hasta  dos años posterior a su graduación, los intérpretes más relevantes, asumen los roles protagónicos de las piezas que quedan en repertorio de la compañía. De este modo comienzan sus prácticas pre-profesionales, vinculándose orgánicamente con la Industria Cultural.
+Con sus puestas en escena se han presentado en diferentes festivales como “Segovia en Danza”, “Festival de Artes Escénicas” (Junta Municipal del Retiro/Madrid)  o  el “Certamen de Teatro Joven de Salamanca”, donde han sido galardonados en dos ocasiones con el 1er Premio a “Mejor puesta en escena”. Además cada año hacen pequeñas temporadas de representaciones en el teatro del Círculo de Bellas Artes de Madrid, en el Teatro “Tomas y Valiente” de Fuenlabrada. Durante 6 años han participado en proyectos artísticos de inmersión social, llevando el teatro y la danza a Centros Penitenciarios y Centros de Educación Especial en diversidad y discapacidad funcional.
 
-## Fusce non orci ut felis feugiat tempor ut vel mi.
+## El Repositorio de Danza
 
-**Mauris lobortis orci non neque malesuada,** consectetur semper turpis efficitur. Curabitur at lobortis nisi, auctor cursus urna. Sed ut blandit orci. Morbi et neque porttitor, elementum ipsum mollis, venenatis justo. Fusce lacinia vitae diam ac laoreet. Morbi pretium purus et feugiat pulvinar. Ut vehicula at velit eu mattis. Pellentesque eu dolor consequat, bibendum orci in, pharetra leo. Nullam finibus faucibus venenatis. Cras sagittis, lorem eget porta varius, nisi turpis condimentum felis, sit amet lobortis nisl dolor quis odio. Maecenas rhoncus aliquet sapien a molestie. Nulla id odio diam.
+El Repositorio Digital de Danza es un proyecto impulsado por el Fondo Documental y de Investigación del Instituto Universitario de la Danza Alicia Alonso con el objetivo de organizar, archivar, preservar y difundir, como información digital, fondos documentales relacionados con el arte de la danza y permitir el acceso a los mismos.
+La aspiración de este proyecto es reunir o referenciar toda la información posible sobre los creadores y las creaciones artísticas del arte de la danza de España en particular y del resto del mundo.
+La obtención en el año 2011 de las ayudas del Ministerio de Cultura para la creación y transformación de recursos digitales y su difusión y preservación mediante repositorios permitió terminar la primera fase del proyecto con la inclusión del archivo documental de Alicia Alonso, figura esencial de la danza en el siglo XX, así como importantes fondos del Museo de la Danza de Cuba, el Fondo Documental del Instituto Universitario de Danza “Alicia Alonso” y su compañía artística ballet de Cámara de Madrid, así como la producción investigadora sobre artes escénicas desarrollada en el instituto y en la URJC en los formatos de libros, artículos, tesis doctorales, y trabajos finales de máster y de grado.
+La colaboración de los servicios de biblioteca de la URJC y la inserción del repositorio en la estructura del repositorio de la universidad URJC Digital permitió que el Repositorio de Danza se haya concretado como un aporte necesario al aún incipiente campo de estudio de la investigación de la Danza y las Artes Escénicas en España. Ha permitido situar en acceso libre una documentación imprescindible para la formación de una masa crítica de estudios en este ámbito y brindar un apoyo importante a la docencia, específicamente de nivel universitario en enseñanzas artísticas.
+Las fases realizadas del proyecto han dado como resultado la construcción de un espacio de referencia internacional para el conocimiento, la docencia y la investigación en danza y artes escénicas en general. A partir de su existencia, personalidades, creadores y estudiosos españoles y de otros países se han interesado en este trabajo y han accedido a colaborar con su desarrollo. Entre estos podemos citar el Archivo de Antonio Gades, Tamara Rojo, Ramiro Guerra, y gestores de otros fondos documentales relacionados que ya están siendo preparados para la digitalización, descripción y transformación, en una segunda etapa del proyecto.
+El Repositorio Digital de Danza ha sido incluído en grandes bibliotecas virtuales Como Hispana y Europeana, entre otras.
 
-### Morbi metus orci, suscipit at viverra ut, ultrices at leo.
+## Centro ITI España
 
-Nunc ac elit rutrum, feugiat dolor ut, imperdiet ipsum. Cras vel dui sed mi accumsan commodo. In luctus purus urna, sed tempus neque consequat id. Etiam congue tellus cursus tellus vehicula, quis congue nulla ornare. Nam semper viverra magna in sollicitudin. Proin at fermentum velit. Praesent commodo sit amet erat ac auctor. Nam quis est dui. Nullam porttitor rhoncus convallis. Proin et commodo enim. Pellentesque massa lorem, pretium eu massa ultricies, viverra tincidunt lectus. Quisque felis lorem, placerat et malesuada at, finibus nec elit. Proin sapien sapien, bibendum a ultrices ac, suscipit vel mi.
-
-## Duis ac felis eget nisi rhoncus pellentesque et id metus.
-
-Cras non interdum ligula, vitae aliquam erat. Aliquam non lectus ut quam bibendum pellentesque eu et ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras consequat risus consequat ipsum porttitor tincidunt. Etiam condimentum scelerisque tempus. Integer et turpis eleifend erat pulvinar faucibus. Ut a tristique odio. Donec a orci vitae orci vestibulum fringilla.
-
-- Morbi aliquet enim eget metus luctus hendrerit.
-- Curabitur id metus et nisl hendrerit ullamcorper.
-- Etiam et ex in libero sagittis eleifend.
-- Sed consectetur magna sed eros mollis posuere id vitae lacus.
-- Aliquam egestas elit nec orci facilisis pulvinar a eu ante.
-
-Nulla aliquet ultricies placerat. Pellentesque a pharetra leo, eu facilisis neque. Aliquam quis arcu ut magna lobortis venenatis. Mauris placerat varius massa et auctor. Vestibulum viverra pharetra metus. Aliquam nec auctor eros. Proin blandit diam ac malesuada interdum. Aliquam erat volutpat.
-
-## Cras tellus diam, accumsan ac mauris sed, varius porta lorem.
-
-Pellentesque non porta metus, vel condimentum odio. Suspendisse potenti. Mauris eu metus nulla. Nulla facilisi. Sed blandit turpis eget felis egestas, ut luctus enim ultricies. Cras pellentesque sed augue eu malesuada. Pellentesque rhoncus porta accumsan. Mauris eleifend felis ac condimentum aliquam.
-
-### Sed cursus bibendum ipsum, nec egestas quam.
-
-Nam convallis aliquam quam, sed lacinia felis lacinia vitae. Fusce ante massa, luctus sed quam vel, pulvinar tempus purus. Praesent sed ante eu dolor scelerisque ornare. Suspendisse suscipit, libero id vehicula ultricies, mi leo porttitor tortor, in aliquam nunc tortor eu nibh. Proin aliquam ultricies mauris et bibendum. Donec condimentum quam non sapien facilisis, id tincidunt nulla ultricies. Phasellus sed quam id mauris ultricies rhoncus. Curabitur suscipit quis velit quis dignissim. Quisque semper dapibus porttitor. Integer hendrerit commodo arcu ac convallis.
-`
+Durante el 34° Congreso Mundial organizado en 2015 en Erevan, capital de Armenia, el Instituto Universitario de Danza Alicia Alonso fue seleccionado como Centro ITI España, canto por su trayectoria como por la estrecha vinculación entre creación artística, formación académica e investigación que ha distinguido su labor durance 25 años.`
 
 export default AboutContentMD
